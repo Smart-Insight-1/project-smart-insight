@@ -64,15 +64,20 @@ Um estudo da Pathintelligence mostrou que “existe uma relação significativa 
         if (interacoes <= 0 || tempoMedio <= 0) {
             divMensagem.innerHTML = "Preencha todos os campos corretamente."
         } else{
-            divMensagem.innerHTML=`A partir dos dados coletados e tratados pela Smart Insight, se torna viavel um aumento no  potencial das nas interações em ${upInteracoes} e do tempo médio de permanencia no PDV em até ${upTempoRetencao} <br> <br>
+            divMensagem.innerHTML=`A partir dos dados coletados e tratados pela Smart Insight, se torna viavel um aumento no  potencial das interações em 25% e do tempo médio de permanencia no PDV em até 20% a partir de estratégias de trade marketing. <br> <br>
 
             <b>ANTES:</b> <br>
             Média de interações: ${interacoes} <br>
             Tempo médio de retenção em loja: ${tempoMedio} segundos <br> <br>
 
             <b>DEPOIS:</b> <br>
-            Média de interações: ${upInteracoes.toFixed(1)} <br>
+            Média de interações: ${upInteracoes.toFixed(0)} <br>
             Tempo médio de retenção em loja: ${upTempoRetencao.toFixed(1)} segundos <br>`
         }
+    }
+
+    function naoPossuoDados(){
+        divMensagem.innerHTML=` Utilizando a Smart Insight, se torna possivel a correção desse ponto cego no PDV e tambem de um aumento no  potencial das interações em 25% e do tempo médio de permanencia no PDV em até 20% a partir de estratégias de trade marketing.<br> <br>`
+
     }
 </script>
