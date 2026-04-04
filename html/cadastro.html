@@ -1,46 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
 
-    
-    Nome da Marca
-    <input type="text" id="iptNomeDaMarca">
-    
-    Nome do PDV
-    <input type="text" id="iptNomeDoPDV">
-    
-    CEP:
-    <input type="text" id="iptCep">
+    <div class="cadastro">
 
-    Numero do endereço
-    <input type="text" id="iptNumero">
+        <div class="container">
+            <div class="card-cadastro">
 
+                <h2 class="tituloCadastro">Cadastro</h2>
 
-    CNPJ da Matriz:
-    <input type="text" id="iptCnpjMatriz">
+                <div class="formulario">
 
-    CNPJ da Filial:
-    <input type="text" id="iptCnpjFilial">
+                    <div class="campo">
+                        Nome Completo
+                        <input type="text" id="iptNomeCompleto">
+                    </div>
 
-    Nome Completo do Usuario
-    <input type="text" id="iptNomeCompleto">
+                    <div class="campo">
+                        Nome da loja
+                        <input type="text" id="iptNomeDaMarca">
+                    </div>
 
-    Email do Usuario
-    <input type="text" id="iptEmail">
+                    <div class="campo">
+                        Email
+                        <input type="text" id="iptEmail">
+                    </div>
 
-    Telefone
-    <input type="text" id="iptTelefone">
+                    <div class="campo">
+                        CEP
+                        <input type="text" id="iptCep">
+                    </div>
 
-    senha:
-    <input type="text" id="iptSenha">
+                    <div class="campo">
+                        Número
+                        <input type="text" id="iptNumero">
+                    </div>
 
-    Confirmar senha:
-    <input type="text" id="iptConfirmarSenha">
-    
+                    <div class="campo">
+                        CNPJ
+                        <input type="text" id="iptCnpj">
+                    </div>
+
+                    <div class="campo">
+                        Senha
+                        <input type="text" id="iptSenha">
+                    </div>
+
+                    <div class="campo">
+                        Telefone
+                        <input type="text" id="iptTelefone">
+                    </div>
+
+                    <div class="campo">
+                        Confirmar senha
+                        <input type="text" id="iptConfirmarSenha">
+                    </div>
+
+                    <div class="botaoCadastro">
+                        <button onclick="criarConta()">Criar conta</button>
+                    </div>
+
+                    <div class="msg">Já tem uma conta?
+                        <a href="">Entre</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="msg"></div>
 </body>
+
 </html>
+<script>
+    function criarConta() {
+        let nome = iptNomeCompleto.value;
+        let loja = iptNomeDaMarca.value
+        let email = iptEmail.value;
+        let cep = iptCep.value;
+        let numero = iptNumero.value;
+        let cnpj = iptCnpj.value;
+        let senha = iptSenha.value;
+        let confirmarSenha = iptConfirmarSenha.value;
+        let telefone = iptTelefone.value;
+
+        let mensagem = "";
+        let erro = false;
+
+        if(nome == "" || loja == "" || email == "" || cep == "" || numero == "" || cnpj == "" || senha == "" || confirmarSenha == "" || telefone == ""){
+            alert(`Preencha todos os campos.`)
+            erro = true;
+        }
+
+        if(senha.length < 8){
+            mensagem += `Senha deve ter pelo menos 8 caracteres.<br>`
+            erro = true;
+        }
+
+        if(cnpj.length < 14){
+            mensagem += `CNPJ inválido.<br>`
+            erro = true;
+        }
+
+        if(email.indexOf("@") == -1 || email.endsWith(".com") == false){
+            mensagem += `Email inválido. <br>`
+            erro = true;
+        }
+
+        if(senha != confirmarSenha){
+            mensagem += `As senhas não coincidem.<br>`
+            erro = true;
+        }
+
+        if(erro == false){
+            mensagem += `Conta criada com sucesso! ✅`
+        }
+
+        msg.innerHTML = mensagem;
+
+    }
+</script>
