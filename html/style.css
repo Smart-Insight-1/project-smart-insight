@@ -1,0 +1,276 @@
+body{
+    margin: 0;
+      background-color: #0C021A;
+
+}
+
+
+.container{
+
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    
+}
+.card-login{
+    padding: 40px;
+    width: 90%;
+    max-width: 400px;
+    
+    background-color: aliceblue;
+    border-radius: 30px;
+    text-align: center;
+
+    box-shadow: 0 0 20px rgb(41, 41, 41);
+}
+
+.card-login h2{
+   padding: 5px;
+    font-size: 40px;
+}
+
+.formulario{
+    padding: 10px;
+    display: flex;
+    
+    flex-direction: column;
+}
+.campo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px;
+    text-align: left;
+     
+    
+
+}
+
+.campo span{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.campo input{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid #2F0569;
+    text-align: center;
+    outline: none;
+   
+    
+}
+
+.botao{
+    width: 100%;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #2F0569;
+    color: antiquewhite;
+    border: none;
+    cursor: pointer;
+
+    box-shadow: 0 0 5px black;
+}
+.botao:hover{
+    background-color: #572e91;
+}
+
+.botao:active{
+    transform: scale(0.95);
+    
+} 
+
+.msg{
+    padding: 20px;
+    height: 0;
+
+}
+.msg span{
+    color: #2F0569;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+.cadastro{
+    padding: 100px;
+    
+    display: flex;
+    justify-content: center;
+}
+.container-cadastro{
+    padding: 40px;
+    border-radius: 30px;
+    background-color: aliceblue;
+    text-align: center;
+    
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+.nomes{
+    display: flex;
+    gap: 20px;
+    
+   
+}
+.nomes > .campo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.nomes > .campo input {
+    width: 100%;     
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+.email{
+    display: flex;
+    gap: 20px;
+}
+
+.email > .campo{
+    flex: 1;
+}
+
+.cep-numero{
+    display: flex;
+    gap: 20px;
+    flex: 1;
+}
+
+.cep-numero .campo{
+    flex: 1;
+}
+
+
+
+
+
+
+
+.senha{
+    display: flex;
+    gap: 20px;
+}
+
+.senha > .campo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.senha > .campo input {
+    width: 100%;     
+    box-sizing: border-box;
+}
+
+
+
+
+
+.confirmarsenha{
+    display: flex;
+    gap: 20px;
+}
+
+.confirmarsenha > .campo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.confirmarsenha > .campo input {
+    width: 100%;     
+    box-sizing: border-box;
+}
+
+
+.botaoCadastro button{
+    width: 100%;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #2F0569;
+    color: antiquewhite;
+    border: none;
+    cursor: pointer;
+
+    box-shadow: 0 0 5px black;
+}
+
+.botaoCadastro button:hover{
+    background-color: #572e91;
+}
+
+.botaoCadastro button:active{
+    transform: scale(0.95);
+    
+} 
+
+
+
+
+
+.alerta {
+    height: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+    display: none; /* começa escondido */
+    animation: aparecer 0.4s ease;
+}
+
+/* ERRO */
+.alerta.erro {
+    background-color: #ffe5e5;
+    color: #d8000c;
+    border: 1px solid #ffb3b3;
+}
+
+/* SUCESSO */
+.alerta.sucesso {
+    background-color: #e6ffed;
+    color: #2e7d32;
+    border: 1px solid #b2f2bb;
+
+    
+background-color: #7f44d2;
+background-color: #ae80ed;
+
+background-color: #5d62e3;
+
+
+background-color: #cd5de3;
+
+
+}
+

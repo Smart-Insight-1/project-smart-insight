@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <link rel="stylesheet" href="style.css">
  </head>
  <body>
     <div class="login">
@@ -35,39 +35,43 @@
         </div>
     </div>
 
-    <div id="div_msg"></div>
+    <div id="div_msg" class="alerta"></div>
  </body>
  </html>
  
 
+
+
     <script>
         function analisar(){
-            // variavel senha
-            let senha = senha_input.value;
-            let tamanhoSenha = senha.length;
+    let senha = senha_input.value;
+    let cnpj = cnpj_input.value;
+    let email = email_input.value;
 
+    let div = div_msg;
 
-            // variavel cnpj
-            let cnpj = cnpj_input.value;
-            let tamanhoCnpj = cnpj.length;
+    // limpa antes
+    div.innerHTML = "";
+    div.style.display = "block";
+    div.className = "alerta";
 
+    let termina_com = email.endsWith('.com');
+    let indice_arroba = email.indexOf('@');
 
-            //variavel email
-            let email = email_input.value;
-            //terminar com .com
-            let termina_com = email.endsWith('.com');
-            //veriicar @
-            let indice_arroba = email.indexOf('@');
-            //deixar minusculo 
-            var frase_minuscula = email.toLowerCase();
-           
-
-            if (tamanhoSenha < 8 || tamanhoCnpj < 11) { 
-                    div_msg.innerHTML  += `Cnpj/senha INVALIDOS<br>`;
-            } else if
-            (indice_arroba == -1){
-                    div_msg.innerHTML  += `Digite um email valido`;
-            }
-
-        }
+    if (senha.length < 8 || cnpj.length < 11) {
+        div.classList.add("erro");
+        div.innerHTML = "❌ CNPJ ou senha inválidos!";
+    } 
+    else if (indice_arroba == -1 || !termina_com) {
+        div.classList.add("erro");
+        div.innerHTML = "❌ Email inválido!";
+    } 
+    else {
+        div.classList.add("sucesso");
+        div.innerHTML = "✅ Login válido!";
+    }
+}
     </script>
+
+
+
