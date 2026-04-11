@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Smart Insight</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="menu">
+        <h2>Painel</h2>
+        <ul>
+            <li>Dashboard</li>
+            <li>Produtos</li>
+            <li>Informações da Loja</li>
+        </ul>
+    </div>
+
+    <div class="dashboard">
+
+        <div class="container-kpi">
+
+            <div class="kpi">
+                <div>
+                    <strong>Total de interações</strong>
+                    <span>5.150</span>
+                </div>
+            </div>
+
+            <div class="kpi">
+                <div>
+                    <strong>Produto mais experimentado</strong>
+                    <span>Malbec Gold</span>
+                </div>
+            </div>
+
+            <div class="kpi">
+                <div>
+                    <strong>Setor com mais interações</strong>
+                    <span>Perfumaria</span>
+                </div>
+            </div>
+
+            <div class="kpi">
+                <div>
+                    <strong>Tempo médio de retenção</strong>
+                    <span>2m 35s</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-graficos">
+            <div class="grafico">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="grafico">
+                <canvas id="myChart2"></canvas>
+            </div>
+            <div class="grafico">
+                <canvas id="myChart3"></canvas>
+            </div>
+            <div class="grafico">
+                <canvas id="graficoInteracoesHora"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Malbec gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
+                datasets: [{
+                    label: 'Interações',
+                    data: [1650, 1100, 950, 880, 420, 150],
+                    borderWidth: 2,
+                    backgroundColor: '#ae80ed',
+                    borderColor: '#2F0569'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#ffffff"
+                        },
+                        title: {
+                            display: true,
+                            text: 'Produtos',
+                            color: '#ffffff'
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: "#ffffff"
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+        const ctx2 = document.getElementById('myChart2');
+
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
+                datasets: [{
+                    label: 'Interações',
+                    data: [4430, 2600, 800, 310],
+                    borderWidth: 2,
+                    backgroundColor: '#ae80ed',
+                    borderColor: '#2F0569'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#ffffff"
+                        },
+                        title: {
+                            display: true,
+                            text: 'Setor',
+                            color: '#ffffff'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: "#ffffff"
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+        const ctx3 = document.getElementById('myChart3');
+
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
+                datasets: [{
+                    label: 'Segundos',
+                    data: [180, 150, 140, 130, 110, 80],
+                    backgroundColor: '#ae80ed',
+                    borderColor: '#2F0569',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tempo Médio de Retenção por Produto',
+                        color: '#ffffff',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Produtos',
+                            color: '#ffffff'
+                        },
+                        ticks: {
+                            color: "#ffffff"
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Tempo (segundos)',
+                            color: '#ffffff'
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            color: "#ffffff"
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+        const ctxHora = document.getElementById('graficoInteracoesHora');
+
+        new Chart(ctxHora, {
+            type: 'line',
+            data: {
+                labels: ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
+                datasets: [
+                    {
+                        label: 'Interações',
+                        data: [230, 830, 350, 610, 1290, 670],
+                        borderColor: '#ae80ed',
+                        borderDash: [5, 5],
+                        borderWidth: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#ffffff"
+                        },
+                        title: {
+                            text: "Hora",
+                            display: true,
+                            color: "#fff"
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Interações por Hora (Diário)',
+                        color: '#ffffff',
+                        font: { size: 16 }
+                    },
+                    legend: {
+                        labels: {
+                            color: "#ffffff"
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

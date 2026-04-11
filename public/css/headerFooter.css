@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&display=swap');
+
+body{
+    margin:0;
+}
+
+/* Css do Header */
+
+.header{
+    font-family: "Hanken Grotesk", sans-serif;
+    background-color:#0C021A;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 5%;
+}
+
+.logo img{
+    width:110px;
+}
+
+.container-navbar {
+    display: flex;
+    align-items: center;
+    gap: 120px;
+}
+
+.navbar{
+    display:flex;
+    gap:50px;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:white;
+    font-size:18px;
+}
+
+.user a{
+    color:white;
+    font-size:22px;
+}
+
+/* Estilização do Footer */
+
+.footer{
+    background-color:#0C021A;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:30px 5%;
+
+    font-family: "Hanken Grotesk", sans-serif;
+    color:white;
+}
+
+.footer-logo img{
+    width:110px;
+}
+
+.footer-text{
+    text-align:center;
+}
+
+.footer-text p{
+    margin:0;
+    font-size:14px;
+}
+
+.footer-social{
+    display:flex;
+    gap:20px;
+}
+
+.footer-social a{
+    color:white;
+    font-size:20px;
+    text-decoration:none;
+}

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&display=swap');
+
+body{
+    margin:0;
+    font-family: "Hanken Grotesk", sans-serif;
+    background-color:#0C021A;
+}
+
+/* Card central da calculadora */
+.central{
+    background-color:aliceblue;
+    padding:40px;
+    border-radius:25px;
+    width:90%;
+    max-width:420px;
+    text-align:center;
+
+    box-shadow:0 0 20px rgb(41,41,41);
+}
+
+.calculadora-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:70vh;
+}
+
+/* Títulos */
+.central h2{
+    margin:0;
+    color:#2F0569;
+    font-size:32px;
+}
+
+.central h3{
+    margin-top:5px;
+    margin-bottom:25px;
+}
+
+/* Inputs */
+.central input{
+    width:100%;
+    height:35px;
+    border-radius:10px;
+    border:1px solid #2F0569;
+    text-align:center;
+    outline:none;
+    margin-bottom:15px;
+}
+
+/* Botões */
+.central button{
+    width:100%;
+    height:40px;
+    border-radius:20px;
+    border:none;
+    background-color:#2F0569;
+    color:white;
+    cursor:pointer;
+    margin-bottom:10px;
+
+    box-shadow:0 0 5px black;
+}
+
+.central button:hover{
+    background-color:#572e91;
+}
+
+.central button:active{
+    transform:scale(0.95);
+}
+
+/* Área de mensagem */
+#divMensagem{
+    margin-top:20px;
+    text-align:left;
+    font-size:14px;
+}
