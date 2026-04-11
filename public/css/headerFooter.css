@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&display=swap');
 
-body{
-    margin:0;
+body {
+    margin: 0;
 }
 
 /* Css do Header */
 
-.header{
+.header {
     font-family: "Hanken Grotesk", sans-serif;
-    background-color:#0C021A;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:15px 5%;
+    background-color: #0C021A;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5%;
 }
 
-.logo img{
-    width:110px;
+.logo img {
+    width: 110px;
 }
 
 .container-navbar {
@@ -25,56 +25,70 @@ body{
     gap: 120px;
 }
 
-.navbar{
-    display:flex;
-    gap:50px;
+.navbar {
+    display: flex;
+    gap: 50px;
 }
 
-.navbar a{
-    text-decoration:none;
-    color:white;
-    font-size:18px;
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
 }
 
-.user a{
-    color:white;
-    font-size:22px;
+
+.navbar a:hover {
+    color: #AD72FF;
+    transition: all 0.3s ease;
+
+}
+
+.user a {
+    color: white;
+    font-size: 22px;
+}
+
+.user i:hover {
+    color: #AD72FF;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
 }
 
 /* Estilização do Footer */
 
-.footer{
-    background-color:#0C021A;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.footer {
+    background-color: #0C021A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    padding:30px 5%;
+    padding: 30px 5%;
 
     font-family: "Hanken Grotesk", sans-serif;
-    color:white;
+    color: white;
 }
 
-.footer-logo img{
-    width:110px;
+.footer-logo img {
+    width: 110px;
 }
 
-.footer-text{
-    text-align:center;
+.footer-text {
+    text-align: center;
 }
 
-.footer-text p{
-    margin:0;
-    font-size:14px;
+.footer-text p {
+    margin: 0;
+    font-size: 14px;
 }
 
-.footer-social{
-    display:flex;
-    gap:20px;
+.footer-social {
+    display: flex;
+    gap: 20px;
 }
 
-.footer-social a{
-    color:white;
-    font-size:20px;
-    text-decoration:none;
+.footer-social a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
 }

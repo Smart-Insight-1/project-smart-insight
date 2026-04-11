@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&display=swap');
+
+
 body{
     margin: 0;
       background-color: #0C021A;
-
+    font-family: "Hanken Grotesk", sans-serif;
 }
 
 
@@ -38,13 +41,19 @@ body{
     
     flex-direction: column;
 }
+
+.tituloCadastro {
+    font-size: 40px;
+    margin: 20px;
+}
+
 .campo{
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 30px;
     text-align: left;
-     
+     font-weight: bold;
     
 
 }
@@ -63,6 +72,12 @@ body{
     outline: none;
    
     
+}
+
+input::placeholder {
+    font-family: "Hanken Grotesk", sans-serif;
+    font-size: 14px;      
+    font-weight: 400;    
 }
 
 .botao{
