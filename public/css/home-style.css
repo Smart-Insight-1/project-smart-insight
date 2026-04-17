@@ -33,9 +33,6 @@ body {
     padding-left: 100px;
 }
 
-.container-banner p {
-    max-width: 950px;
-}
 
 .tituloBanner {
     font-family: 'Hanken Grotesk', sans-serif;
@@ -44,6 +41,7 @@ body {
 }
 
 .container-banner p {
+    max-width: 950px;
     font-size: 30px;
     margin-bottom: 40px;
     color: #2F0569;
@@ -120,7 +118,7 @@ body {
     gap: 30px;
     max-width: 1300px;
     height: 800px;
-    margin:auto;
+    margin: auto;
     padding: 0 20px;
     margin-bottom: 120px;
 }
@@ -255,4 +253,46 @@ body {
     max-width: 220px;
     height: auto;
     object-fit: contain;
+}
+
+@media (max-width: 1920px) {
+
+    .tituloBanner {
+        font-size: 70px;
+    }
+
+    .container-banner p {
+        max-width: 800px;
+        font-size: 20px;
+    }
+
+    .botaoBanner button {
+        width: 300px;
+        height: 60px;
+        font-size: 25px;
+    }
+
+    .container-quemSomos img {
+        height: 600px;
+        width: 500px;
+    }
+
+    .tituloFaleConosco {
+        font-size: 36px;
+        max-width: 500px;
+    }
+
+    .container-quemSomos p {
+        font-size: 20px;
+    }
+
+    .container-processo {
+        max-width: 1200px;
+        height: 700px;
+    }
+
+    .conteudoBox {
+    font-size: 20px;
+}
+
 }

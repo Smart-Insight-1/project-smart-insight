@@ -14,10 +14,10 @@ body {
     width: 15%;
     background: #14042A;
     padding: 30px 20px;
-    box-shadow: 3px 0 15px rgba(0,0,0,0.4);
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.4);
 }
 
-.menu h2{
+.menu h2 {
     margin-bottom: 30px;
     color: #ae80ed;
 }
@@ -35,8 +35,8 @@ body {
     transition: 0.2s;
 }
 
-.menu li:hover{
-    background:#1E0A3A;
+.menu li:hover {
+    background: #1E0A3A;
 }
 
 /* DASHBOARD */
@@ -61,34 +61,35 @@ body {
     border-radius: 12px;
     padding: 20px;
 
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
 
-    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 
     transition: 0.2s;
 }
 
-.kpi:hover{
+.kpi:hover {
     transform: translateY(-3px);
 }
 
-.kpi div{
-    display:flex;
-    flex-direction:column;
+.kpi div {
+    display: flex;
+    flex-direction: column;
 }
 
-.kpi strong{
-    font-size:14px;
-    color:#c9b5ff;
-    font-weight:500;
+.kpi strong {
+    font-size: 15px;
+    color: #c9b5ff;
+    font-weight: 500;
 }
 
-.kpi span{
-    font-size:28px;
-    font-weight:700;
-    margin-top:4px;
+.kpi span {
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 4px;
 }
+
 
 /* GRÁFICOS */
 
@@ -104,12 +105,13 @@ body {
     border-radius: 12px;
     padding: 15px;
 
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 /* canvas ocupa todo espaço */
 
-.grafico canvas{
-    width:100% !important;
-    height:100% !important;
+.grafico canvas {
+    width: 100% !important;
+    height: 100% !important;
 }

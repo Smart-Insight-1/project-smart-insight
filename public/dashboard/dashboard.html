@@ -16,7 +16,7 @@
     <div class="menu">
         <h2>Painel</h2>
         <ul>
-            <li>Dashboard</li>
+            <li>Dashboard - Diário</li>
             <li>Produtos</li>
             <li>Informações da Loja</li>
         </ul>
@@ -28,28 +28,28 @@
 
             <div class="kpi">
                 <div>
-                    <strong>Total de interações</strong>
+                    <strong>Total de interações na loja</strong>
                     <span>5.150</span>
                 </div>
             </div>
 
             <div class="kpi">
                 <div>
-                    <strong>Produto mais experimentado</strong>
+                    <strong>Produto mais experimentado da Loja</strong>
                     <span>Malbec Gold</span>
                 </div>
             </div>
 
             <div class="kpi">
                 <div>
-                    <strong>Setor com mais interações</strong>
+                    <strong>Setor com mais interações da loja</strong>
                     <span>Perfumaria</span>
                 </div>
             </div>
 
             <div class="kpi">
                 <div>
-                    <strong>Tempo médio de retenção</strong>
+                    <strong>Tempo médio de retenção dos produtos na loja</strong>
                     <span>2m 35s</span>
                 </div>
             </div>
@@ -74,6 +74,7 @@
     </div>
 
     <script>
+
         const ctx = document.getElementById('myChart');
 
         new Chart(ctx, {
@@ -94,22 +95,44 @@
                 scales: {
                     x: {
                         ticks: {
+                            font: {
+                                size: 13
+                            },
                             color: "#ffffff"
                         },
                         title: {
+                            font: {
+                                size: 18
+                            },
                             display: true,
                             text: 'Produtos',
                             color: '#ffffff'
                         },
                     },
                     y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade (interações)',
+                            color: '#ffffff'
+                        },
                         beginAtZero: true,
                         ticks: {
+                            font: {
+                                size: 14
+                            },
                             color: "#ffffff"
                         }
                     }
                 },
                 plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total de interações por produto',
+                        color: '#ffffff',
+                        font: {
+                            size: 16
+                        }
+                    },
                     legend: {
                         labels: {
                             color: "#ffffff"
@@ -128,12 +151,15 @@
             data: {
                 labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
                 datasets: [{
-                    label: 'Interações',
+                    label: 'Interações por produto',
                     data: [4430, 2600, 800, 310],
                     borderWidth: 2,
                     backgroundColor: '#ae80ed',
                     borderColor: '#2F0569'
+
+
                 }]
+                
             },
             options: {
                 responsive: true,
@@ -141,22 +167,44 @@
                 scales: {
                     x: {
                         ticks: {
+                            font: {
+                                size: 13
+                            },
                             color: "#ffffff"
                         },
                         title: {
+                            font: {
+                                size: 18
+                            },
                             display: true,
                             text: 'Setor',
                             color: '#ffffff'
                         }
                     },
                     y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade (interações)',
+                            color: '#ffffff'
+                        },
                         beginAtZero: true,
                         ticks: {
+                            font: {
+                                size: 14
+                            },
                             color: "#ffffff"
                         }
                     }
                 },
                 plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total de interações por setor',
+                        color: '#ffffff',
+                        font: {
+                            size: 16
+                        }
+                    },
                     legend: {
                         labels: {
                             color: "#ffffff"
@@ -203,15 +251,26 @@
                 scales: {
                     x: {
                         title: {
+                            font: {
+                                size: 18
+                            },
                             display: true,
                             text: 'Produtos',
                             color: '#ffffff'
                         },
                         ticks: {
+                            font: {
+                                size: 13
+                            },
                             color: "#ffffff"
                         }
                     },
                     y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade (interações)',
+                            color: '#ffffff'
+                        },
                         title: {
                             display: true,
                             text: 'Tempo (segundos)',
@@ -219,6 +278,9 @@
                         },
                         beginAtZero: true,
                         ticks: {
+                            font: {
+                                size: 14
+                            },
                             color: "#ffffff"
                         }
                     }
@@ -250,17 +312,31 @@
                 scales: {
                     x: {
                         ticks: {
+                            font: {
+                                size: 13
+                            },
                             color: "#ffffff"
                         },
                         title: {
+                             font: {
+                                size: 18
+                            },
                             text: "Hora",
                             display: true,
                             color: "#fff"
                         }
                     },
                     y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade',
+                            color: '#ffffff'
+                        },
                         beginAtZero: true,
                         ticks: {
+                            font: {
+                                size: 14
+                            },
                             color: "#ffffff"
                         }
                     }
