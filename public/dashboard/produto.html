@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos | Smart Insight</title>
+
+    <link rel="stylesheet" href="../css/dashboardMenu.css">
+    <link rel="stylesheet" href="../css/produto.css">
+</head>
+
+<body>
+
+    <div class="menu">
+        <h2>Painel</h2>
+
+        <ul>
+            <li><a href="dashboardDiaria.html">Dashboard - Diário</a></li>
+            <li><a href="dashboardSemanal.html">Dashboard - Semanal</a></li>
+            <li><a href="dashboardMensal.html">Dashboard - Mensal</a></li>
+            <li><strong><a href="produto.html">Produtos</a></strong></li>
+            <li><a href="setor.html">Setores</a></li>
+            <li><a href="contato.html">Contatos</a></li>
+            <li><a href="informacao.html">Informações</a></li>
+        </ul>
+    </div>
+
+    <div class="container-produto">
+
+        <div class="lista-produtos">
+
+            <h2>Produtos Cadastrados</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Produto</th>
+                        <th>Tipo</th>
+                        <th>Setor</th>
+                        <th>Marca</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1351</td>
+                        <td>Malbec Gold</td>
+                        <td>Perfume</td>
+                        <td>Masculino</td>
+                        <td>O Boticário</td>
+                    </tr>
+
+                    <tr>
+                        <td>2841</td>
+                        <td>Lily EDP</td>
+                        <td>Perfume</td>
+                        <td>Feminino</td>
+                        <td>O Boticário</td>
+                    </tr>
+
+                    <tr>
+                        <td>4412</td>
+                        <td>Make B Base</td>
+                        <td>Maquiagem</td>
+                        <td>Lançamentos</td>
+                        <td>Make B</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="box">
+
+            <h2>Cadastro de Produto</h2>
+
+            <div class="campo">
+                <label>Nome do Produto</label>
+                <input type="text" placeholder="Digite o nome do produto">
+            </div>
+
+            <div class="campo">
+                <label>Tipo do Produto</label>
+                <input type="text" placeholder="Digite o tipo do produto">
+            </div>
+
+            <div class="campo">
+                <label>Código</label>
+                <input type="text" placeholder="1351">
+            </div>
+
+            <div class="campo">
+                <label>Setor</label>
+                <select>
+                    <option>Masculino</option>
+                    <option>Feminino</option>
+                    <option>Lançamentos</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Marca</label>
+                <input type="text" placeholder="Digite a marca">
+            </div>
+
+            <button>Cadastrar Produto</button>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

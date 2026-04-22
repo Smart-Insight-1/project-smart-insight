@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Smart Insight</title>
+
+    <link rel="stylesheet" href="../css/dashboardMenu.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="menu">
+        <h2>Painel</h2>
+        <ul>
+            <li><a href="dashboardDiaria.html">Dashboard - Diário</a></li>
+            <li><strong><a href="dashboardSemanal.html">Dashboard - Semanal</a></strong></li>
+            <li><a href="dashboardMensal.html">Dashboard - Mensal</a></li>
+            <li><a href="produto.html">Produtos</a></li>
+            <li><a href="setor.html">Setores</a></li>
+            <li><a href="contato.html">Contatos</a></li>
+            <li><a href="informacao.html">Informações</a></li>
+        </ul>
+    </div>
+
+    <div class="dashboard">
+
+        <div class="container-kpi">
+
+            <div class="kpi">
+                <div>
+                    <strong>Total de interações na loja</strong>
+                    <span>5.150</span>
+                </div>
+            </div>
+
+            <div class="kpi">
+                <div>
+                    <strong>Produto mais experimentado da Loja</strong>
+                    <span>Malbec Gold</span>
+                </div>
+            </div>
+
+            <div class="kpi">
+                <div>
+                    <strong>Setor com mais interações da loja</strong>
+                    <span>Perfumaria</span>
+                </div>
+            </div>
+
+            <div class="kpi">
+                <div>
+                    <strong>Tempo médio de retenção dos produtos na loja</strong>
+                    <span>2m 35s</span>
+                </div>
+            </div>
+
+        </div>
+        
+        <h1>Dashboard - Semanal</h1>
+
+
+        <div class="container-graficos">
+            <div class="grafico">
+                <canvas id="graficoInteracaoProduto"></canvas>
+            </div>
+            <div class="grafico">
+                <canvas id="graficoInteracaoSetor"></canvas>
+            </div>
+            <div class="grafico">
+                <canvas id="graficoTempoRetencao"></canvas>
+            </div>
+            <div class="grafico">
+                <canvas id="graficoInteracoesHora"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
+
+        new Chart(graficoInteracaoProduto, {
+            type: 'bar',
+            data: {
+                labels: ['Malbec gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
+                datasets: [{
+                    label: 'Interações',
+                    data: [1650, 1100, 950, 880, 420, 150],
+                    borderWidth: 2,
+                    backgroundColor: '#ae80ed',
+                    borderColor: '#2F0569'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 13
+                            },
+                            color: "#ffffff"
+                        },
+                        title: {
+                            font: {
+                                size: 18
+                            },
+                            display: true,
+                            text: 'Produtos',
+                            color: '#ffffff'
+                        },
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade (interações)',
+                            color: '#ffffff'
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total de interações por produto',
+                        color: '#ffffff',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            color: "#ffffff"
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+        const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
+
+        new Chart(graficoInteracaoSetor, {
+            type: 'bar',
+            data: {
+                labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
+                datasets: [{
+                    label: 'Interações por produto',
+                    data: [4430, 2600, 800, 310],
+                    borderWidth: 2,
+                    backgroundColor: '#ae80ed',
+                    borderColor: '#2F0569'
+
+
+                }]
+                
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 13
+                            },
+                            color: "#ffffff"
+                        },
+                        title: {
+                            font: {
+                                size: 18
+                            },
+                            display: true,
+                            text: 'Setor',
+                            color: '#ffffff'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade (interações)',
+                            color: '#ffffff'
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total de interações por setor',
+                        color: '#ffffff',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            color: "#ffffff"
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+        const graficoTempoRetencao = document.getElementById('graficoTempoRetencao');
+
+        new Chart(graficoTempoRetencao, {
+            type: 'bar',
+            data: {
+                labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
+                datasets: [{
+                    label: 'Segundos',
+                    data: [180, 150, 140, 130, 110, 80],
+                    backgroundColor: '#ae80ed',
+                    borderColor: '#2F0569',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tempo Médio de Retenção por Produto',
+                        color: '#ffffff',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            font: {
+                                size: 18
+                            },
+                            display: true,
+                            text: 'Produtos',
+                            color: '#ffffff'
+                        },
+                        ticks: {
+                            font: {
+                                size: 13
+                            },
+                            color: "#ffffff"
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade (interações)',
+                            color: '#ffffff'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Tempo (segundos)',
+                            color: '#ffffff'
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: "#ffffff"
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+        const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
+
+        new Chart(graficoInteracoesHora, {
+            type: 'line',
+            data: {
+                labels: ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
+                datasets: [
+                    {
+                        label: 'Interações',
+                        data: [230, 830, 350, 610, 1290, 670],
+                        borderColor: '#ae80ed',
+                        borderDash: [5, 5],
+                        borderWidth: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 13
+                            },
+                            color: "#ffffff"
+                        },
+                        title: {
+                             font: {
+                                size: 18
+                            },
+                            text: "Hora",
+                            display: true,
+                            color: "#fff"
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade',
+                            color: '#ffffff'
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Interações por Hora',
+                        color: '#ffffff',
+                        font: { size: 16 }
+                    },
+                    legend: {
+                        labels: {
+                            color: "#ffffff"
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

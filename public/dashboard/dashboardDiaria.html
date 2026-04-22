@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Smart Insight</title>
 
+    <link rel="stylesheet" href="../css/dashboardMenu.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -16,9 +17,13 @@
     <div class="menu">
         <h2>Painel</h2>
         <ul>
-            <li>Dashboard - Diário</li>
-            <li>Produtos</li>
-            <li>Informações da Loja</li>
+            <li><strong><a href="dashboardDiaria.html">Dashboard - Diário</a></strong></li>
+            <li><a href="dashboardSemanal.html">Dashboard - Semanal</a></li>
+            <li><a href="dashboardMensal.html">Dashboard - Mensal</a></li>
+            <li><a href="produto.html">Produtos</a></li>
+            <li><a href="setor.html">Setores</a></li>
+            <li><a href="contato.html">Contatos</a></li>
+            <li><a href="informacao.html">Informações</a></li>
         </ul>
     </div>
 
@@ -56,15 +61,17 @@
 
         </div>
 
+        <h1>Dashboard - Diária</h1>
+
         <div class="container-graficos">
             <div class="grafico">
-                <canvas id="myChart"></canvas>
+                <canvas id="graficoInteracaoProduto"></canvas>
             </div>
             <div class="grafico">
-                <canvas id="myChart2"></canvas>
+                <canvas id="graficoInteracaoSetor"></canvas>
             </div>
             <div class="grafico">
-                <canvas id="myChart3"></canvas>
+                <canvas id="graficoTempoRetencao"></canvas>
             </div>
             <div class="grafico">
                 <canvas id="graficoInteracoesHora"></canvas>
@@ -75,9 +82,9 @@
 
     <script>
 
-        const ctx = document.getElementById('myChart');
+        const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
 
-        new Chart(ctx, {
+        new Chart(graficoInteracaoProduto, {
             type: 'bar',
             data: {
                 labels: ['Malbec gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
@@ -144,9 +151,9 @@
 
 
 
-        const ctx2 = document.getElementById('myChart2');
+        const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
 
-        new Chart(ctx2, {
+        new Chart(graficoInteracaoSetor, {
             type: 'bar',
             data: {
                 labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
@@ -216,9 +223,9 @@
 
 
 
-        const ctx3 = document.getElementById('myChart3');
+        const graficoTempoRetencao = document.getElementById('graficoTempoRetencao');
 
-        new Chart(ctx3, {
+        new Chart(graficoTempoRetencao, {
             type: 'bar',
             data: {
                 labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
@@ -290,9 +297,9 @@
 
 
 
-        const ctxHora = document.getElementById('graficoInteracoesHora');
+        const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
 
-        new Chart(ctxHora, {
+        new Chart(graficoInteracoesHora, {
             type: 'line',
             data: {
                 labels: ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
@@ -344,7 +351,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Interações por Hora (Diário)',
+                        text: 'Interações por Hora',
                         color: '#ffffff',
                         font: { size: 16 }
                     },
