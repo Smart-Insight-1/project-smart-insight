@@ -1,28 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&display=swap');
 
 
-body{
+body {
     margin: 0;
-      background-color: #0C021A;
+    background-color: #0C021A;
     font-family: "Hanken Grotesk", sans-serif;
 }
 
 
-.container{
+.container {
 
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    
-    
+
+
 }
-.card-login{
+
+.card-login {
     padding: 40px;
     width: 90%;
     max-width: 400px;
-    
+
     background-color: aliceblue;
     border-radius: 30px;
     text-align: center;
@@ -30,15 +31,15 @@ body{
     box-shadow: 0 0 20px rgb(41, 41, 41);
 }
 
-.card-login h2{
-   padding: 5px;
+.card-login h2 {
+    padding: 5px;
     font-size: 40px;
 }
 
-.formulario{
+.formulario {
     padding: 10px;
     display: flex;
-    
+
     flex-direction: column;
 }
 
@@ -47,40 +48,40 @@ body{
     margin: 20px;
 }
 
-.campo{
+.campo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 30px;
     text-align: left;
-     font-weight: bold;
-    
+    font-weight: bold;
+
 
 }
 
-.campo span{
+.campo span {
     font-size: 20px;
     font-weight: bold;
 }
 
-.campo input{
+.campo input {
     width: 100%;
     height: 30px;
     border-radius: 10px;
     border: 1px solid #2F0569;
     text-align: center;
     outline: none;
-   
-    
+
+
 }
 
 input::placeholder {
     font-family: "Hanken Grotesk", sans-serif;
-    font-size: 14px;      
-    font-weight: 400;    
+    font-size: 14px;
+    font-weight: 400;
 }
 
-.botao{
+.botao {
     width: 100%;
     height: 50px;
     border-radius: 30px;
@@ -91,45 +92,47 @@ input::placeholder {
 
     box-shadow: 0 0 5px black;
 }
-.botao:hover{
+
+.botao:hover {
     background-color: #572e91;
 }
 
-.botao:active{
+.botao:active {
     transform: scale(0.95);
-    
-} 
 
-.msg{
+}
+
+.msg {
     padding: 20px;
     height: 0;
 
 }
 
-.msg a{
+.msg a {
     color: #000;
     text-decoration: none;
 }
 
-.msg span{
+.msg span {
     color: #2F0569;
     text-decoration: underline;
     cursor: pointer;
 }
 
 
-.cadastro{
+.cadastro {
     padding: 100px;
-    
+
     display: flex;
     justify-content: center;
 }
-.container-cadastro{
+
+.container-cadastro {
     padding: 40px;
     border-radius: 30px;
     background-color: aliceblue;
     text-align: center;
-    
+
     display: flex;
     justify-content: center;
 }
@@ -143,40 +146,41 @@ input::placeholder {
 
 
 
-.nomes{
+.nomes {
     display: flex;
     gap: 20px;
-    
-   
+
+
 }
-.nomes > .campo{
+
+.nomes>.campo {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-.nomes > .campo input {
-    width: 100%;     
+.nomes>.campo input {
+    width: 100%;
     box-sizing: border-box;
 }
 
 
-.email{
+.email {
     display: flex;
     gap: 20px;
 }
 
-.email > .campo{
+.email>.campo {
     flex: 1;
 }
 
-.cep-numero{
+.cep-numero {
     display: flex;
     gap: 20px;
     flex: 1;
 }
 
-.cep-numero .campo{
+.cep-numero .campo {
     flex: 1;
 }
 
@@ -186,18 +190,19 @@ input::placeholder {
 
 
 
-.senha{
+.senha {
     display: flex;
     gap: 20px;
 }
 
-.senha > .campo{
+.senha>.campo {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-.senha > .campo input {
-    width: 100%;     
+
+.senha>.campo input {
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -205,23 +210,24 @@ input::placeholder {
 
 
 
-.confirmarsenha{
+.confirmarsenha {
     display: flex;
     gap: 20px;
 }
 
-.confirmarsenha > .campo{
+.confirmarsenha>.campo {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-.confirmarsenha > .campo input {
-    width: 100%;     
+
+.confirmarsenha>.campo input {
+    width: 100%;
     box-sizing: border-box;
 }
 
 
-.botaoCadastro button{
+.botaoCadastro button {
     width: 100%;
     height: 50px;
     border-radius: 30px;
@@ -233,18 +239,14 @@ input::placeholder {
     box-shadow: 0 0 5px black;
 }
 
-.botaoCadastro button:hover{
+.botaoCadastro button:hover {
     background-color: #572e91;
 }
 
-.botaoCadastro button:active{
+.botaoCadastro button:active {
     transform: scale(0.95);
-    
-} 
 
-
-
-
+}
 
 .alerta {
     height: 20px;
@@ -252,32 +254,8 @@ input::placeholder {
     border-radius: 10px;
     font-size: 14px;
     text-align: center;
-    display: none; /* começa escondido */
+    display: none;
+    /* começa escondido */
     animation: aparecer 0.4s ease;
-}
-
-/* ERRO */
-.alerta.erro {
-    background-color: #ffe5e5;
-    color: #d8000c;
-    border: 1px solid #ffb3b3;
-}
-
-/* SUCESSO */
-.alerta.sucesso {
     background-color: #e6ffed;
-    color: #2e7d32;
-    border: 1px solid #b2f2bb;
-
-    
-background-color: #7f44d2;
-background-color: #ae80ed;
-
-background-color: #5d62e3;
-
-
-background-color: #cd5de3;
-
-
 }
-

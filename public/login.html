@@ -56,7 +56,8 @@
     </div>
 
     <div id="div_msg" class="alerta"></div>
-    <footer class="footer">
+
+,32695    <footer class="footer">
         <div class="footer-logo">
             <img src="assets/logo.png" alt="Logo">
         </div>
@@ -95,15 +96,12 @@
         let indice_arroba = email.indexOf('@');
 
         if (senha.length < 8 || cnpj.length < 11) {
-            div.classList.add("erro");
             div.innerHTML = "❌ CNPJ ou senha inválidos!";
         }
         else if (indice_arroba == -1 || !termina_com) {
-            div.classList.add("erro");
             div.innerHTML = "❌ Email inválido!";
         }
         else {
-            div.classList.add("sucesso");
             div.innerHTML = "✅ Login válido!";
         }
     }
