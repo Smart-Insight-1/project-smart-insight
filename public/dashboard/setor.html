@@ -74,20 +74,47 @@
 
             <div class="campo">
                 <label>Nome do Setor</label>
-                <input type="text" placeholder="Digite o nome do setor">
+                <input type="text" placeholder="Digite o nome do setor" id="ipt_nome">
             </div>
 
             <div class="campo">
                 <label>Descrição</label>
-                <input type="text" placeholder="Digite a descrição">
+                <input type="text" placeholder="Digite a descrição" id="ipt_desc">
             </div>
 
-            <button>Cadastrar Setor</button>
+            <button onclick="botao()">Cadastrar Setor</button>
+
+
 
         </div>
 
+        <div id="div_msg" class="alertas"></div>
+        
     </div>
+
+
 
 </body>
 
 </html>
+
+<script>
+    function botao() {
+
+        let div = div_msg
+        let nomeSetor = ipt_nome.value;
+        let descSetor = ipt_desc.value;
+
+        div.innerHTML = "";
+        div.style.display = "block";
+
+        if (descSetor.length <= 200 && nomeSetor.length != 0 && descSetor.length != 0) {
+            div.innerHTML = "✅ cadastro válido!";
+        }
+        else {
+            div.innerHTML = "❌ cadastro inválido!";
+        }
+
+    }
+
+</script>

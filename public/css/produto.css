@@ -18,7 +18,7 @@
 
     border-radius: 15px;
 
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .lista-produtos h2 {
@@ -59,7 +59,7 @@ tr:hover {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .box h2 {
@@ -114,4 +114,35 @@ button {
 
 button:hover {
     background-color: #9258e6;
+}
+
+
+.div_msg {
+    padding: 20px;
+    height: 0;
+
+}
+
+.div_msg a {
+    color: #000;
+    text-decoration: none;
+}
+
+.div_msg span {
+    color: #2F0569;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.alertas {
+    
+    height: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+    /* começa escondido */
+    animation: aparecer 0.4s ease;
+    background-color: #786da5;
 }

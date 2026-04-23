@@ -62,15 +62,39 @@
 
             <div class="campo">
                 <label>Telefone</label>
-                <input type="text" placeholder="11999999999">
+                <input type="text" placeholder="11999999999" id="ipt_telefone">
             </div>
 
-            <button>Cadastrar Contato</button>
+            <button onclick="botao()">Cadastrar Contato</button>
 
         </div>
 
+        <div id="div_msg" class="alertas"></div>
+        
     </div>
+
+
 
 </body>
 
 </html>
+
+<script>
+    function botao() {
+
+        let div = div_msg
+
+        let telefone = ipt_telefone.value
+
+        div.innerHTML = "";
+        div.style.display = "block";
+
+
+        if (telefone.length == 11) {
+            div.innerHTML = "✅ cadastro válido!";
+        }
+        else {
+            div.innerHTML = "❌ cadastro inválido!";
+        }
+    }
+</script>

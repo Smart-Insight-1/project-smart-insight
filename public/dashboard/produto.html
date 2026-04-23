@@ -80,22 +80,22 @@
 
             <div class="campo">
                 <label>Nome do Produto</label>
-                <input type="text" placeholder="Digite o nome do produto">
+                <input type="text" placeholder="Digite o nome do produto" id="ipt_nome">
             </div>
 
             <div class="campo">
                 <label>Tipo do Produto</label>
-                <input type="text" placeholder="Digite o tipo do produto">
+                <input type="text" placeholder="Digite o tipo do produto" id="ipt_tipo">
             </div>
 
             <div class="campo">
                 <label>Código</label>
-                <input type="text" placeholder="1351">
+                <input type="text" placeholder="1351" id="ipt_codigo">
             </div>
 
             <div class="campo">
                 <label>Setor</label>
-                <select>
+                <select id="ipt_setor">
                     <option>Masculino</option>
                     <option>Feminino</option>
                     <option>Lançamentos</option>
@@ -104,15 +104,45 @@
 
             <div class="campo">
                 <label>Marca</label>
-                <input type="text" placeholder="Digite a marca">
+                <input type="text" placeholder="Digite a marca" id="ipt_marca">
             </div>
 
-            <button>Cadastrar Produto</button>
+            <button onclick="botao()">Cadastrar Produto</button>
+
+            
 
         </div>
 
+        <div id="div_msg" class="alertas"></div>
     </div>
+
+
 
 </body>
 
 </html>
+
+<script>
+    function botao() {
+
+        let div = div_msg
+        let nomeProd = ipt_nome.value
+        let tipoProd = ipt_tipo.value
+        let codigo = ipt_codigo.value
+        let setor = ipt_setor.value
+        let marca = ipt_marca.value
+
+        div.innerHTML = "";
+        div.style.display = "block";
+
+        if (codigo.length <= 13 && nomeProd.length != 0 && tipoProd.length != 0 && marca.length != 0 && codigo.length != 0) {
+            div.innerHTML = "✅ cadastro válido!";
+        }
+        else {
+            div.innerHTML = "❌ cadastro inválido!";
+        }
+
+
+
+    }
+</script>

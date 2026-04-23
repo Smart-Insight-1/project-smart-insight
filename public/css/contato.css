@@ -111,3 +111,15 @@ button:hover {
     background-color: #9258e6;
     transform: translateY(-2px);
 }
+
+.alertas {
+    height: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+    /* começa escondido */
+    animation: aparecer 0.4s ease;
+    background-color: #786da5;
+}
