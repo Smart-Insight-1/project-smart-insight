@@ -135,6 +135,9 @@
 </html>
 
 <script>
+
+    let listaCaracter = ["@","#","$","%","&","*","!","."]
+
     function criarConta() {
         let nome = iptNomeCompleto.value;
         let loja = iptNomeDaMarca.value;
@@ -156,6 +159,15 @@
         let termina_com = email.endsWith('.com');
         let indice_arroba = email.indexOf('@');
 
+        let temEspecial = false;
+
+        for (let i = 0; i < listaCaracter.length; i++) {
+            if (senha.includes(listaCaracter[i])) {
+                temEspecial = true;
+                break;
+            }
+        }
+
         if (
             nome == "" || loja == "" || email == "" || cep == "" ||
             numero == "" || cnpj == "" || senha == "" ||
@@ -169,6 +181,9 @@
         else if (cnpj.length < 14) {
             div.innerHTML = "❌ CNPJ inválido!";
         }
+        else if (!temEspecial) {
+            div.innerHTML += `❌ A senha precisa ter caractere especial<br> `;
+            } 
         else if (indice_arroba == -1 || !termina_com) {
             div.innerHTML = "❌ Email inválido!";
         }
