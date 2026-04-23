@@ -161,27 +161,21 @@
             numero == "" || cnpj == "" || senha == "" ||
             confirmarSenha == "" || telefone == ""
         ) {
-            div.classList.add("erro");
             div.innerHTML = "❌ Preencha todos os campos!";
         }
         else if (senha.length < 8) {
-            div.classList.add("erro");
             div.innerHTML = "❌ A senha deve ter pelo menos 8 caracteres!";
         }
         else if (cnpj.length < 14) {
-            div.classList.add("erro");
             div.innerHTML = "❌ CNPJ inválido!";
         }
         else if (indice_arroba == -1 || !termina_com) {
-            div.classList.add("erro");
             div.innerHTML = "❌ Email inválido!";
         }
         else if (senha != confirmarSenha) {
-            div.classList.add("erro");
             div.innerHTML = "❌ As senhas não coincidem!";
         }
         else {
-            div.classList.add("sucesso");
             div.innerHTML = "✅ Conta criada com sucesso!";
         }
     }
