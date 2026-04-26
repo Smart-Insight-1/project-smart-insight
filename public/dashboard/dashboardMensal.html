@@ -74,7 +74,7 @@
                 <canvas id="graficoTempoRetencao"></canvas>
             </div>
             <div class="grafico">
-                <canvas id="graficoInteracoesHora"></canvas>
+                <canvas id="graficoInteracoesSemana"></canvas>
             </div>
         </div>
 
@@ -297,12 +297,12 @@
 
 
 
-        const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
+        const graficoInteracoesSemana = document.getElementById('graficoInteracoesSemana');
 
-        new Chart(graficoInteracoesHora, {
+        new Chart(graficoInteracoesSemana, {
             type: 'line',
             data: {
-                labels: ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
+                labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
                 datasets: [
                     {
                         label: 'Interações',
@@ -328,7 +328,7 @@
                              font: {
                                 size: 18
                             },
-                            text: "Hora",
+                            text: "Semana",
                             display: true,
                             color: "#fff"
                         }
@@ -351,7 +351,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Interações por Hora',
+                        text: 'Interações por Semana',
                         color: '#ffffff',
                         font: { size: 16 }
                     },
