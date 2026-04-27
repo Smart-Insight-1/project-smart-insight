@@ -34,7 +34,7 @@
             <div class="kpi">
                 <div>
                     <strong>Total de interações na loja</strong>
-                    <span>5.150</span>
+                    <span>36.150</span>
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
             </div>
 
         </div>
-        
+
         <h1>Dashboard - Semanal</h1>
 
 
@@ -80,302 +80,212 @@
         </div>
 
     </div>
-
     <script>
 
-        const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
+const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
 
-        new Chart(graficoInteracaoProduto, {
-            type: 'bar',
-            data: {
-                labels: ['Malbec gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
-                datasets: [{
-                    label: 'Interações',
-                    data: [1650, 1100, 950, 880, 420, 150],
-                    borderWidth: 2,
-                    backgroundColor: '#ae80ed',
-                    borderColor: '#2F0569'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 13
-                            },
-                            color: "#ffffff"
-                        },
-                        title: {
-                            font: {
-                                size: 18
-                            },
-                            display: true,
-                            text: 'Produtos',
-                            color: '#ffffff'
-                        },
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Quantidade (interações)',
-                            color: '#ffffff',
-                            font: {
-                                size: 18
-                            }
-                        },
-                        beginAtZero: true,
-                        ticks: {
-                            font: {
-                                size: 16
-                            },
-                            color: "#ffffff"
-                        }
-                    }
-                },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Total de interações por produto',
-                        color: '#ffffff',
-                        font: {
-                            size: 16
-                        }
-                    },
-                    legend: {
-                        labels: {
-                            color: "#ffffff"
-                        }
-                    }
+new Chart(graficoInteracaoProduto, {
+    type: 'bar',
+    data: {
+        labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
+        datasets: [{
+            label: 'Interações',
+            data: [11550, 7700, 6650, 5950, 2800, 1500],
+            borderWidth: 2,
+            backgroundColor: '#ae80ed',
+            borderColor: '#2F0569'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                ticks: { font: { size: 13 }, color: "#ffffff" },
+                title: {
+                    font: { size: 18 },
+                    display: true,
+                    text: 'Produtos',
+                    color: '#ffffff'
                 }
-            }
-        });
-
-
-
-        const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
-
-        new Chart(graficoInteracaoSetor, {
-            type: 'bar',
-            data: {
-                labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
-                datasets: [{
-                    label: 'Interações por produto',
-                    data: [4430, 2600, 800, 310],
-                    borderWidth: 2,
-                    backgroundColor: '#ae80ed',
-                    borderColor: '#2F0569'
-
-
-                }]
-                
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 13
-                            },
-                            color: "#ffffff"
-                        },
-                        title: {
-                            font: {
-                                size: 18
-                            },
-                            display: true,
-                            text: 'Setor',
-                            color: '#ffffff'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Quantidade (interações)',
-                            color: '#ffffff',
-                            font: {
-                                size: 16
-                            }
-                        },
-                        beginAtZero: true,
-                        ticks: {
-                            font: {
-                                size: 16
-                            },
-                            color: "#ffffff"
-                        }
-                    }
+            y: {
+                title: {
+                    display: true,
+                    text: 'Quantidade (interações)',
+                    color: '#ffffff',
+                    font: { size: 18 }
                 },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Total de interações por setor',
-                        color: '#ffffff',
-                        font: {
-                            size: 16
-                        }
-                    },
-                    legend: {
-                        labels: {
-                            color: "#ffffff"
-                        }
-                    }
-                }
+                beginAtZero: true,
+                ticks: { font: { size: 16 }, color: "#ffffff" }
             }
-        });
-
-
-
-        const graficoTempoRetencao = document.getElementById('graficoTempoRetencao');
-
-        new Chart(graficoTempoRetencao, {
-            type: 'bar',
-            data: {
-                labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
-                datasets: [{
-                    label: 'Segundos',
-                    data: [180, 150, 140, 130, 110, 80],
-                    backgroundColor: '#ae80ed',
-                    borderColor: '#2F0569',
-                    borderWidth: 2
-                }]
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Total de interações por produto',
+                color: '#ffffff',
+                font: { size: 16 }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Tempo Médio de Retenção por Produto',
-                        color: '#ffffff',
-                        font: {
-                            size: 16
-                        }
-                    },
-                    legend: {
-                        labels: {
-                            color: "#ffffff"
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            font: {
-                                size: 18
-                            },
-                            display: true,
-                            text: 'Produtos',
-                            color: '#ffffff'
-                        },
-                        ticks: {
-                            font: {
-                                size: 13
-                            },
-                            color: "#ffffff"
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Quantidade (interações)',
-                            color: '#ffffff'
-                        },
-                        title: {
-                            display: true,
-                            text: 'Tempo (segundos)',
-                            color: '#ffffff',
-                            font: {
-                                size: 16
-                            }
-                        },
-                        beginAtZero: true,
-                        ticks: {
-                            font: {
-                                size: 16
-                            },
-                            color: "#ffffff"
-                        }
-                    }
+            legend: { labels: { color: "#ffffff" } }
+        }
+    }
+});
+
+
+const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
+
+new Chart(graficoInteracaoSetor, {
+    type: 'bar',
+    data: {
+        labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
+        datasets: [{
+            label: 'Interações por setor',
+            data: [18200, 13650, 2800, 1500],
+            borderWidth: 2,
+            backgroundColor: '#ae80ed',
+            borderColor: '#2F0569'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                ticks: { font: { size: 13 }, color: "#ffffff" },
+                title: {
+                    font: { size: 18 },
+                    display: true,
+                    text: 'Setor',
+                    color: '#ffffff'
                 }
-            }
-        });
-
-
-        const graficoInteracoesDia = document.getElementById('graficoInteracoesDia');
-
-        new Chart(graficoInteracoesDia, {
-            type: 'line',
-            data: {
-                labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
-                datasets: [
-                    {
-                        label: 'Interações',
-                        data: [230, 830, 350, 610, 1290, 670, 532],
-                        borderColor: '#ae80ed',
-                        borderDash: [5, 5],
-                        borderWidth: 3
-                    }
-                ]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 13
-                            },
-                            color: "#ffffff"
-                        },
-                        title: {
-                             font: {
-                                size: 18
-                            },
-                            text: "Dia",
-                            display: true,
-                            color: "#fff"
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Quantidade',
-                            color: '#ffffff',
-                            font: {
-                                size: 16
-                            }
-                        },
-                        beginAtZero: true,
-                        ticks: {
-                            font: {
-                                size: 16
-                            },
-                            color: "#ffffff"
-                        }
-                    }
+            y: {
+                title: {
+                    display: true,
+                    text: 'Quantidade (interações)',
+                    color: '#ffffff',
+                    font: { size: 16 }
                 },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Interações por Dia',
-                        color: '#ffffff',
-                        font: { size: 16 }
-                    },
-                    legend: {
-                        labels: {
-                            color: "#ffffff"
-                        }
-                    }
-                }
+                beginAtZero: true,
+                ticks: { font: { size: 16 }, color: "#ffffff" }
             }
-        });
-    </script>
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Total de interações por setor',
+                color: '#ffffff',
+                font: { size: 16 }
+            },
+            legend: { labels: { color: "#ffffff" } }
+        }
+    }
+});
+
+
+const graficoTempoRetencao = document.getElementById('graficoTempoRetencao');
+
+new Chart(graficoTempoRetencao, {
+    type: 'bar',
+    data: {
+        labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
+        datasets: [{
+            label: 'Tempo (segundos)',
+            data: [180, 160, 150, 140, 120, 100],
+            backgroundColor: '#ae80ed',
+            borderColor: '#2F0569',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Tempo Médio de Retenção por Produto',
+                color: '#ffffff',
+                font: { size: 16 }
+            },
+            legend: { labels: { color: "#ffffff" } }
+        },
+        scales: {
+            x: {
+                title: {
+                    font: { size: 18 },
+                    display: true,
+                    text: 'Produtos',
+                    color: '#ffffff'
+                },
+                ticks: { font: { size: 13 }, color: "#ffffff" }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Tempo (segundos)',
+                    color: '#ffffff',
+                    font: { size: 16 }
+                },
+                beginAtZero: true,
+                ticks: { font: { size: 16 }, color: "#ffffff" }
+            }
+        }
+    }
+});
+
+
+const graficoInteracoesDia = document.getElementById('graficoInteracoesDia');
+
+new Chart(graficoInteracoesDia, {
+    type: 'line',
+    data: {
+        labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+        datasets: [{
+            label: 'Interações',
+            data: [4000, 5000, 3500, 4500, 7000, 6000, 5150],
+            borderColor: '#ae80ed',
+            borderDash: [5, 5],
+            borderWidth: 3
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                ticks: { font: { size: 13 }, color: "#ffffff" },
+                title: {
+                    font: { size: 18 },
+                    text: "Dia",
+                    display: true,
+                    color: "#fff"
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Quantidade',
+                    color: '#ffffff',
+                    font: { size: 16 }
+                },
+                beginAtZero: true,
+                ticks: { font: { size: 16 }, color: "#ffffff" }
+            }
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Interações por Dia',
+                color: '#ffffff',
+                font: { size: 16 }
+            },
+            legend: { labels: { color: "#ffffff" } }
+        }
+    }
+});
+
+</script>
 
 </body>
 
