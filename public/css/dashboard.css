@@ -28,6 +28,8 @@
     transition: 0.2s;
 }
 
+
+
 .kpi:hover {
     transform: translateY(-3px);
 }
@@ -41,6 +43,11 @@
     font-size: 15px;
     color: #c9b5ff;
     font-weight: 500;
+}
+
+.kpi-ancoragem strong{
+    font-size: 12px;
+    color: #cecece;
 }
 
 .kpi span {
