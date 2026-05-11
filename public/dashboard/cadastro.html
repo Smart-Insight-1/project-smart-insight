@@ -39,11 +39,6 @@
             </div>
 
             <div class="campo">
-                <label>Nome social:</label>
-                <input type="text" placeholder="Digite o nome social do usuário" id="ipt_nomeSocial">
-            </div>
-
-            <div class="campo">
                 <label>Email:</label>
                 <input type="text" placeholder="Digite o email do usuário" id="ipt_email">
             </div>
@@ -74,15 +69,10 @@
     let listaCaracter = ["@","#","$","%","&","*","!","."]
 
     function criarConta() {
-        let nome = iptNomeCompleto.value;
-        let loja = iptNomeDaMarca.value;
-        let email = iptEmail.value;
-        let cep = iptCep.value;
-        let numero = iptNumero.value;
-        let cnpj = iptCnpj.value;
-        let senha = iptSenha.value;
-        let confirmarSenha = iptConfirmarSenha.value;
-        let telefone = iptTelefone.value;
+        let nome = ipt_nome.value;
+        let email = ipt_email.value;
+        let senha = ipt_senha.value;
+        let confirmarSenha = ipt_confirmarSenha.value;
 
         let div = msg;
 
@@ -103,21 +93,17 @@
         }
 
         if (
-            nome == "" || loja == "" || email == "" || cep == "" ||
-            numero == "" || cnpj == "" || senha == "" ||
-            confirmarSenha == "" || telefone == ""
+            nome == "" ||  email == "" || senha == "" ||
+            confirmarSenha == ""
         ) {
             div.innerHTML = "❌ Preencha todos os campos!";
         }
         else if (senha.length < 8) {
             div.innerHTML = "❌ A senha deve ter pelo menos 8 caracteres!";
         }
-        else if (cnpj.length < 14) {
-            div.innerHTML = "❌ CNPJ inválido!";
-        }
         else if (!temEspecial) {
             div.innerHTML += `❌ A senha precisa ter caractere especial<br> `;
-            } 
+        } 
         else if (indice_arroba == -1 || !termina_com) {
             div.innerHTML = "❌ Email inválido!";
         }
