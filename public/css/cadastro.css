@@ -1,0 +1,104 @@
+.container-cadastro {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 30px;
+    gap: 30px;
+}
+
+.box {
+    width: 50%;
+    background-color: #1E0A3A;
+    padding: 35px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.box h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo label {
+    font-size: 16px;
+}
+
+.campo input,
+.campo select {
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #2A1247;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+button {
+    margin-top: 10px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #2A1247;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #9258e6;
+}
+
+
+.div_msg {
+    padding: 20px;
+    height: 0;
+
+}
+
+.div_msg a {
+    color: #000;
+    text-decoration: none;
+}
+
+.div_msg span {
+    color: #2F0569;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.alertas {
+    
+    height: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+    /* começa escondido */
+    animation: aparecer 0.4s ease;
+    background-color: #786da5;
+}
