@@ -4,16 +4,17 @@ USE prateleiraInteligente;
 CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    razao_social VARCHAR(100),
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fkGestor INT,
+    FOREIGN KEY (fkGestor) REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE contato (
     id_contato INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
-    telefone CHAR(11),
+    telefone CHAR(14),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
@@ -21,8 +22,20 @@ CREATE TABLE loja (
     id_loja INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     nome_loja VARCHAR(100) NOT NULL,
+	razao_social VARCHAR(100),
     cnpj CHAR(14) UNIQUE,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE Acesso (
+    fkUsuario INT,
+    fkLoja INT,
+    acessoTotal INT CHECK (acessoTotal IN (0,1)),
+    CONSTRAINT pkComposta PRIMARY KEY (fkUsuario, fkLoja),
+	CONSTRAINT fkUsuarioAce FOREIGN KEY (fkUsuario)
+		REFERENCES Usuario(id_usuario),
+	CONSTRAINT fkLojaAce FOREIGN KEY (fkLoja)
+		REFERENCES Loja(id_loja)
 );
 
 CREATE TABLE endereco (
