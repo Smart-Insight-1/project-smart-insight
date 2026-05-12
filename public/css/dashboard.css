@@ -5,6 +5,51 @@
     padding: 35px;
 }
 
+/* FILTROS */
+
+.filtros{
+    display: flex;
+    align-items: end;
+    gap: 15px;
+    background-color: #14042A;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.campo-filtro{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo-filtro p{
+    margin: 0;
+    color: white;
+    font-size: 14px;
+}
+
+.campo-filtro input{
+    width: 160px;
+    height: 35px;
+    border: 1px solid #2F0569;
+    border-radius: 5px;
+    background-color: #1E0A3A;
+    color: white;
+    padding: 0 10px;
+}
+
+.filtros button{
+    height: 37px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #300968;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 /* KPI */
 
 .container-kpi {
