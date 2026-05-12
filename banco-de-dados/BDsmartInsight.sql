@@ -1,41 +1,52 @@
 CREATE DATABASE prateleiraInteligente;
 USE prateleiraInteligente;
 
+CREATE TABLE empresa (
+    id_empresa INT AUTO_INCREMENT PRIMARY KEY,
+    razao_social VARCHAR(100) NOT NULL,
+    cnpj CHAR(14) UNIQUE NOT NULL,
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    id_empresa INT NOT NULL,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
+    tipo_usuario VARCHAR(20) NOT NULL,
     data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fkGestor INT,
-    FOREIGN KEY (fkGestor) REFERENCES usuario(id_usuario)
+    CONSTRAINT chTipoUsuario
+        CHECK(tipo_usuario IN ('gestor','analista')),
+    FOREIGN KEY (id_empresa)
+        REFERENCES empresa(id_empresa)
 );
 
 CREATE TABLE contato (
     id_contato INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
-    telefone CHAR(14),
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    telefone CHAR(11),
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE loja (
     id_loja INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
+    id_empresa INT NOT NULL,
+    codigo_loja VARCHAR(20) UNIQUE,
     nome_loja VARCHAR(100) NOT NULL,
-	razao_social VARCHAR(100),
-    cnpj CHAR(14) UNIQUE,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_empresa)
+        REFERENCES empresa(id_empresa)
 );
 
-CREATE TABLE Acesso (
-    fkUsuario INT,
-    fkLoja INT,
-    acessoTotal INT CHECK (acessoTotal IN (0,1)),
-    CONSTRAINT pkComposta PRIMARY KEY (fkUsuario, fkLoja),
-	CONSTRAINT fkUsuarioAce FOREIGN KEY (fkUsuario)
-		REFERENCES Usuario(id_usuario),
-	CONSTRAINT fkLojaAce FOREIGN KEY (fkLoja)
-		REFERENCES Loja(id_loja)
+CREATE TABLE acesso_loja (
+    id_loja INT NOT NULL,
+    id_usuario INT NOT NULL,
+    PRIMARY KEY(id_loja, id_usuario),
+    FOREIGN KEY (id_loja)
+        REFERENCES loja(id_loja),
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE endereco (
