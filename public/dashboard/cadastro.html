@@ -16,14 +16,12 @@
     <div class="menu">
         <h2>Painel</h2>
         <ul>
-            <li><a href="dashboardDiaria.html">Dashboard - Diário</a></li>
-            <li><a href="dashboardSemanal.html">Dashboard - Semanal</a></li>
-            <li><a href="dashboardMensal.html">Dashboard - Mensal</a></li>
-            <li><a href="produto.html">Produtos</a></li>
-            <li><a href="setor.html">Setores</a></li>
-            <li><a href="contato.html">Contatos</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li id="menuProdutos"><a href="produto.html">Produtos</a></li>
+            <li id="menuSetores"><a href="setor.html">Setores</a></li>
+            <li id="menuContatos"><a href="contato.html">Contatos</a></li>
             <li><a href="informacao.html">Informações</a></li>
-            <li><strong><a href="cadastro.html">Cadastro Usuário</a></strong></li>
+            <li id="menuCadastro"><strong><a href="cadastro.html">Cadastro Usuário</a></strong></li>
         </ul>
     </div>
 
@@ -65,6 +63,15 @@
 </html>
 
 <script>
+
+    const tipoUsuario = sessionStorage.TIPO_USUARIO;
+
+    if(tipoUsuario == "analista") {
+        document.getElementById("menuProdutos").style.display = "none";
+        document.getElementById("menuSetores").style.display = "none";
+        document.getElementById("menuContatos").style.display = "none";
+        document.getElementById("menuCadastro").style.display = "none";
+    }
 
     let listaCaracter = ["@","#","$","%","&","*","!","."]
 
