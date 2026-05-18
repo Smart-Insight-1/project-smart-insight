@@ -35,19 +35,19 @@
                 <div class="formulario">
                     <div class="campo">
                         <span>Nome:</span>
-                        <input id="email_input" type="text" placeholder="Nome do responsável">
+                        <input id="ipt_nome" type="text" placeholder="Nome do responsável">
                     </div>
                     <div class="campo">
                         <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="contato@empresa.com">
+                        <input id="ipt_email" type="text" placeholder="contato@empresa.com">
                     </div>
                     <div class="campo">
                         <span>Razão social:</span>
-                        <input id="razao_social_input" type="text" placeholder="Nome Oficial da Loja Ltda">
+                        <input id="ipt_razao_social" type="text" placeholder="Nome Oficial da Loja Ltda">
                     </div>
                     <div class="campo">
                         <span>CNPJ:</span>
-                        <input id="cnpj_input" type="text" placeholder="00.000.000/0001-00">
+                        <input id="ipt_cnpj" type="text" placeholder="10100100000110">
                     </div>
                     <button class="botao" onclick="solicitarAtivacao()">Solicitar Ativação</button>
                 </div>
@@ -77,3 +77,29 @@
 
 </html>
 
+<script>
+    function solicitarAtivacao() {
+        let nome = ipt_nome.value;
+        let email = ipt_email.value;
+        let razaoSocial = ipt_razao_social.value
+        let cnpj = ipt_cnpj.value;
+
+        let termina_com = email.endsWith('.com');
+        let indice_arroba = email.indexOf('@');
+
+
+        if (
+            nome == "" ||  email == "" || cnpj == "" || razaoSocial == ""
+        ) {
+            alert("❌ Preencha todos os campos!");
+        } else if (indice_arroba == -1 || !termina_com) {
+            alert("❌ Email inválido!");
+        }
+        else if (cnpj.length != 14) {
+            alert("❌ CNPJ inválido!");
+        }
+        else {
+            alert("✅ Validação encaminhada com sucesso!");
+        }
+    }
+</script>
