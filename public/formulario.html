@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário | Smart Insight</title>
+    <link rel="stylesheet" href="css/headerFooter.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://kit.fontawesome.com/d840916580.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="assets/logo.png" alt="Logo">
+        </div>
+        <div class="container-navbar">
+            <div class="navbar">
+                <a href="home.html">Home</a>
+                <a href="home.html">Quem somos</a>
+                <a href="calculadora.html">Calculadora</a>
+                <a href="home.html">Contato</a>
+            </div>
+            <div class="user">
+                <a href="login.html"><i class="fa-regular fa-user"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="login">
+
+        <div class="container">
+            <div class="card-login">
+                <h2>Formulário</h2>
+                <div class="formulario">
+                    <div class="campo">
+                        <span>Nome:</span>
+                        <input id="email_input" type="text" placeholder="Nome do responsável">
+                    </div>
+                    <div class="campo">
+                        <span>E-mail:</span>
+                        <input id="email_input" type="text" placeholder="contato@empresa.com">
+                    </div>
+                    <div class="campo">
+                        <span>Razão social:</span>
+                        <input id="razao_social_input" type="text" placeholder="Nome Oficial da Loja Ltda">
+                    </div>
+                    <div class="campo">
+                        <span>CNPJ:</span>
+                        <input id="cnpj_input" type="text" placeholder="00.000.000/0001-00">
+                    </div>
+                    <button class="botao" onclick="solicitarAtivacao()">Solicitar Ativação</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="div_msg" class="alerta"></div>
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="assets/logo.png" alt="Logo">
+        </div>
+        <div class="footer-text">
+            <p>© Smart Insight</p>
+            <p>2026</p>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+</body>
+
+</html>
+
