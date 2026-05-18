@@ -34,6 +34,10 @@
                 <h2>Login</h2>
                 <div class="formulario">
                     <div class="campo">
+                        <span>Código da loja</span>
+                        <input id="codigo_loja_input" type="text" placeholder="Código">
+                    </div>
+                    <div class="campo">
                         <span>E-mail:</span>
                         <input id="email_input" type="text" placeholder="Login">
                     </div>
@@ -76,6 +80,7 @@
     function entrar() {
         let senha = senha_input.value;
         let email = email_input.value;
+        let codigoLoja = Number(codigo_loja_input.value)
 
         let verificacao = false;
 
@@ -93,6 +98,9 @@
         }
         else if (indice_arroba == -1 || !termina_com) {
             div.innerHTML = "❌ Email inválido!";
+        }
+        else if (codigoLoja.length > 20) {
+            div.innerHTML = "❌ Código da loja inválido!";
         }
         else {
             div.innerHTML = "✅ Login válido!";
