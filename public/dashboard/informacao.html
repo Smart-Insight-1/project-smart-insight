@@ -38,10 +38,11 @@
 <script>
     const tipoUsuario = sessionStorage.TIPO_USUARIO;
 
-    if(tipoUsuario == "analista") {
+    if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
         document.getElementById("menuCadastro").style.display = "none";
     }
+    
 </script>
