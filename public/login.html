@@ -83,73 +83,71 @@
 
         // limpa antes
         div.innerHTML = "";
-        div.style.display = "block";
 
         let termina_com = email.endsWith('.com');
         let indice_arroba = email.indexOf('@');
 
         if (senha.length < 8) {
+            div.style.display = "block";
             div.innerHTML = "❌senha inválida!";
+            return;
         }
         else if (indice_arroba == -1 || !termina_com) {
+            div.style.display = "block";
             div.innerHTML = "❌ Email inválido!";
-        } else {
-            div.innerHTML = "✅ Login válido!";
-            verificacao = true;
+            return;
         }
 
-        if(email == 'admin@gmail.com' && senha == 'Smartinsight#2026') {
-           window.location.href = "dashboard/dashboard.html";
-        } else {
-            alert(`Email ou Senha estão incorretos!`);
-        }
+        console.log("FORM LOGIN: ", email);
+        console.log("FORM SENHA: ", senha);
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+        verificacao = true;
 
-        fetch("/usuarios/autenticar", {
+        if(verificacao) {
+            fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
+                emailServer: email,
+                senhaServer: senha
             })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
 
-            if (resposta.ok) {
-                console.log(resposta);
+                if (resposta.ok) {
+                    console.log(resposta);
 
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.ID_USUARIO = json.id; 
+
+                        alert('Login realizado! Direcionando para tela inicial!');
+
+                        setTimeout(function () {
+                            window.location = "painelLoja.html";
+                        }, 1000); 
+
+                    });
+
+                } else {
+                    console.log("Houve um erro ao tentar realizar o login!");
                     
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.ID_USUARIO = json.id; 
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        alert("Email e/ou senha inválidos. Tente novamente!"); 
+                    });
+                }
 
-                    alert('Login realizado! Direcionando para tela inicial!');
+            }).catch(function (erro) {
+                console.log(erro);
+            })
 
-                    setTimeout(function () {
-                        window.location = "home.html";
-                    }, 1000); 
-
-                });
-
-            } else {
-                console.log("Houve um erro ao tentar realizar o login!");
-                
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    alert("Email e/ou senha inválidos. Tente novamente!"); 
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
+            return false;
+        }
     }
 </script>
