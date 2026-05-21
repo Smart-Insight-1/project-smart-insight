@@ -73,9 +73,9 @@
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
     
     if(nomeUsuario == undefined || nomeUsuario == null) {
-        document.getElementById("nome_usuario").innerHTML = nomeUsuario;
-    } else {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
+    } else {
+        document.getElementById("nome_usuario").innerHTML = nomeUsuario;
     }
     
     const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');

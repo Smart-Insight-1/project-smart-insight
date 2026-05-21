@@ -79,6 +79,14 @@
 
 <script>
 
+    const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
+    
+    if(nomeUsuario == undefined || nomeUsuario == null) {
+        document.getElementById("nome_usuario").innerHTML = "Usuário";
+    } else {
+        document.getElementById("nome_usuario").innerHTML = nomeUsuario;
+    }
+
     const tipoUsuario = sessionStorage.TIPO_USUARIO;
 
     if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
