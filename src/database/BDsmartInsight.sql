@@ -33,7 +33,6 @@ CREATE TABLE contato (
 CREATE TABLE loja (
     id_loja INT AUTO_INCREMENT PRIMARY KEY,
     id_empresa INT NOT NULL,
-    codigo_loja VARCHAR(20) UNIQUE,
     nome_loja VARCHAR(100) NOT NULL,
     FOREIGN KEY (id_empresa)
         REFERENCES empresa(id_empresa)
