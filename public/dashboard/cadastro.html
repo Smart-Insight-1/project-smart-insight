@@ -54,7 +54,7 @@
             <div class="campo">
                 <label>Tipo de Usuario:</label>
                 <select name="" id="ipt_tipoUsuario">
-                    <option value="analista">Analista</option>
+                    <option selected value="analista">Analista</option>
                     <option value="gestor">Gestor</option>
                 </select>
             </div>
@@ -86,6 +86,7 @@
         let email = ipt_email.value;
         let senha = ipt_senha.value;
         let confirmarSenha = ipt_confirmarSenha.value;
+        let tipoUsuario = ipt_tipoUsuario.value
 
         let termina_com = email.endsWith('.com');
         let indice_arroba = email.indexOf('@');
@@ -103,21 +104,49 @@
             nome == "" ||  email == "" || senha == "" || confirmarSenha == ""
         ) {
             alert("❌ Preencha todos os campos!");
+            return;
         }
         else if (senha.length < 8) {
             alert("❌ A senha deve ter pelo menos 8 caracteres!");
+            return;
         }
         else if (!temEspecial) {
             alert("❌ A senha precisa ter caractere especial");
+            return;
         } 
         else if (indice_arroba == -1 || !termina_com) {
             alert("❌ Email inválido!");
+            return;
         }
         else if (senha != confirmarSenha) {
             alert("❌ As senhas não coincidem!");
+            return;
         }
         else {
-            alert("✅ Conta criada com sucesso!");
-        }
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nomeServer: nome,
+                    emailServer: email,
+                    senhaServer: senha,
+                    tipoUsuarioServer: tipoUsuario
+                })
+            })
+            .then(function (resposta) {
+                console.log("Resposta:", resposta);
+                if(resposta.ok) {
+                    alert("Cadastro realizado com sucesso!");
+                }else {
+                    alert("Erro ao realizar cadastro! Verifique as informações inseridas");
+                }
+            })
+            .catch(function (erro) {
+                console.log("Erro: ", erro);
+                alert("Erro na comumincação com o servidor.")
+            });
+    }
     }
 </script>
