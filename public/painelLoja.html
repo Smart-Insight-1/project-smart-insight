@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Loja | Smart Insight</title>
+    <link rel="stylesheet" href="css/painelLoja.css">
 </head>
 <body onload="carregar()">
-    <div class="container-escolha">
-        <select name="escolha" id="filtroEscolha">
-        </select>
-        <button onclick="entrarLoja()">Confirmar</button>
+    
+    <div class="card">
+        <div class="titulo">
+        <h1>Painel de lojas</h1>
     </div>
+
+        <div class="container-escolha">
+            <h1>Escolha sua loja</h1>
+            <div class="botoes">
+                 <select class="escolha" name="escolha" id="filtroEscolha">
+                    </select>
+                    <button class="botao" onclick="entrarLoja()">Confirmar</button>
+            </div>
+       
+    </div>
+    </div>
+    
     <div class="container-loja">
 
     </div>
