@@ -51,6 +51,8 @@ function cadastrar(req, res) {
     var senha = req.body.senhaServer;
     var tipoUsuario = req.body.tipoUsuarioServer;
     var idEmpresa = req.body.idEmpresaServer;
+    var idLoja = req.body.idLojaServer;
+
 
     // Faça as validações dos valores
     if (nome == undefined) {
@@ -63,10 +65,12 @@ function cadastrar(req, res) {
         res.status(400).send("Sua empresa a vincular está undefined!");
     } else if (tipoUsuario == undefined) {
         res.status(400).send("Seu tipo de usuário está undefined!")
+    } else if (idLoja == undefined) {
+        res.status(400).send("Sua loja a vincular está undefined!")
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha, idEmpresa, tipoUsuario)
+        usuarioModel.cadastrar(nome, email, senha, idEmpresa, tipoUsuario, idLoja)
             .then(
                 function (resultado) {
                     res.json(resultado);
