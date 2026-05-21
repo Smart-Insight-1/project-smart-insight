@@ -86,7 +86,10 @@
         let email = ipt_email.value;
         let senha = ipt_senha.value;
         let confirmarSenha = ipt_confirmarSenha.value;
-        let tipoUsuario = ipt_tipoUsuario.value
+        let tipoUsuario = ipt_tipoUsuario.value;
+        const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+
 
         let termina_com = email.endsWith('.com');
         let indice_arroba = email.indexOf('@');
@@ -132,7 +135,8 @@
                     nomeServer: nome,
                     emailServer: email,
                     senhaServer: senha,
-                    tipoUsuarioServer: tipoUsuario
+                    tipoUsuarioServer: tipoUsuario,
+                    idEmpresaServer: idEmpresa
                 })
             })
             .then(function (resposta) {
