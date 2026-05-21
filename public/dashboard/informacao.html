@@ -15,7 +15,7 @@
 <body>
 
     <div class="menu">
-        <h2>Painel</h2>
+        <h2>Painel, Olá <span id="nome_usuario">*</span></h2>
         <ul>
             <li><a href="dashboard.html">Dashboard</a></li>
             <li id="menuProdutos"><a href="produto.html">Produtos</a></li>
@@ -36,7 +36,15 @@
     </div>
 </body>
 <script>
-    const tipoUsuario = sessionStorage.TIPO_USUARIO;
+    const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
+    
+    if(nomeUsuario == undefined || nomeUsuario == null) {
+        document.getElementById("nome_usuario").innerHTML = nomeUsuario;
+    } else {
+        document.getElementById("nome_usuario").innerHTML = "Usuário";
+    }
+    
+    const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
 
     if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
