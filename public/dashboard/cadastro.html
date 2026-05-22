@@ -71,8 +71,6 @@
 <script>
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
-    const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
-    
     
     if(nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
@@ -80,16 +78,17 @@
         document.getElementById("nome_usuario").innerHTML = nomeUsuario;
     }
     
-    
+    const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
+
     if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
         document.getElementById("menuCadastro").style.display = "none";
     }
-    
+
     let listaCaracter = ["@","#","$","%","&","*","!","."]
-    
+
     function criarConta() {
         let nome = ipt_nome.value;
         let email = ipt_email.value;
@@ -98,8 +97,6 @@
         let tipoUsuario = ipt_tipoUsuario.value;
         const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
         const idLoja = sessionStorage.getItem('ID_LOJA');
-
-
 
         let termina_com = email.endsWith('.com');
         let indice_arroba = email.indexOf('@');

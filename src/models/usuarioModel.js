@@ -15,11 +15,11 @@ function cadastrar(nome, email, senha, idEmpresa, tipoUsuario, idLoja) {
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
+    
     var instrucaoSql = `
         INSERT INTO usuario (id_empresa, nome, email, senha, tipo_usuario) VALUES ('${idEmpresa}', '${nome}', '${email}', '${senha}' ,'${tipoUsuario}');
-        INSERT INTO acesso_loja (id_loja, id_usuario) VALUES 
-        ('${idLoja}', (SELECT id_usuario FROM usuario WHERE email = '${email}'
-        AND senha = '${senha}'))
+
+        INSERT INTO acesso_loja (id_loja, id_usuario) VALUES ('${idLoja}', (SELECT id_usuario FROM usuario WHERE email = '${email}'));
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
