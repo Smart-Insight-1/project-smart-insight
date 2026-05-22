@@ -1,7 +1,7 @@
 var lojaModel = require("../models/lojaModel");
 
 function buscarLojaUsuario(req, res) {
-  var idUsuario = req.params.id;
+  var idUsuario = req.params.usuarioId;
 
   lojaModel.buscarLojaUsuario(idUsuario).then((resultadoBuscarLojaUsuario) => {
     if (resultadoBuscarLojaUsuario.length > 0) {
@@ -14,4 +14,8 @@ function buscarLojaUsuario(req, res) {
     console.log("Houve um erro ao buscar as lojas: ", erro.sqlMessage);
     res.status(500).json(erro.sqlMessage);
   });
+}
+
+module.exports = {
+  buscarLojaUsuario
 }
