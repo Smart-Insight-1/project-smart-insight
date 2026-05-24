@@ -1,54 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Loja | Smart Insight</title>
     <link rel="stylesheet" href="css/painelLoja.css">
 </head>
+
 <body onload="carregar()">
-    
+
     <div class="card">
         <div class="titulo">
-        <h1>Painel de lojas</h1>
-    </div>
+            <h1>Painel de lojas</h1>
+        </div>
 
         <div class="container-escolha">
             <h1>Escolha sua loja</h1>
             <div class="botoes">
-                 <select class="escolha" name="escolha" id="filtroEscolha">
+                <select class="escolha" name="escolha" id="filtroEscolha">
                     <option value="">escolha</option>
                     <option value="">teste1</option>
                     <option value="">teste2</option>
                     <option value="">teste3</option>
                     <option value="">teste4</option>
                     <option value="">teste5</option>
-                    </select>
-                    <button class="botao" onclick="entrarLoja()">Confirmar</button>
+                </select>
+                <button class="botao" onclick="entrarLoja()">Confirmar</button>
             </div>
-       
+
+        </div>
     </div>
-    </div>
-    
+
     <div class="container-loja">
 
     </div>
+
     <script>
+    const idUsuario = sessionStorage.getItem('ID_USUARIO');
 
-        const idUsuario = sessionStorage.getItem('ID_USUARIO');
-
-        function carregar() {
+    function carregar() {
+        if (!idUsuario) {
+            window.location.href = "login.html";
+        } else {
             buscarLojas();
         }
+    }
 
-        function buscarLojas() {
-
-        }
-
-        function entrarLoja(){
+    function buscarLojas() {
+        fetch(`/lojas/buscarLojaPorUsuario/${idUsuario}`, { 
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(function (resposta) {
+            console.log("Resposta:", resposta);
             
-        }
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    alert("Nenhuma loja encontrada para este usuário.");
+                    return;
+                }
 
-    </script>
+                resposta.json().then(function (lojas) {
+                    console.log("Lojas recebidas:", lojas);
+
+                    if (lojas.length === 1) {
+                        sessionStorage.setItem('ID_LOJA', lojas[0].id_loja);
+                        sessionStorage.setItem('NOME_LOJA', lojas[0].nome_loja);
+
+                        alert(`Redirecionando para a dashboard da loja selecionada: ${lojas[0].nome_loja}`);
+                        window.location.href = "dashboard.html";
+
+                    } else if (lojas.length > 1) {
+                        let select = document.getElementById("filtroEscolha");
+                        select.innerHTML = "<option value=''>Selecione a loja</option>";
+
+                        for (let i = 0; i < lojas.length; i++) {
+                            let lojaAtual = lojas[i];
+                            select.innerHTML += `<option value="${lojaAtual.id_loja}">${lojaAtual.nome_loja}</option>`;
+                        }
+                    }
+                }).catch(function (erro) {
+                    console.log("Erro no JSON: ", erro);
+                });
+                
+            } else {
+                alert("Erro ao buscar as lojas! Verifique as informações inseridas");
+            }
+        })
+        .catch(function (erro) {
+            console.log("Erro no Fetch: ", erro);
+            alert("Erro na comunicação com o servidor.");
+        }); 
+    } 
+
+    function entrarLoja() {
+         
+    }
+</script>
 </body>
+
 </html>
+
+<script>
+    const idUsuario = sessionStorage.getItem('ID_USUARIO');
+
+    function carregar() {
+        if (!idUsuario) {
+            window.location.href = "login.html";
+        } else {
+            buscarLojas();
+        }
+    }
+
+    function buscarLojas() {
+        fetch(`/lojas/buscarLojaPorUsuario/${idUsuario}`, { 
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(function (resposta) {
+            console.log("Resposta:", resposta);
+            
+
+                resposta.json().then(function (lojas) {
+                    console.log("Lojas recebidas:", lojas);
+
+                    if (lojas.length === 1) {
+                        sessionStorage.setItem('ID_LOJA', lojas[0].id_loja);
+                        sessionStorage.setItem('NOME_LOJA', lojas[0].nome_loja);
+
+                        alert(`Redirecionando para a dashboard da loja selecionada: ${lojas[0].nome_loja}`);
+                        window.location.href = "dashboard.html";
+
+                    } else if (lojas.length > 1) {
+                        let select = document.getElementById("filtroEscolha");
+                        select.innerHTML = "<option value=''>Selecione a loja</option>";
+
+                        for (let i = 0; i < lojas.length; i++) {
+                            let lojaAtual = lojas[i];
+                            select.innerHTML += `<option value="${lojaAtual.id_loja}">${lojaAtual.nome_loja}</option>`;
+                        }
+                    }
+                }).catch(function (erro) {
+                    console.log("Erro no JSON: ", erro);
+                });
+                
+            } else {
+                alert("Erro ao buscar as lojas! Verifique as informações inseridas");
+            }
+        })
+        .catch(function (erro) {
+            console.log("Erro no Fetch: ", erro);
+            alert("Erro na comunicação com o servidor.");
+        }); 
+    } 
+
+    function entrarLoja() {
+         
+    }
+</script>
