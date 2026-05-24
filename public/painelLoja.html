@@ -36,70 +36,6 @@
 
     </div>
 
-    <script>
-    const idUsuario = sessionStorage.getItem('ID_USUARIO');
-
-    function carregar() {
-        if (!idUsuario) {
-            window.location.href = "login.html";
-        } else {
-            buscarLojas();
-        }
-    }
-
-    function buscarLojas() {
-        fetch(`/lojas/buscarLojaPorUsuario/${idUsuario}`, { 
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(function (resposta) {
-            console.log("Resposta:", resposta);
-            
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    alert("Nenhuma loja encontrada para este usuário.");
-                    return;
-                }
-
-                resposta.json().then(function (lojas) {
-                    console.log("Lojas recebidas:", lojas);
-
-                    if (lojas.length === 1) {
-                        sessionStorage.setItem('ID_LOJA', lojas[0].id_loja);
-                        sessionStorage.setItem('NOME_LOJA', lojas[0].nome_loja);
-
-                        alert(`Redirecionando para a dashboard da loja selecionada: ${lojas[0].nome_loja}`);
-                        window.location.href = "dashboard.html";
-
-                    } else if (lojas.length > 1) {
-                        let select = document.getElementById("filtroEscolha");
-                        select.innerHTML = "<option value=''>Selecione a loja</option>";
-
-                        for (let i = 0; i < lojas.length; i++) {
-                            let lojaAtual = lojas[i];
-                            select.innerHTML += `<option value="${lojaAtual.id_loja}">${lojaAtual.nome_loja}</option>`;
-                        }
-                    }
-                }).catch(function (erro) {
-                    console.log("Erro no JSON: ", erro);
-                });
-                
-            } else {
-                alert("Erro ao buscar as lojas! Verifique as informações inseridas");
-            }
-        })
-        .catch(function (erro) {
-            console.log("Erro no Fetch: ", erro);
-            alert("Erro na comunicação com o servidor.");
-        }); 
-    } 
-
-    function entrarLoja() {
-         
-    }
-</script>
 </body>
 
 </html>
@@ -125,6 +61,8 @@
         .then(function (resposta) {
             console.log("Resposta:", resposta);
             
+            if (resposta.ok) {
+
 
                 resposta.json().then(function (lojas) {
                     console.log("Lojas recebidas:", lojas);
@@ -156,10 +94,23 @@
         .catch(function (erro) {
             console.log("Erro no Fetch: ", erro);
             alert("Erro na comunicação com o servidor.");
-        }); 
+        });
     } 
 
     function entrarLoja() {
-         
+        let select = document.getElementById("filtroEscolha");
+        let idLojaSelecionada = select.value;
+
+        if (idLojaSelecionada == "") {
+            alert("Por favor, selecione uma loja para confirmar o acesso!");
+            return;
+        }
+
+        let nomeLojaSelecionada = select.options[select.selectedIndex].text;
+
+        sessionStorage.setItem('ID_LOJA', idLojaSelecionada);
+        sessionStorage.setItem('NOME_LOJA', nomeLojaSelecionada);
+
+        window.location.href = "dashboard.html"; 
     }
 </script>
