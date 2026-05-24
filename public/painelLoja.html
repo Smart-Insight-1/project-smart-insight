@@ -19,12 +19,6 @@
             <h1>Escolha sua loja</h1>
             <div class="botoes">
                 <select class="escolha" name="escolha" id="filtroEscolha">
-                    <option value="">escolha</option>
-                    <option value="">teste1</option>
-                    <option value="">teste2</option>
-                    <option value="">teste3</option>
-                    <option value="">teste4</option>
-                    <option value="">teste5</option>
                 </select>
                 <button class="botao" onclick="entrarLoja()">Confirmar</button>
             </div>
@@ -70,9 +64,10 @@
                     if (lojas.length === 1) {
                         sessionStorage.setItem('ID_LOJA', lojas[0].id_loja);
                         sessionStorage.setItem('NOME_LOJA', lojas[0].nome_loja);
+                        sessionStorage.setItem('ID_EMPRESA', lojas[0].id_empresa);
 
                         alert(`Redirecionando para a dashboard da loja selecionada: ${lojas[0].nome_loja}`);
-                        window.location.href = "dashboard.html";
+                        window.location.href = "dashboard/dashboard.html";
 
                     } else if (lojas.length > 1) {
                         let select = document.getElementById("filtroEscolha");
@@ -80,7 +75,7 @@
 
                         for (let i = 0; i < lojas.length; i++) {
                             let lojaAtual = lojas[i];
-                            select.innerHTML += `<option value="${lojaAtual.id_loja}">${lojaAtual.nome_loja}</option>`;
+                            select.innerHTML += `<option value="${lojaAtual.id_loja},${lojaAtual.id_empresa}">${lojaAtual.nome_loja}</option>`;
                         }
                     }
                 }).catch(function (erro) {
@@ -99,18 +94,22 @@
 
     function entrarLoja() {
         let select = document.getElementById("filtroEscolha");
-        let idLojaSelecionada = select.value;
+        let idLoja_idEmpresa = select.value;
 
-        if (idLojaSelecionada == "") {
+        if (idLoja_idEmpresa == "") {
             alert("Por favor, selecione uma loja para confirmar o acesso!");
             return;
         }
 
         let nomeLojaSelecionada = select.options[select.selectedIndex].text;
 
-        sessionStorage.setItem('ID_LOJA', idLojaSelecionada);
-        sessionStorage.setItem('NOME_LOJA', nomeLojaSelecionada);
+        let idLoja = idLoja_idEmpresa.split(',')[0];
+        let idEmpresa = idLoja_idEmpresa.split(',')[1];
 
-        window.location.href = "dashboard.html"; 
+        sessionStorage.setItem('ID_LOJA', idLoja);
+        sessionStorage.setItem('NOME_LOJA', nomeLojaSelecionada);
+        sessionStorage.setItem('ID_EMPRESA', idEmpresa);
+
+        window.location.href = "dashboard/dashboard.html"; 
     }
 </script>
