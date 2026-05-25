@@ -1,0 +1,14 @@
+.sairBotao{
+    background-color: rgb(255, 0, 0);
+    display: flex;
+    margin-top: 30%;
+    transition: 0.3s;
+}
+.sairBotao a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.sairBotao:hover{
+    transform: scale(130%);
+}
