@@ -9,6 +9,6 @@ function listarProduto(id_loja) {
     return database.executar(instrucaoSql);
 }
 
-exports.module = {
+module.exports = {
     listarProduto
 }

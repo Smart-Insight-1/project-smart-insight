@@ -9,7 +9,7 @@ function listarProduto(req, res) {
                 console.log(`\nResultados encontrados: ${resultadoProduto.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultadoProduto)}`); // transforma JSON em String
 
-                    res.json(resultado);
+                    res.json(resultadoProduto);
             })
             .catch(
                 function (erro) {
@@ -23,6 +23,6 @@ function listarProduto(req, res) {
             );
 }
 
-exports.module = {
+module.exports = {
     listarProduto
 }
