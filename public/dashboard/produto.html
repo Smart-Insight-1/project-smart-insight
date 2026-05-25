@@ -131,9 +131,18 @@
                 <input type="text" placeholder="Digite a marca" id="ipt_marca">
             </div>
 
-            <button onclick="botao()">Cadastrar Produto</button>
+            <button onclick="botao()">Cadastrar Produto</button> <br> <br>
 
-            
+            <div class="container-remover-produto">
+
+                <h1>Remover produto por código:</h1> <br>
+
+                <div class="campo">
+                    <input type="text" id="ipt_removerProduto" class="ipt_removerProduto"
+                        placeholder="Insira o código do produto"> <br>
+                </div>
+            </div>
+            <button>Remover</button>
 
         </div>
 
@@ -149,16 +158,16 @@
 <script>
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
-    
-    if(nomeUsuario == undefined || nomeUsuario == null) {
+
+    if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
     } else {
         document.getElementById("nome_usuario").innerHTML = nomeUsuario;
     }
-    
+
     const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
 
-    if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
+    if (tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
