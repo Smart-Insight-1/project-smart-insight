@@ -1,56 +1,88 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #63B1BC;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Hanken Grotesk", sans-serif;
+    background-color: #0C021A;
 }
 
 #container {
     width: 80%;
-    margin: 50px auto;
+    margin: 76px auto;
     text-align: center;
 }
 
 h1 {
     color: #1F2A44;
+    margin-bottom: 80px;
+    color: white;
 }
 
 textarea[type="text"] {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    width: 400px;
+    padding: 25px;
+    font-size: 14px;
+    border-radius: 50px;
+    resize: none;
+    width: 1200px;
+    height: 100px;
+    background-color: #2A1247;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    scrollbar-width: none;
 }
 
 select,
 button {
     padding: 8px;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
 button {
-    background-color: #ED145B;
-    color: #FFFFFF;
+    margin-top: 10px;
+
+    padding: 14px;
+
     border: none;
+    border-radius: 8px;
+
+    background-color: #2A1247;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
 
 button:hover {
-    background-color: #EFB661;
+    background-color: #572e91;
 }
+
+h3 {
+    margin-top: 30px;
+    color: #fff;
+}
+
 
 #resposta {
     margin-top: 20px;
     padding: 10px;
     border-radius: 5px;
     background-color: #D0D3D4;
-    border: 1px solid #63666A;
+    border: 1px solid #2F0569;
     text-align: left;
     display: none;
 }
 
-.container-bobia{
+.container-bobia {
     width: 100%;
-    height: calc(85dvh - 250px);
+    height: 100%;
 }
