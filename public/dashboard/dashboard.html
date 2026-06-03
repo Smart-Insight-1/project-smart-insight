@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/sair.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
 
 <body>
@@ -136,6 +137,7 @@
     }
 
     const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
+    Chart.register(ChartDataLabels);
 
     new Chart(graficoInteracaoProduto, {
         type: 'bar',
@@ -180,6 +182,15 @@
                 }
             },
             plugins: {
+                 datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: '#ffffff',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                    },
                 title: {
                     display: true,
                     text: 'Top 06 - Total de interações por produto',
@@ -238,6 +249,15 @@
                 }
             },
             plugins: {
+                 datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: '#ffffff',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                    },
                 title: {
                     display: true,
                     text: 'Total de interações por setor',
@@ -269,6 +289,15 @@
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
+                                 datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: '#ffffff',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                    },
                 title: {
                     display: true,
                     text: 'Top 06 - Tempo Médio de Retenção por Produto',
@@ -354,6 +383,15 @@
                 }
             },
             plugins: {
+                                 datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: '#ffffff',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                    },
                 title: {
                     display: true,
                     text: 'Quantidade total de interações por Hora',
