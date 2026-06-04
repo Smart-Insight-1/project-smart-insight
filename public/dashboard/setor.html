@@ -99,7 +99,7 @@
                         placeholder="Digite o nome do setor">
                 </div>
             </div>
-            <button onclick="botao()">Remover</button>
+            <button onclick="deletar()">Remover</button>
 
         </div>
 
@@ -114,6 +114,8 @@
 </html>
 
 <script>
+
+    const idLoja = sessionStorage.getItem('ID_LOJA');
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
 
