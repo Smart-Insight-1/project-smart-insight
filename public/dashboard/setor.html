@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../css/dashboardMenu.css">
     <link rel="stylesheet" href="../css/setor.css">
     <link rel="stylesheet" href="../css/sair.css">
-    <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 </head>
 
 <body>
@@ -23,14 +22,14 @@
             <li id="menuContatos"><a href="contato.html">Contatos</a></li>
             <li><a href="informacao.html">Informações</a></li>
             <li id="menuCadastro"><a href="cadastro.html">Cadastro Usuário</a></li>
-            <button1 class="sairBotao"><a href="../index.html">SAIR</a></button1>
+            <button class="sairBotao"><a href="../index.html">SAIR</a></button>
         </ul>
     </div>
 
     <div class="container-setor">
 
         <div class="lista-setores">
-            
+
             <h2>Setores Cadastrados</h2>
 
             <table>
@@ -91,12 +90,21 @@
 
             <button onclick="botao()">Cadastrar Setor</button>
 
+            <div class="container-remover-setor">
 
+                <h1>Deletar setor por nome: </h1>
+
+                <div class="campo">
+                    <input type="text" id="ipt_removerSetor" class="ipt_removerSetor"
+                        placeholder="Digite o nome do setor">
+                </div>
+            </div>
+            <button onclick="botao()">Remover</button>
 
         </div>
 
         <div id="div_msg" class="alertas"></div>
-        
+
     </div>
 
 
@@ -108,16 +116,16 @@
 <script>
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
-    
-    if(nomeUsuario == undefined || nomeUsuario == null) {
+
+    if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
     } else {
         document.getElementById("nome_usuario").innerHTML = nomeUsuario;
     }
-    
+
     const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
 
-    if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
+    if (tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
