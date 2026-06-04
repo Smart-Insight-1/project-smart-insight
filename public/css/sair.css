@@ -1,14 +1,14 @@
 .sairBotao:hover{
-    transform: scale(115%);
+    transform: scale(105%);
 }
 
 .sairBotao {
     position: absolute;
     bottom: 20px;
-    width: 40px;
-    height: 40px;
+    width: 140px;
+    height: 28px;
     padding: 6px;    
-    background-color: #431247;
+    background-color: #300968;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -19,6 +19,11 @@
     transition: 0.3s;
 }
 
+.sairBotao:hover {
+    background-color: #9258e6;
+}
+
 .sairBotao a{
     text-decoration: none;
     color:white;
+}
