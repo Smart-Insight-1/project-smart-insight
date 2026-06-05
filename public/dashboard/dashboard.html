@@ -143,16 +143,31 @@
             }
         }
 
-        const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
-        Chart.register(ChartDataLabels);
+       const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
+       Chart.register(ChartDataLabels);
+       const idLoja = sessionStorage.getItem('ID_LOJA');
+       
+
+fetch(`/dashboard/interacoesPorProduto/${idLoja}`)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(dados) {
+        let xLabels = [];
+        let yValores = [];
+
+        for (let i = 0; i < dados.length; i++) {
+            xLabels.push(dados[i].produto);
+            yValores.push(dados[i].total_interacoes);
+        }
 
         new Chart(graficoInteracaoProduto, {
             type: 'bar',
             data: {
-                labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
+                labels: xLabels,
                 datasets: [{
                     label: 'Interações',
-                    data: [1650, 1100, 950, 850, 400, 200],
+                    data: yValores,
                     borderWidth: 2,
                     backgroundColor: '#ae80ed',
                     borderColor: '#2F0569'
@@ -210,16 +225,30 @@
                 }
             }
         });
+    });
 
-        const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
+    const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
+
+fetch(`/dashboard/interacoesPorSetor/${idLoja}`)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(dados) {
+        let xLabels = [];
+        let yValores = [];
+
+        for (let i = 0; i < dados.length; i++) {
+            xLabels.push(dados[i].setor);
+            yValores.push(dados[i].total_interacoes);
+        }
 
         new Chart(graficoInteracaoSetor, {
             type: 'bar',
             data: {
-                labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
+                labels: xLabels,
                 datasets: [{
                     label: 'Interações por setor',
-                    data: [2600, 1950, 400, 200],
+                    data: yValores,
                     borderWidth: 2,
                     backgroundColor: '#ae80ed',
                     borderColor: '#2F0569'
@@ -277,7 +306,7 @@
                 }
             }
         });
-
+    });
 
         function obterTempoRetencao() {
             let id_loja = sessionStorage.getItem('ID_LOJA') || 1;

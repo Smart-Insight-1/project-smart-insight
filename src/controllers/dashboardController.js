@@ -1,12 +1,13 @@
 var produtoModel = require("../models/produtoModel");
+var dashboardModel = require("../models/dashboard");
 
 function obterInteracoesPorProduto(req, res) {
     var id_loja = req.params.idLoja;
 
-    dashboardModel.interacoesPorProduto(id_loja)
+    dashboardModel.obterInteracoesPorProduto(id_loja)
         .then(function (resultado) {
             console.log(`\nResultados encontrados: ${resultado.length}`);
-            console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+            console.log(`Resultados: ${JSON.stringify(resultado)}`);
 
             res.json(resultado);
         }).catch(function (erro) {
@@ -20,6 +21,16 @@ function obterInteracoesPorProduto(req, res) {
 }
 function obterInteracoesPorSetor(req, res) {
     var id_loja = req.params.idLoja;
+
+       dashboardModel.obterInteracoesPorSetor(id_loja)
+        .then(function(resultado) {
+            console.log(`\nResultados encontrados: ${resultado.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultado)}`);
+            res.json(resultado);
+        }).catch(function(erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function obterTempoRetencao(req, res) {

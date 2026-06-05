@@ -22,6 +22,7 @@ var lojaRouter = require("./src/routes/loja");
 var produtoRouter = require("./src/routes/produto");
 var bobRouter = require("./src/routes/bob");
 var setorRouter = require("./src/routes/setores");
+var dashboardRouter = require("./src/routes/dashboard");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,6 +36,7 @@ app.use("/lojas", lojaRouter);
 app.use("/produtos", produtoRouter);
 app.use("/bob", bobRouter);
 app.use("/setores", setorRouter);
+app.use("/dashboard", dashboardRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
