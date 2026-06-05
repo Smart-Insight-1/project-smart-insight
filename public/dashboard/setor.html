@@ -42,33 +42,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
-
-                    <tr>
-                        <td>1</td>
-                        <td>Perfumaria</td>
-                        <td>Produtos de fragrâncias como perfumes e colônias</td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>Maquiagem</td>
-                        <td>Produtos de maquiagem como base, batom e itens de beleza</td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td>Skincare</td>
-                        <td>Produtos para cuidados com a pele</td>
-                    </tr>
-
-                    <tr>
-                        <td>4</td>
-                        <td>Corpo/Banho</td>
-                        <td>Produtos para cuidados corporais e higiene</td>
-                    </tr>
-
-                </tbody>
+                <tbody id="tabela_setores"></tbody>
 
             </table>
 
@@ -117,6 +91,10 @@
 
     const idLoja = sessionStorage.getItem('ID_LOJA');
 
+    window.onload = function(){
+        listarSetor()
+    }
+
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
 
     if (nomeUsuario == undefined || nomeUsuario == null) {
@@ -161,6 +139,8 @@
 
                     if (resposta.ok) {
                         div.innerHTML = `✅ Setor cadastrado com sucesso!`;
+
+                        listarSetor();
                     } else {
                         div.innerHTML = `❌ Erro ao cadastrar setor!`
                     }
@@ -195,6 +175,8 @@
 
                 if (resposta.ok) {
                     alert(`Setor removido com sucesso!`)
+
+                    listarSetor()
                 } else {
                     alert(`Erro ao remover setor!`)
                 }
@@ -202,6 +184,42 @@
             .catch(function (erro) {
                 console.log(erro);
             })
+    }
+
+    function listarSetor(){
+
+        fetch(`/setores/buscarSetorPorLoja/${idLoja}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(function(resposta){
+
+            if(resposta.ok){
+                resposta.json().then(function(setores){
+
+                    console.log(setores);
+                    tabela_setores.innerHTML = "";
+
+                    for(let i = 0; i < setores.length; i++){
+                        let setor = setores[i];
+
+                        tabela_setores.innerHTML +=  `
+                            <tr>
+                                <td>${setor.ID}</td>
+                                <td>${setor.nome_setor}</td>
+                                <td>${setor.Descrição}</td>
+                        `
+                    }
+                });
+            } else {
+                console.log("erro ao listar setores")
+            }
+        })
+        .catch(function(erro){
+            console.log(erro)
+        });
     }
 
 </script>
