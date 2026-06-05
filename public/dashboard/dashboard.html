@@ -56,9 +56,9 @@
             <div class="kpi">
                 <div>
                     <strong>Total de interações por produto na loja</strong>
-                    <span>5.150</span>
+                    <span id="kpi-total-interacoes"></span>
                     <div class="kpi-ancoragem">
-                        <strong>10% maior que registro diario anterior</strong>
+                        <strong id="kpi-total-ancoragem"></strong>
                     </div>
                 </div>
             </div>
@@ -66,9 +66,9 @@
             <div class="kpi">
                 <div>
                     <strong>Produto com mais interações da Loja</strong>
-                    <span>Malbec Gold</span>
+                    <span id="kpi-top-produto"></span>
                     <div class="kpi-ancoragem">
-                        <strong>Anterior: Batom Make B.</strong>
+                        <strong id="kpi-top-produto-anterior"></strong>
                     </div>
                 </div>
             </div>
@@ -76,9 +76,9 @@
             <div class="kpi">
                 <div>
                     <strong>Setor com maior quantidade de interações da loja</strong>
-                    <span>Perfumaria</span>
+                    <span id="kpi-top-setor"></span>
                     <div class="kpi-ancoragem">
-                        <strong>Anterior: Maquiagem</strong>
+                        <strong id="kpi-top-setor-anterior"></strong>
                     </div>
                 </div>
             </div>
@@ -86,9 +86,9 @@
             <div class="kpi">
                 <div>
                     <strong>Tempo médio de retenção do cliente na loja por produto</strong>
-                    <span>2m 35s</span>
+                    <span id="kpi-tempo-medio"></span>
                     <div class="kpi-ancoragem">
-                        <strong>12% maior que o tempo médio anterior</strong>
+                        <strong id="kpi-tempo-ancoragem"></strong>
                     </div>
                 </div>
             </div>
@@ -143,170 +143,170 @@
             }
         }
 
-       const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
-       Chart.register(ChartDataLabels);
-       const idLoja = sessionStorage.getItem('ID_LOJA');
-       
+        const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
+        Chart.register(ChartDataLabels);
+        const idLoja = sessionStorage.getItem('ID_LOJA');
 
-fetch(`/dashboard/interacoesPorProduto/${idLoja}`)
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(dados) {
-        let xLabels = [];
-        let yValores = [];
 
-        for (let i = 0; i < dados.length; i++) {
-            xLabels.push(dados[i].produto);
-            yValores.push(dados[i].total_interacoes);
-        }
+        fetch(`/dashboard/interacoesPorProduto/${idLoja}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (dados) {
+                let xLabels = [];
+                let yValores = [];
 
-        new Chart(graficoInteracaoProduto, {
-            type: 'bar',
-            data: {
-                labels: xLabels,
-                datasets: [{
-                    label: 'Interações',
-                    data: yValores,
-                    borderWidth: 2,
-                    backgroundColor: '#ae80ed',
-                    borderColor: '#2F0569'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: { size: 13 },
-                            color: "#ffffff"
-                        },
-                        title: {
-                            font: { size: 18 },
-                            display: true,
-                            text: 'Produtos',
-                            color: '#ffffff'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Quantidade (interações)',
-                            color: '#ffffff',
-                            font: { size: 18 }
-                        },
-                        beginAtZero: true,
-                        ticks: {
-                            font: { size: 16 },
-                            color: "#ffffff"
-                        }
-                    }
-                },
-                plugins: {
-                    datalabels: {
-                        anchor: 'end',
-                        align: 'end',
-                        color: '#ffffff',
-                        font: {
-                            size: 14,
-                            weight: 'bold'
-                        },
-                    },
-                    title: {
-                        display: true,
-                        text: 'Top 06 - Total de interações por produto',
-                        color: '#ffffff',
-                        font: { size: 16 }
-                    },
-                    legend: {
-                        labels: { color: "#ffffff" }
-                    }
+                for (let i = 0; i < dados.length; i++) {
+                    xLabels.push(dados[i].produto);
+                    yValores.push(dados[i].total_interacoes);
                 }
-            }
-        });
-    });
 
-    const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
-
-fetch(`/dashboard/interacoesPorSetor/${idLoja}`)
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(dados) {
-        let xLabels = [];
-        let yValores = [];
-
-        for (let i = 0; i < dados.length; i++) {
-            xLabels.push(dados[i].setor);
-            yValores.push(dados[i].total_interacoes);
-        }
-
-        new Chart(graficoInteracaoSetor, {
-            type: 'bar',
-            data: {
-                labels: xLabels,
-                datasets: [{
-                    label: 'Interações por setor',
-                    data: yValores,
-                    borderWidth: 2,
-                    backgroundColor: '#ae80ed',
-                    borderColor: '#2F0569'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: { size: 13 },
-                            color: "#ffffff"
-                        },
-                        title: {
-                            font: { size: 18 },
-                            display: true,
-                            text: 'Setor',
-                            color: '#ffffff'
-                        }
+                new Chart(graficoInteracaoProduto, {
+                    type: 'bar',
+                    data: {
+                        labels: xLabels,
+                        datasets: [{
+                            label: 'Interações',
+                            data: yValores,
+                            borderWidth: 2,
+                            backgroundColor: '#ae80ed',
+                            borderColor: '#2F0569'
+                        }]
                     },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Quantidade (interações)',
-                            color: '#ffffff',
-                            font: { size: 16 }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                ticks: {
+                                    font: { size: 13 },
+                                    color: "#ffffff"
+                                },
+                                title: {
+                                    font: { size: 18 },
+                                    display: true,
+                                    text: 'Produtos',
+                                    color: '#ffffff'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Quantidade (interações)',
+                                    color: '#ffffff',
+                                    font: { size: 18 }
+                                },
+                                beginAtZero: true,
+                                ticks: {
+                                    font: { size: 16 },
+                                    color: "#ffffff"
+                                }
+                            }
                         },
-                        beginAtZero: true,
-                        ticks: {
-                            font: { size: 16 },
-                            color: "#ffffff"
+                        plugins: {
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'end',
+                                color: '#ffffff',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                            },
+                            title: {
+                                display: true,
+                                text: 'Top 06 - Total de interações por produto',
+                                color: '#ffffff',
+                                font: { size: 16 }
+                            },
+                            legend: {
+                                labels: { color: "#ffffff" }
+                            }
                         }
                     }
-                },
-                plugins: {
-                    datalabels: {
-                        anchor: 'end',
-                        align: 'end',
-                        color: '#ffffff',
-                        font: {
-                            size: 14,
-                            weight: 'bold'
-                        },
-                    },
-                    title: {
-                        display: true,
-                        text: 'Total de interações por setor',
-                        color: '#ffffff',
-                        font: { size: 16 }
-                    },
-                    legend: {
-                        labels: { color: "#ffffff" }
-                    }
+                });
+            });
+
+        const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
+
+        fetch(`/dashboard/interacoesPorSetor/${idLoja}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (dados) {
+                let xLabels = [];
+                let yValores = [];
+
+                for (let i = 0; i < dados.length; i++) {
+                    xLabels.push(dados[i].setor);
+                    yValores.push(dados[i].total_interacoes);
                 }
-            }
-        });
-    });
+
+                new Chart(graficoInteracaoSetor, {
+                    type: 'bar',
+                    data: {
+                        labels: xLabels,
+                        datasets: [{
+                            label: 'Interações por setor',
+                            data: yValores,
+                            borderWidth: 2,
+                            backgroundColor: '#ae80ed',
+                            borderColor: '#2F0569'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                ticks: {
+                                    font: { size: 13 },
+                                    color: "#ffffff"
+                                },
+                                title: {
+                                    font: { size: 18 },
+                                    display: true,
+                                    text: 'Setor',
+                                    color: '#ffffff'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Quantidade (interações)',
+                                    color: '#ffffff',
+                                    font: { size: 16 }
+                                },
+                                beginAtZero: true,
+                                ticks: {
+                                    font: { size: 16 },
+                                    color: "#ffffff"
+                                }
+                            }
+                        },
+                        plugins: {
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'end',
+                                color: '#ffffff',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                            },
+                            title: {
+                                display: true,
+                                text: 'Total de interações por setor',
+                                color: '#ffffff',
+                                font: { size: 16 }
+                            },
+                            legend: {
+                                labels: { color: "#ffffff" }
+                            }
+                        }
+                    }
+                });
+            });
 
         function obterTempoRetencao() {
             let id_loja = sessionStorage.getItem('ID_LOJA') || 1;
@@ -395,7 +395,7 @@ fetch(`/dashboard/interacoesPorSetor/${idLoja}`)
                     }
 
                 })
-                .catch(function(erro) {
+                .catch(function (erro) {
                     console.error(erro)
                 })
 
@@ -405,98 +405,128 @@ fetch(`/dashboard/interacoesPorSetor/${idLoja}`)
         const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
 
         fetch(`/dashboard/interacoesPorHora/${idLoja}`)
-    .then(function(response) {
-        if (response.ok) {
-            response.json().then(function(dados) {
-                let xLabels = [];
-                let yValores = [];
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (dados) {
+                        let xLabels = [];
+                        let yValores = [];
 
-                for (let i = 0; i < dados.length; i++) {
-                    let hora = String(dados[i].hora).padStart(2, '0') + ':00';
-                    xLabels.push(hora);
-                    yValores.push(dados[i].total_interacoes);
-                }
-
-                new Chart(graficoInteracoesHora, {
-                    type: 'line',
-                    data: {
-                        labels: xLabels,
-                        datasets: [{
-                            label: 'Interações',
-                            data: yValores,
-                            borderColor: '#ae80ed',
-                            borderDash: [5, 5],
-                            borderWidth: 3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                ticks: 
-                                { 
-                                    font: { size: 13 }, 
-                                    color: "#ffffff" 
-                                },
-                                title: 
-                                { 
-                                    font: { size: 18 }, 
-                                    text: "Hora", 
-                                    display: true, 
-                                    color: "#fff" 
-                                }
-                            },
-                            y: {
-                                title: { 
-                                    display: true, 
-                                    text: 'Quantidade', 
-                                    color: '#ffffff', 
-                                    font: { size: 16 } 
-                                },
-                                beginAtZero: true,
-                                ticks: 
-                                { 
-                                    font: { size: 16 }, 
-                                    color: "#ffffff" 
-                                }
-                            }
-                        },
-                        plugins: {
-                            datalabels: {
-                                anchor: 'end', align: 'end', color: '#ffffff',
-                                font: 
-                                { 
-                                    size: 14, 
-                                    weight: 'bold' 
-                                }
-                            },
-                            title: {
-                                display: true,
-                                text: 'Quantidade total de interações por Hora',
-                                color: '#ffffff',
-                                font: { size: 16 }
-                            },
-                            legend: { 
-                                labels: 
-                                { 
-                                    color: "#ffffff" 
-                                } 
-                            }
+                        for (let i = 0; i < dados.length; i++) {
+                            let hora = String(dados[i].hora).padStart(2, '0') + ':00';
+                            xLabels.push(hora);
+                            yValores.push(dados[i].total_interacoes);
                         }
-                    }
-                });
+
+                        new Chart(graficoInteracoesHora, {
+                            type: 'line',
+                            data: {
+                                labels: xLabels,
+                                datasets: [{
+                                    label: 'Interações',
+                                    data: yValores,
+                                    borderColor: '#ae80ed',
+                                    borderDash: [5, 5],
+                                    borderWidth: 3
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    x: {
+                                        ticks:
+                                        {
+                                            font: { size: 13 },
+                                            color: "#ffffff"
+                                        },
+                                        title:
+                                        {
+                                            font: { size: 18 },
+                                            text: "Hora",
+                                            display: true,
+                                            color: "#fff"
+                                        }
+                                    },
+                                    y: {
+                                        title: {
+                                            display: true,
+                                            text: 'Quantidade',
+                                            color: '#ffffff',
+                                            font: { size: 16 }
+                                        },
+                                        beginAtZero: true,
+                                        ticks:
+                                        {
+                                            font: { size: 16 },
+                                            color: "#ffffff"
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    datalabels: {
+                                        anchor: 'end', align: 'end', color: '#ffffff',
+                                        font:
+                                        {
+                                            size: 14,
+                                            weight: 'bold'
+                                        }
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Quantidade total de interações por Hora',
+                                        color: '#ffffff',
+                                        font: { size: 16 }
+                                    },
+                                    legend: {
+                                        labels:
+                                        {
+                                            color: "#ffffff"
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    })
+                } else {
+                    console.error('Erro na API')
+                }
             })
-        } else {
-            console.error('Erro na API')
-        }
-    })
-    .catch(function(erro) {
-        console.error(erro)
-    })
+            .catch(function (erro) {
+                console.error(erro)
+            })
 
 
         obterTempoRetencao()
+
+        fetch(`/dashboard/kpis/${idLoja}?dataInicio=2026-06-01&dataFim=2026-06-07`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (dados) {
+                var sinal = "";
+                if (dados.variacaoPercentual >= 0) {
+                    sinal = "+";
+                }
+
+                var sinalTempo = "";
+                if (dados.variacaoTempo >= 0) {
+                    sinalTempo = "+";
+                }
+
+                document.getElementById("kpi-total-interacoes").innerHTML = dados.totalAtual;
+                document.getElementById("kpi-total-ancoragem").innerHTML = sinal + dados.variacaoPercentual + "% em relação ao período anterior";
+
+                document.getElementById("kpi-top-produto").innerHTML = dados.topProdutoAtual;
+                document.getElementById("kpi-top-produto-anterior").innerHTML = "Anterior: " + dados.topProdutoAnterior;
+
+                document.getElementById("kpi-top-setor").innerHTML = dados.topSetorAtual;
+                document.getElementById("kpi-top-setor-anterior").innerHTML = "Anterior: " + dados.topSetorAnterior;
+
+                document.getElementById("kpi-tempo-medio").innerHTML = dados.tempoMedio + "s";
+
+
+                document.getElementById("kpi-tempo-ancoragem").innerHTML = sinalTempo + dados.variacaoTempo + "% em relação ao período anterior";
+            });
 
     </script>
 
