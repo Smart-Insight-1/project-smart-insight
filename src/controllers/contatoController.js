@@ -2,8 +2,8 @@ var setoresModel = require("../models/setoresModel");
 
 function listarContato(req, res) {
     var id_contato = req.params.idContato;
-    
-    contatoModel.listarSetorPorLoja(id_loja)
+
+    contatoModel.listarContato(telefone)
         .then(
             function (resultadoContato) {
                 console.log(`\nResultados encontrados: ${resultadoContato.length}`);

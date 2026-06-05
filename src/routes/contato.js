@@ -3,7 +3,7 @@ var router = express.Router();
 
 var contatoController = require("../controllers/contatoController");
 
-router.get("/buscarContato/:idContato", function(req, res) {
+router.get("/buscarContato/telefone", function(req, res) {
     contatoController.listarContato(req, res);
 });
 
