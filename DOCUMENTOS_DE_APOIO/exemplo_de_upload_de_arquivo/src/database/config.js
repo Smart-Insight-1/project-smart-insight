@@ -6,6 +6,7 @@ const mySqlConfig = {
   database: "SEU_BANCO_DE_DADOS",
   user: "SEU_USUARIO",
   password: "SUA_SENHA",
+  multipleStatements: true
 }
 
 function executar(instrucao) {

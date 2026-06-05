@@ -19,4 +19,7 @@ router.get("/interacoesPorHora/:idLoja", function(req, res) {
     dashboardController.obterInteracoesPorHora(req, res);
 });
 
+router.get("/kpis/:idLoja", function(req, res) {
+    dashboardController.obterKpis(req, res);
+});
 module.exports = router;
