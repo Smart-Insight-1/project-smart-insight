@@ -1,9 +1,9 @@
-var setoresModel = require("../models/setoresModel");
+var setoresModel = require("../models/contatoModel");
 
 function listarContato(req, res) {
-    var id_contato = req.params.idContato;
+    var id_usuario = req.params.idUsuario;
 
-    contatoModel.listarContato(telefone)
+    contatoModel.listarContato(id_usuario)
         .then(
             function (resultadoContato) {
                 console.log(`\nResultados encontrados: ${resultadoContato.length}`);
@@ -25,9 +25,8 @@ function listarContato(req, res) {
 
 function deletarContato(req, res) {
     var id_contato = req.params.idContato;
-    var telefone = req.body.telefone;
 
-    contatoModel.deletarContato(id_contato, telefone)
+    contatoModel.deletarContato(id_contato)
         .then(
             function (resultadoContato) {
                 console.log(`\nResultados encontrados: ${resultadoContato.length}`);
@@ -48,10 +47,10 @@ function deletarContato(req, res) {
 }
 
 function inserirContato(req, res) {
-    var id_contato = req.params.idContato;
+    var id_usuario = req.params.idUsuario;
     var telefone = req.body.telefone;
 
-    contatoModel.inserirContato(id_contato, telefone)
+    contatoModel.inserirContato(id_usuario, telefone)
         .then(
             function (resultadoContato) {
                 console.log(`\nResultados encontrados: ${resultadoContato.length}`);

@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 </head>
 
-<body>
+<body onload="listar()">
 
     <div class="menu">
         <h2>Painel</h2>
@@ -37,19 +37,12 @@
 
                 <thead>
                     <tr>
+                        <th>ID do Contato</th>
                         <th>Telefones</th>
                     </tr>
                 </thead>
 
-                <tbody>
-
-                    <tr>
-                        <td>11999999999</td>
-                    </tr>
-
-                    <tr>
-                        <td>11988888888</td>
-                    </tr>
+                <tbody id="tabela_contatos">
 
                 </tbody>
 
@@ -70,10 +63,10 @@
 
             <div class="container-remover-setor">
 
-                <h1>Deletar setor por ID: </h1>
+                <h1>Deletar contato por ID: </h1>
 
                 <div class="campo">
-                    <input type="text" id="ipt_removerSetor" class="ipt_removerSetor"
+                    <input type="text" id="ipt_removerContato" class="ipt_removerContato"
                         placeholder="Digite o ID do contato">
                 </div>
             </div>
@@ -94,6 +87,7 @@
 <script>
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
+    const idUsuario = sessionStorage.getItem('ID_USUARIO');
 
     if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
@@ -110,6 +104,37 @@
         document.getElementById("menuCadastro").style.display = "none";
     }
 
+    function listar() {
+
+        fetch(`/contatos/buscarContato/${idUsuario}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                resposta.json().then(function (contatos) {
+
+                    let tabela = document.getElementById("tabela_contatos")
+                    tabela.innerHTML = ""
+
+                    for (let i = 0; i < contatos.length; i++) {
+                        let contato = contatos[i]
+
+                        tabela.innerHTML += `
+                        <tr>
+                        <td>${contato.id_contato}</td>
+                        <td>${contato.telefone}</td>   
+                        <tr>
+                        `
+                    }
+
+                })
+               
+            })
+            .catch(function (erro) {
+                console.log("Houve um erro ao buscar os contatos:", erro);
+            });
+
+    }
+
     function botao() {
 
         let div = div_msg
@@ -123,7 +148,7 @@
         if (telefone.length == 11) {
             div.innerHTML = "✅ cadastro válido!";
 
-            fetch(`/setores/inserirSetorPorLoja/${idLoja}`, {
+            fetch(`/contatos/inserirContato/${idUsuario}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -154,13 +179,14 @@
 
 
     function deletar() {
-        let idSetor = ipt_removerSetor.value;
+        let idContato = ipt_removerContato.value;
 
-        if (idSetor == "") {
+        if (idContato == "") {
             alert(`Informe o ID do contato!`);
+            return
         }
 
-        fetch(`/setores/deletarSetorPorLoja/${idLoja}/${idSetor}`, {
+        fetch(`/contatos/deletarContato/${idContato}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -172,7 +198,7 @@
                 if (resposta.ok) {
                     alert(`Contato removido com sucesso!`)
                 } else {
-                    alert(`Erro ao remover setor!`)
+                    alert(`Erro ao remover contato!`)
                 }
             })
             .catch(function (erro) {
