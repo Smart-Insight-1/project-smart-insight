@@ -2,7 +2,7 @@ var produtoModel = require("../models/produtoModel");
 var dashboardModel = require("../models/dashboard");
 
 function obterInteracoesPorProduto(req, res) {
-    var id_loja = req.params.idLoja;
+    let id_loja = req.params.idLoja;
 
     dashboardModel.obterInteracoesPorProduto(id_loja)
         .then(function (resultado) {
@@ -20,7 +20,7 @@ function obterInteracoesPorProduto(req, res) {
         });
 }
 function obterInteracoesPorSetor(req, res) {
-    var id_loja = req.params.idLoja;
+    let id_loja = req.params.idLoja;
 
        dashboardModel.obterInteracoesPorSetor(id_loja)
         .then(function(resultado) {
@@ -34,7 +34,7 @@ function obterInteracoesPorSetor(req, res) {
 }
 
 function obterTempoRetencao(req, res) {
-    var id_loja = req.params.idLoja;
+    let id_loja = req.params.idLoja;
 
     if (id_loja == undefined) {
         res.status(400).send("O ID da loja está undefined!");
@@ -51,7 +51,7 @@ function obterTempoRetencao(req, res) {
 }
 
 function obterInteracoesPorHora(req, res) {
-    var id_loja = req.params.idLoja;
+    let id_loja = req.params.idLoja;
 
     if (id_loja == undefined) {
         res.status(400).send("O ID da loja está undefined!");
