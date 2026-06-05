@@ -109,9 +109,5 @@ module.exports = {
     obterInteracoesPorProduto,
     obterInteracoesPorSetor,
     obterTempoRetencao,
-<<<<<<< HEAD
     obterKpis
-=======
-    obterInteracoesPorHora 
->>>>>>> 91a4b65fff48176be15fe6c4242ed3217a4bcf03
 }
