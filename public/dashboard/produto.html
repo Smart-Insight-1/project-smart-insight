@@ -45,55 +45,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td>1351</td>
-                        <td>Malbec Gold</td>
-                        <td>Perfume</td>
-                        <td>Masculino</td>
-                        <td>O Boticário</td>
-                    </tr>
-
-                    <tr>
-                        <td>2841</td>
-                        <td>Lily EDP</td>
-                        <td>Perfume</td>
-                        <td>Feminino</td>
-                        <td>O Boticário</td>
-                    </tr>
-
-                    <tr>
-                        <td>4412</td>
-                        <td>Base Make B.</td>
-                        <td>Maquiagem</td>
-                        <td>Lançamentos</td>
-                        <td>Make B</td>
-                    </tr>
-
-                    <tr>
-                        <td>5523</td>
-                        <td>Batom Make B.</td>
-                        <td>Maquiagem</td>
-                        <td>Lançamentos</td>
-                        <td>Make B</td>
-                    </tr>
-
-                    <tr>
-                        <td>6634</td>
-                        <td>Sérum Botik</td>
-                        <td>Skincare</td>
-                        <td>Cuidados com a pele</td>
-                        <td>Botik</td>
-                    </tr>
-
-                    <tr>
-                        <td>7745</td>
-                        <td>Protetor Solar</td>
-                        <td>Skincare</td>
-                        <td>Cuidados com a pele</td>
-                        <td>Botik</td>
-                    </tr>
-                </tbody>
+                <tbody id="tabela_produtos"> </tbody>
 
             </table>
 
@@ -160,6 +112,10 @@
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
 
+    window.onload = function() {
+        listarProduto()
+    }
+
     if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
     } else {
@@ -175,6 +131,34 @@
         document.getElementById("menuCadastro").style.display = "none";
     }
 
+   function listarProduto() {
+    fetch(`/produtos/buscarProdutosPorLoja/${sessionStorage.getItem('ID_LOJA')}`)
+    .then(function(response) {
+        if (response.ok) {
+            response.json().then(function(dados) {
+                tabela_produtos.innerHTML = "";
+
+                for (let i = 0; i < dados.length; i++) {
+                    tabela_produtos.innerHTML += `
+                        <tr>
+                            <td>${dados[i].cod_produto}</td>
+                            <td>${dados[i].nome}</td>
+                            <td>${dados[i].tipo_produto}</td>
+                            <td>${dados[i].setor}</td>
+                            <td>${dados[i].marca}</td>
+                        </tr>
+                    `
+                }
+            })
+        } else {
+            console.error('Erro na API')
+        }
+    })
+    .catch(function(erro) {
+        console.error(erro)
+    })
+}
+
     function botao() {
 
         let div = div_msg
@@ -188,7 +172,33 @@
         div.style.display = "block";
 
         if (codigo.length <= 13 && nomeProd.length != 0 && tipoProd.length != 0 && marca.length != 0 && codigo.length != 0) {
-            div.innerHTML = "✅ cadastro válido!";
+
+            let id_loja = sessionStorage.getItem('ID_LOJA');
+
+        fetch(`/produtos/inserirProduto/${id_loja}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: nomeProd,
+                tipoProduto: tipoProd,
+                codProduto: codigo,
+                marca: marca
+            })
+        })
+            .then(function(response) {
+                if (response.ok) {
+                    div.innerHTML = "✅ cadastro válido!";
+                    listarProduto()
+                } else {
+                    console.error('Erro na API')
+                }
+            })
+            .catch(function(erro) {
+                console.error(erro)
+            })
+
         }
         else {
             div.innerHTML = "❌ cadastro inválido!";
@@ -210,6 +220,7 @@
         .then(function(response) {
             if (response.ok) {
                 div.innerHTML = "✅ produto removido!";
+                listarProduto()
             } else {
                 console.error('Erro na API')
             }

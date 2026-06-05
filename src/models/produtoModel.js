@@ -3,7 +3,19 @@ var database = require("../database/config");
 function listarProduto(id_loja) {
     console.log('Acessando o model para listar os produtos');
 
-    var instrucaoSql = `SELECT * FROM produto WHERE id_loja = ${id_loja};`
+      var instrucaoSql = `
+        SELECT 
+            p.cod_produto,
+            p.nome,
+            p.tipo_produto,
+            p.marca,
+            sa.nome_setor AS setor
+        FROM produto p
+        LEFT JOIN sensor s ON p.id_produto = s.id_produto
+        LEFT JOIN setor_amostra sa ON s.id_setor = sa.id_setor
+        WHERE p.id_loja = ${id_loja}
+        GROUP BY p.id_produto;
+    `
 
     console.log("Executando a instrução: ", instrucaoSql);
     return database.executar(instrucaoSql);
