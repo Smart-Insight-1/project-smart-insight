@@ -127,7 +127,7 @@
                     }
 
                 })
-               
+
             })
             .catch(function (erro) {
                 console.log("Houve um erro ao buscar os contatos:", erro);
@@ -173,17 +173,23 @@
                 });
         }
         else {
-            div.innerHTML = "❌ cadastro inválido!";
+            div.innerHTML = "❌ Insira as informações corretas!";
         }
     }
 
 
     function deletar() {
+
+        let div = div_msg
+
         let idContato = ipt_removerContato.value;
 
+
+        div.innerHTML = "";
+
+
         if (idContato == "") {
-            alert(`Informe o ID do contato!`);
-            return
+            div.innerHTML = `❌ Insira o ID do contato`;
         }
 
         fetch(`/contatos/deletarContato/${idContato}`, {
