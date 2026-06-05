@@ -20,10 +20,10 @@ function inserirProduto(id_loja, nome, tipo_produto, cod_produto, marca) {
     return database.executar(instrucaoSql);
 }
 
-function deletarProduto(id_loja, id_produto) {
+function deletarProduto(id_loja, cod_produto) {
     console.log('Acessando o model para deletar o produto');
 
-    var instrucaoSql = `DELETE FROM produto WHERE id_produto = ${id_produto} AND id_loja = ${id_loja};`
+    var instrucaoSql = `DELETE FROM produto WHERE cod_produto = '${cod_produto}' AND id_loja = ${id_loja};`
 
     console.log("Executando a instrução: ", instrucaoSql);
     return database.executar(instrucaoSql);

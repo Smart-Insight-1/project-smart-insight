@@ -143,7 +143,7 @@
                         placeholder="Insira o código do produto"> <br>
                 </div>
             </div>
-            <button>Remover</button>
+            <button onclick="deletarProduto()">Remover</button>
 
         </div>
 
@@ -193,8 +193,29 @@
         else {
             div.innerHTML = "❌ cadastro inválido!";
         }
-
-
-
     }
+
+    function deletarProduto() {
+
+    let div = div_msg
+    let id_loja = sessionStorage.getItem('ID_LOJA');
+    let cod_produto = ipt_removerProduto.value;
+
+    div.innerHTML = "";
+    div.style.display = "block";
+
+    fetch(`/produtos/deletarProduto/${id_loja}/${cod_produto}`, {
+        method: 'DELETE'
+    })
+        .then(function(response) {
+            if (response.ok) {
+                div.innerHTML = "✅ produto removido!";
+            } else {
+                console.error('Erro na API')
+            }
+        })
+        .catch(function(erro) {
+            console.error(erro)
+        })
+}
 </script>

@@ -23,6 +23,53 @@ function listarProduto(req, res) {
             );
 }
 
+function inserirProduto(req, res) {
+    var id_loja = req.params.idLoja;
+    var nome = req.body.nome;
+    var tipo_produto = req.body.tipoProduto;
+    var cod_produto = req.body.codProduto;
+    var marca = req.body.marca;
+
+    produtoModel.inserirProduto(id_loja, nome, tipo_produto, cod_produto, marca)
+        .then(function (resultadoProduto) {
+            console.log(
+                `\nResultados encontrados: ${resultadoProduto.length}`
+            );
+            console.log(
+                `Resultados: ${JSON.stringify(resultadoProduto)}`
+            );
+
+            res.json(resultadoProduto);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao inserir! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
+
+function deletarProduto(req, res) {
+    var id_loja = req.params.idLoja;
+    var cod_produto = req.params.codProduto;
+
+    produtoModel.deletarProduto(id_loja, cod_produto)
+        .then(function (resultadoProduto) {
+            console.log(`\nResultados encontrados: ${resultadoProduto.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultadoProduto)}`);
+
+            res.json(resultadoProduto);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao deletar! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
-    listarProduto
+    listarProduto,
+    inserirProduto,
+    deletarProduto
 }
