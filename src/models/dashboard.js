@@ -47,8 +47,25 @@ function obterTempoRetencao(id_loja) {
 }
 
 
+function obterInteracoesPorHora(id_loja) {
+    var instrucao = `
+        SELECT 
+            HOUR(i.horario) AS hora,
+            COUNT(i.id_interacao) AS total_interacoes
+        FROM interacao i
+        JOIN sensor s ON i.id_sensor = s.id_sensor
+        JOIN produto p ON s.id_produto = p.id_produto
+        WHERE p.id_loja = ${id_loja}
+        GROUP BY HOUR(i.horario)
+        ORDER BY hora ASC;
+    `;
+    return database.executar(instrucao);
+}
+
+
 module.exports = {
     obterInteracoesPorProduto,
     obterInteracoesPorSetor,
-    obterTempoRetencao
+    obterTempoRetencao,
+    obterInteracoesPorHora 
 }
