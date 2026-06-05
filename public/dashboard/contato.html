@@ -68,10 +68,21 @@
 
             <button onclick="botao()">Cadastrar Contato</button>
 
+            <div class="container-remover-setor">
+
+                <h1>Deletar setor por ID: </h1>
+
+                <div class="campo">
+                    <input type="text" id="ipt_removerSetor" class="ipt_removerSetor"
+                        placeholder="Digite o ID do contato">
+                </div>
+            </div>
+            <button onclick="deletar()">Remover</button>
+
         </div>
 
         <div id="div_msg" class="alertas"></div>
-        
+
     </div>
 
 
@@ -83,8 +94,8 @@
 <script>
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
-    
-    if(nomeUsuario == undefined || nomeUsuario == null) {
+
+    if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
     } else {
         document.getElementById("nome_usuario").innerHTML = nomeUsuario;
@@ -92,7 +103,7 @@
 
     const tipoUsuario = sessionStorage.TIPO_USUARIO;
 
-    if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
+    if (tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
@@ -111,9 +122,61 @@
 
         if (telefone.length == 11) {
             div.innerHTML = "✅ cadastro válido!";
+
+            fetch(`/setores/inserirSetorPorLoja/${idLoja}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    telefone: telefone
+                })
+            })
+                .then(function (resposta) {
+                    console.log(resposta);
+
+                    if (resposta.ok) {
+                        div.innerHTML = `✅ Contato cadastrado com sucesso!`;
+                    } else {
+                        div.innerHTML = `❌ Erro ao cadastrar contato!`
+                    }
+                })
+                .catch(function (erro) {
+                    console.log(erro);
+
+                    div.innerHTML = `❌ Erro na comunicação com o servidor!`
+                });
         }
         else {
             div.innerHTML = "❌ cadastro inválido!";
         }
+    }
+
+
+    function deletar() {
+        let idSetor = ipt_removerSetor.value;
+
+        if (idSetor == "") {
+            alert(`Informe o ID do contato!`);
+        }
+
+        fetch(`/setores/deletarSetorPorLoja/${idLoja}/${idSetor}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function (resposta) {
+                console.log(resposta)
+
+                if (resposta.ok) {
+                    alert(`Contato removido com sucesso!`)
+                } else {
+                    alert(`Erro ao remover setor!`)
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+            })
     }
 </script>
