@@ -88,15 +88,15 @@
                 <input type="text" placeholder="Digite a descrição" id="ipt_desc">
             </div>
 
-            <button onclick="botao()">Cadastrar Setor</button>
+            <button onclick="inserir()">Cadastrar Setor</button>
 
             <div class="container-remover-setor">
 
-                <h1>Deletar setor por nome: </h1>
+                <h1>Deletar setor por ID: </h1>
 
                 <div class="campo">
                     <input type="text" id="ipt_removerSetor" class="ipt_removerSetor"
-                        placeholder="Digite o nome do setor">
+                        placeholder="Digite o ID do setor">
                 </div>
             </div>
             <button onclick="deletar()">Remover</button>
@@ -134,7 +134,8 @@
         document.getElementById("menuCadastro").style.display = "none";
     }
 
-    function botao() {
+    function inserir() {
+        console.log('Botao clicado')
 
         let div = div_msg
         let nomeSetor = ipt_nome.value;
@@ -144,12 +145,63 @@
         div.style.display = "block";
 
         if (descSetor.length <= 200 && nomeSetor.length != 0 && descSetor.length != 0) {
-            div.innerHTML = "✅ cadastro válido!";
+
+            fetch(`/setores/inserirSetorPorLoja/${idLoja}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nomeSetor: nomeSetor,
+                    descricao: descSetor
+                })
+            })
+                .then(function (resposta) {
+                    console.log(resposta);
+
+                    if (resposta.ok) {
+                        div.innerHTML = `✅ Setor cadastrado com sucesso!`;
+                    } else {
+                        div.innerHTML = `❌ Erro ao cadastrar setor!`
+                    }
+                })
+                .catch(function (erro) {
+                    console.log(erro);
+
+                    div.innerHTML = `❌ Erro na comunicação com o servidor!`
+                });
         }
         else {
-            div.innerHTML = "❌ cadastro inválido!";
+            div.innerHTML = "❌ Cadastro inválido!";
         }
 
+    }
+
+    function deletar() {
+        let idSetor = ipt_removerSetor.value;
+
+        if (idSetor == "") {
+            alert(`Informe o ID do setor!`);
+        }
+
+        fetch(`/setores/deletarSetorPorLoja/${idLoja}/${idSetor}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function (resposta) {
+                console.log(resposta)
+
+                if (resposta.ok) {
+                    alert(`Setor removido com sucesso!`)
+                } else {
+                    alert(`Erro ao remover setor!`)
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+            })
     }
 
 </script>
