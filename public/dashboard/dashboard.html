@@ -29,12 +29,11 @@
             <button1 class="sairBotao"><a href="../index.html">SAIR</a></button1>
         </ul>
         <a href="/documentacao/SMIN-MANUAL-DE-INSTALACAO-E-UTILIZACAO-V2.0.pdf"
-       download="SMIN-MANUAL-DE-INSTALACAO-E-UTILIZACAO-V2.0.pdf"
-       title="Baixar Manual de Instalação e Utilização">
-        <button class="btnManual">
-            <img src="/assets/icons/google-docs.png" alt="Manual PDF">
-        </button>
-    </a>
+            download="SMIN-MANUAL-DE-INSTALACAO-E-UTILIZACAO-V2.0.pdf" title="Baixar Manual de Instalação e Utilização">
+            <button class="btnManual">
+                <img src="/assets/icons/google-docs.png" alt="Manual PDF">
+            </button>
+        </a>
     </div>
 
     <div class="dashboard">
@@ -68,7 +67,7 @@
                 <div>
                     <strong>Produto com mais interações da Loja</strong>
                     <span>Malbec Gold</span>
-                     <div class="kpi-ancoragem">
+                    <div class="kpi-ancoragem">
                         <strong>Anterior: Batom Make B.</strong>
                     </div>
                 </div>
@@ -78,7 +77,7 @@
                 <div>
                     <strong>Setor com maior quantidade de interações da loja</strong>
                     <span>Perfumaria</span>
-                     <div class="kpi-ancoragem">
+                    <div class="kpi-ancoragem">
                         <strong>Anterior: Maquiagem</strong>
                     </div>
                 </div>
@@ -88,7 +87,7 @@
                 <div>
                     <strong>Tempo médio de retenção do cliente na loja por produto</strong>
                     <span>2m 35s</span>
-                     <div class="kpi-ancoragem">
+                    <div class="kpi-ancoragem">
                         <strong>12% maior que o tempo médio anterior</strong>
                     </div>
                 </div>
@@ -115,82 +114,82 @@
 
     </div>
 
-<script>
+    <script>
 
-    const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
-    
-    if(nomeUsuario == undefined || nomeUsuario == null) {
-        document.getElementById("nome_usuario").innerHTML = "Usuário";
-    } else {
-        document.getElementById("nome_usuario").innerHTML = nomeUsuario;
-    }
-    
-    const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
+        const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
 
-    if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
-        document.getElementById("menuProdutos").style.display = "none";
-        document.getElementById("menuSetores").style.display = "none";
-        document.getElementById("menuContatos").style.display = "none";
-        document.getElementById("menuCadastro").style.display = "none";
-    }
-
-    function filtrarDashboard() {
-        let dataInicio = dataInicial.value;
-        let dataFim = dataFinal.value;
-
-         if(dataInicio == "" || dataFim == "") {
-            alert("Selecione as datas!");
-            return;
+        if (nomeUsuario == undefined || nomeUsuario == null) {
+            document.getElementById("nome_usuario").innerHTML = "Usuário";
+        } else {
+            document.getElementById("nome_usuario").innerHTML = nomeUsuario;
         }
-    }
 
-    const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
-    Chart.register(ChartDataLabels);
+        const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
 
-    new Chart(graficoInteracaoProduto, {
-        type: 'bar',
-        data: {
-            labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
-            datasets: [{
-                label: 'Interações',
-                data: [1650, 1100, 950, 850, 400, 200],
-                borderWidth: 2,
-                backgroundColor: '#ae80ed',
-                borderColor: '#2F0569'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    ticks: {
-                        font: { size: 13 },
-                        color: "#ffffff"
+        if (tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
+            document.getElementById("menuProdutos").style.display = "none";
+            document.getElementById("menuSetores").style.display = "none";
+            document.getElementById("menuContatos").style.display = "none";
+            document.getElementById("menuCadastro").style.display = "none";
+        }
+
+        function filtrarDashboard() {
+            let dataInicio = dataInicial.value;
+            let dataFim = dataFinal.value;
+
+            if (dataInicio == "" || dataFim == "") {
+                alert("Selecione as datas!");
+                return;
+            }
+        }
+
+        const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
+        Chart.register(ChartDataLabels);
+
+        new Chart(graficoInteracaoProduto, {
+            type: 'bar',
+            data: {
+                labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
+                datasets: [{
+                    label: 'Interações',
+                    data: [1650, 1100, 950, 850, 400, 200],
+                    borderWidth: 2,
+                    backgroundColor: '#ae80ed',
+                    borderColor: '#2F0569'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: { size: 13 },
+                            color: "#ffffff"
+                        },
+                        title: {
+                            font: { size: 18 },
+                            display: true,
+                            text: 'Produtos',
+                            color: '#ffffff'
+                        }
                     },
-                    title: {
-                        font: { size: 18 },
-                        display: true,
-                        text: 'Produtos',
-                        color: '#ffffff'
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade (interações)',
+                            color: '#ffffff',
+                            font: { size: 18 }
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            font: { size: 16 },
+                            color: "#ffffff"
+                        }
                     }
                 },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Quantidade (interações)',
-                        color: '#ffffff',
-                        font: { size: 18 }
-                    },
-                    beginAtZero: true,
-                    ticks: {
-                        font: { size: 16 },
-                        color: "#ffffff"
-                    }
-                }
-            },
-            plugins: {
-                 datalabels: {
+                plugins: {
+                    datalabels: {
                         anchor: 'end',
                         align: 'end',
                         color: '#ffffff',
@@ -199,105 +198,65 @@
                             weight: 'bold'
                         },
                     },
-                title: {
-                    display: true,
-                    text: 'Top 06 - Total de interações por produto',
-                    color: '#ffffff',
-                    font: { size: 16 }
-                },
-                legend: {
-                    labels: { color: "#ffffff" }
-                }
-            }
-        }
-    });
-
-    const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
-
-    new Chart(graficoInteracaoSetor, {
-        type: 'bar',
-        data: {
-            labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
-            datasets: [{
-                label: 'Interações por setor',
-                data: [2600, 1950, 400, 200],
-                borderWidth: 2,
-                backgroundColor: '#ae80ed',
-                borderColor: '#2F0569'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    ticks: {
-                        font: { size: 13 },
-                        color: "#ffffff"
-                    },
-                    title: {
-                        font: { size: 18 },
-                        display: true,
-                        text: 'Setor',
-                        color: '#ffffff'
-                    }
-                },
-                y: {
                     title: {
                         display: true,
-                        text: 'Quantidade (interações)',
+                        text: 'Top 06 - Total de interações por produto',
                         color: '#ffffff',
                         font: { size: 16 }
                     },
-                    beginAtZero: true,
-                    ticks: {
-                        font: { size: 16 },
-                        color: "#ffffff"
+                    legend: {
+                        labels: { color: "#ffffff" }
                     }
-                }
-            },
-            plugins: {
-                 datalabels: {
-                        anchor: 'end',
-                        align: 'end',
-                        color: '#ffffff',
-                        font: {
-                            size: 14,
-                            weight: 'bold'
-                        },
-                    },
-                title: {
-                    display: true,
-                    text: 'Total de interações por setor',
-                    color: '#ffffff',
-                    font: { size: 16 }
-                },
-                legend: {
-                    labels: { color: "#ffffff" }
                 }
             }
-        }
-    });
+        });
 
-    const graficoTempoRetencao = document.getElementById('graficoTempoRetencao');
+        const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
 
-    new Chart(graficoTempoRetencao, {
-        type: 'bar',
-        data: {
-            labels: ['Malbec Gold', 'Batom Make B.', 'Lily EDP', 'Base Make B.', 'Sérum Botik', 'Protetor Solar'],
-            datasets: [{
-                label: 'Tempo (segundos)',
-                data: [180, 160, 150, 140, 120, 100],
-                backgroundColor: '#ae80ed',
-                borderColor: '#2F0569',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                                 datalabels: {
+        new Chart(graficoInteracaoSetor, {
+            type: 'bar',
+            data: {
+                labels: ['Perfumaria', 'Maquiagem', 'Skincare', 'Corpo/Banho'],
+                datasets: [{
+                    label: 'Interações por setor',
+                    data: [2600, 1950, 400, 200],
+                    borderWidth: 2,
+                    backgroundColor: '#ae80ed',
+                    borderColor: '#2F0569'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: { size: 13 },
+                            color: "#ffffff"
+                        },
+                        title: {
+                            font: { size: 18 },
+                            display: true,
+                            text: 'Setor',
+                            color: '#ffffff'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade (interações)',
+                            color: '#ffffff',
+                            font: { size: 16 }
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            font: { size: 16 },
+                            color: "#ffffff"
+                        }
+                    }
+                },
+                plugins: {
+                    datalabels: {
                         anchor: 'end',
                         align: 'end',
                         color: '#ffffff',
@@ -306,92 +265,160 @@
                             weight: 'bold'
                         },
                     },
-                title: {
-                    display: true,
-                    text: 'Top 06 - Tempo Médio de Retenção por Produto',
-                    color: '#ffffff',
-                    font: { size: 16 }
-                },
-                legend: {
-                    labels: { color: "#ffffff" }
-                }
-            },
-            scales: {
-                x: {
-                    title: {
-                        font: { size: 18 },
-                        display: true,
-                        text: 'Produtos',
-                        color: '#ffffff'
-                    },
-                    ticks: {
-                        font: { size: 13 },
-                        color: "#ffffff"
-                    }
-                },
-                y: {
                     title: {
                         display: true,
-                        text: 'Tempo (segundos)',
+                        text: 'Total de interações por setor',
                         color: '#ffffff',
                         font: { size: 16 }
                     },
-                    beginAtZero: true,
-                    ticks: {
-                        font: { size: 16 },
-                        color: "#ffffff"
+                    legend: {
+                        labels: { color: "#ffffff" }
                     }
                 }
             }
+        });
+
+
+        function obterTempoRetencao() {
+            let id_loja = sessionStorage.getItem('ID_LOJA') || 1;
+
+            fetch(`/dashboard/grafico/retencao/${id_loja}`, { cache: 'no-store' })
+                .then(function (response) {
+                    if (response.ok) {
+                        response.json().then(function (resposta) {
+                            let labelsProduto = []
+                            let dadosTempo = []
+
+                            for (let i = 0; i < resposta.length; i++) {
+                                labelsProduto.push(resposta[i].produto)
+                                dadosTempo.push(resposta[i].tempo_medio)
+                            }
+
+                            const graficoTempoRetencao = document.getElementById('graficoTempoRetencao');
+
+                            new Chart(graficoTempoRetencao, {
+                                type: 'bar',
+                                data: {
+                                    labels: labelsProduto,
+                                    datasets: [{
+                                        label: 'Tempo (segundos)',
+                                        data: dadosTempo,
+                                        backgroundColor: '#ae80ed',
+                                        borderColor: '#2F0569',
+                                        borderWidth: 2
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                        datalabels: {
+                                            anchor: 'end',
+                                            align: 'end',
+                                            color: '#ffffff',
+                                            font: {
+                                                size: 14,
+                                                weight: 'bold'
+                                            },
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: 'Top 06 - Tempo Médio de Retenção por Produto',
+                                            color: '#ffffff',
+                                            font: { size: 16 }
+                                        },
+                                        legend: {
+                                            labels: { color: "#ffffff" }
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            title: {
+                                                font: { size: 18 },
+                                                display: true,
+                                                text: 'Produtos',
+                                                color: '#ffffff'
+                                            },
+                                            ticks: {
+                                                font: { size: 13 },
+                                                color: "#ffffff"
+                                            }
+                                        },
+                                        y: {
+                                            title: {
+                                                display: true,
+                                                text: 'Tempo (segundos)',
+                                                color: '#ffffff',
+                                                font: { size: 16 }
+                                            },
+                                            beginAtZero: true,
+                                            ticks: {
+                                                font: { size: 16 },
+                                                color: "#ffffff"
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        })
+                    } else {
+                        console.error('Erro na API')
+                    }
+
+                })
+                .catch(function(erro) {
+                    console.error(erro)
+                })
+
         }
-    });
 
-    const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
 
-    new Chart(graficoInteracoesHora, {
-        type: 'line',
-        data: {
-            labels: ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
-            datasets: [{
-                label: 'Interações',
-                data: [500, 800, 350, 600, 1500, 1400],
-                borderColor: '#ae80ed',
-                borderDash: [5, 5],
-                borderWidth: 3
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    ticks: {
-                        font: { size: 13 },
-                        color: "#ffffff"
+        const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
+
+        new Chart(graficoInteracoesHora, {
+            type: 'line',
+            data: {
+                labels: ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
+                datasets: [{
+                    label: 'Interações',
+                    data: [500, 800, 350, 600, 1500, 1400],
+                    borderColor: '#ae80ed',
+                    borderDash: [5, 5],
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: { size: 13 },
+                            color: "#ffffff"
+                        },
+                        title: {
+                            font: { size: 18 },
+                            text: "Hora",
+                            display: true,
+                            color: "#fff"
+                        }
                     },
-                    title: {
-                        font: { size: 18 },
-                        text: "Hora",
-                        display: true,
-                        color: "#fff"
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade',
+                            color: '#ffffff',
+                            font: { size: 16 }
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            font: { size: 16 },
+                            color: "#ffffff"
+                        }
                     }
                 },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Quantidade',
-                        color: '#ffffff',
-                        font: { size: 16 }
-                    },
-                    beginAtZero: true,
-                    ticks: {
-                        font: { size: 16 },
-                        color: "#ffffff"
-                    }
-                }
-            },
-            plugins: {
-                                 datalabels: {
+                plugins: {
+                    datalabels: {
                         anchor: 'end',
                         align: 'end',
                         color: '#ffffff',
@@ -400,20 +427,23 @@
                             weight: 'bold'
                         },
                     },
-                title: {
-                    display: true,
-                    text: 'Quantidade total de interações por Hora',
-                    color: '#ffffff',
-                    font: { size: 16 }
-                },
-                legend: {
-                    labels: { color: "#ffffff" }
+                    title: {
+                        display: true,
+                        text: 'Quantidade total de interações por Hora',
+                        color: '#ffffff',
+                        font: { size: 16 }
+                    },
+                    legend: {
+                        labels: { color: "#ffffff" }
+                    }
                 }
             }
-        }
-    });
+        });
 
-</script>
+
+        obterTempoRetencao()
+
+    </script>
 
 </body>
 

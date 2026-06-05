@@ -21,13 +21,14 @@ function obterInteracoesPorProduto(req, res) {
 function obterInteracoesPorSetor(req, res) {
     var id_loja = req.params.idLoja;
 }
+
 function obterTempoRetencao(req, res) {
     var id_loja = req.params.idLoja;
 
     if (id_loja == undefined) {
         res.status(400).send("O ID da loja está undefined!");
     } else {
-        dashboardModel.buscarComparativo(id_loja)
+        dashboardModel.obterTempoRetencao(id_loja)
             .then(function (resultado) {
                 res.json(resultado);
             })
@@ -37,6 +38,7 @@ function obterTempoRetencao(req, res) {
             });
     }
 }
+
 function obterInteracoesPorHora(req, res) {
     var id_loja = req.params.idLoja;
 }
