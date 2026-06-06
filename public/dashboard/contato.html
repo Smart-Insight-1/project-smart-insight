@@ -15,7 +15,7 @@
 <body onload="listar()">
 
     <div class="menu">
-        <h2>Painel</h2>
+        <h2>Painel, Olá <span id="nome_usuario">*</span></h2>
         <ul>
             <li><a href="dashboard.html">Dashboard</a></li>
             <li id="menuProdutos"><a href="produto.html">Produtos</a></li>
@@ -87,7 +87,6 @@
 <script>
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
-    const idUsuario = sessionStorage.getItem('ID_USUARIO');
 
     if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
@@ -95,7 +94,7 @@
         document.getElementById("nome_usuario").innerHTML = nomeUsuario;
     }
 
-    const tipoUsuario = sessionStorage.TIPO_USUARIO;
+    const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
 
     if (tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
