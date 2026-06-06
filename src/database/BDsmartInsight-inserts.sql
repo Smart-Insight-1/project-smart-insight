@@ -34,7 +34,6 @@ CREATE TABLE loja (
     id_loja INT AUTO_INCREMENT PRIMARY KEY,
     id_empresa INT NOT NULL,
     nome_loja VARCHAR(100) NOT NULL,
-    cnpj CHAR(14) UNIQUE NOT NULL,
     FOREIGN KEY (id_empresa)
         REFERENCES empresa(id_empresa)
 );
@@ -97,3 +96,112 @@ CREATE TABLE interacao (
     duracao FLOAT,
     FOREIGN KEY (id_sensor) REFERENCES sensor(id_sensor)
 );
+
+
+
+
+-- EMPRESA
+INSERT INTO empresa (razao_social, cnpj)
+VALUES ('Smart Insight Tecnologia Ltda', '12345678000199');
+
+-- USUÁRIO
+INSERT INTO usuario (
+    id_empresa,
+    nome,
+    email,
+    senha,
+    tipo_usuario
+)
+VALUES (
+    1,
+    'Marcel Suriani',
+    'usuariousuariomarcel@smartinsight.com',
+    '123456',
+    'gestor'
+);
+
+-- CONTATO
+INSERT INTO contato (id_usuario, telefone)
+VALUES (1, '11999999999');
+
+-- LOJA
+INSERT INTO loja (id_empresa, nome_loja)
+VALUES (1, 'Loja Shopping Paulista');
+
+-- ENDEREÇO
+INSERT INTO endereco (
+    id_loja,
+    rua,
+    numero,
+    bairro,
+    cidade,
+    uf,
+    cep
+)
+VALUES (
+    1,
+    'Av. Paulista',
+    '1000',
+    'Bela Vista',
+    'São Paulo',
+    'SP',
+    '01310000'
+);
+
+-- SETOR
+INSERT INTO setor_amostra (
+    id_loja,
+    nome_setor,
+    descricao
+)
+VALUES (
+    1,
+    'Perfumaria',
+    'Área de testers de perfumes'
+);
+
+-- PRODUTO
+INSERT INTO produto (
+    id_loja,
+    nome,
+    tipo_produto,
+    cod_produto,
+    marca
+)
+VALUES (
+    1,
+    'Perfume Tester Elegance',
+    'Perfume',
+    '7891234567890',
+    'BeautyLux'
+);
+
+-- SENSOR
+INSERT INTO sensor (
+    id_setor,
+    id_produto,
+    situacao,
+    data_instalacao
+)
+VALUES (
+    1,
+    1,
+    'Ativo',
+    CURDATE()
+);
+
+-- INTERAÇÕES
+INSERT INTO interacao (
+    id_sensor,
+    horario,
+    duracao
+)
+VALUES
+(1, NOW() - INTERVAL 30 MINUTE, 12.5),
+(1, NOW() - INTERVAL 25 MINUTE, 8.7),
+(1, NOW() - INTERVAL 20 MINUTE, 15.2),
+(1, NOW() - INTERVAL 15 MINUTE, 9.4),
+(1, NOW() - INTERVAL 10 MINUTE, 21.8),
+(1, NOW() - INTERVAL 5 MINUTE, 18.3),
+(1, NOW(), 11.6);
+
