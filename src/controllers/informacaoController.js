@@ -9,8 +9,8 @@ function buscarInformacoesEmpresaLoja(req, res) {
 
     informacaoModel.buscarInformacoesEmpresaLoja(idLoja).then((resultado) => {
         console.log("Resultados encontrados: ", resultado);
-        if(resultado.lentgh == 1) {
-            res.json({
+        if(resultado.length == 1) {
+            res.status(200).json({
                 razao_social: resultado[0].razao_social,
                 cnpj_empresa: resultado[0].cnpj_empresa,
                 nome_loja: resultado[0].nome_loja,
@@ -22,8 +22,8 @@ function buscarInformacoesEmpresaLoja(req, res) {
         }
     }).catch((err) => {
         console.log(err);
-        console.log("\nHouve um erro ao buscar as informações! Erro: ", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
+        console.log("\nHouve um erro ao buscar as informações! Erro: ", err.sqlMessage);
+        res.status(500).json(err.sqlMessage);
     })
 }
 

@@ -3,7 +3,7 @@ var router = express.Router();
 
 var informacaoController = require('../controllers/informacaoController');
 
-router.get("/buscarInformacoesEmpresaLoja/:id_loja", function (req, res) {
+router.get("/buscarInformacoesEmpresaLoja/:idLoja", function (req, res) {
     informacaoController.buscarInformacoesEmpresaLoja(req, res)
 });
 
