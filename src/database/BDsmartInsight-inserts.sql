@@ -209,3 +209,49 @@ VALUES
 (1, NOW() - INTERVAL 5 MINUTE, 18.3),
 (1, NOW(), 11.6);
 
+CREATE VIEW vw_kpi AS
+SELECT
+    interacao.id_interacao,
+    interacao.horario,
+    interacao.duracao,
+
+    sensor.id_sensor,
+
+    produto.id_produto,
+    produto.nome AS produto,
+    produto.id_loja,
+
+    setor_amostra.id_setor,
+    setor_amostra.nome_setor AS setor
+FROM interacao 
+JOIN sensor ON interacao.id_sensor = sensor.id_sensor
+JOIN produto ON sensor.id_produto = produto.id_produto
+JOIN setor_amostra ON sensor.id_setor = setor_amostra.id_setor;
+
+
+
+CREATE VIEW vw_graficos AS
+SELECT
+    interacao.id_interacao,
+    interacao.horario,
+    interacao.duracao,
+
+    produto.id_loja,
+    produto.nome AS produto,
+
+    setor_amostra.nome_setor AS setor
+
+FROM interacao 
+JOIN sensor 
+    ON interacao.id_sensor = sensor.id_sensor
+JOIN produto 
+    ON sensor.id_produto = produto.id_produto
+JOIN setor_amostra 
+    ON sensor.id_setor = setor_amostra.id_setor;
+
+    
+
+CREATE VIEW informacoes_empresa_loja AS
+	SELECT l.id_loja AS id_loja, emp.razao_social, emp.cnpj AS cnpj_empresa, l.nome_loja, l.cnpj AS cnpj_loja, CONCAT(en.rua, ', ', en.numero, ' - ', en.bairro, ' - ', en.cidade, ' (',en.uf,') - ', en.cep) AS 'endereco_loja' FROM empresa emp
+		JOIN loja l ON l.id_empresa = emp.id_empresa
+		JOIN endereco en ON en.id_loja = l.id_loja;
