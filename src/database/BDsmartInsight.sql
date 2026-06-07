@@ -137,3 +137,12 @@ JOIN produto
     ON sensor.id_produto = produto.id_produto
 JOIN setor_amostra 
     ON sensor.id_setor = setor_amostra.id_setor;
+
+    
+
+CREATE VIEW informacoes_empresa_loja AS
+	SELECT l.id_loja AS id_loja, emp.razao_social, emp.cnpj AS cnpj_empresa, l.nome_loja, l.cnpj AS cnpj_loja, CONCAT(en.rua, ', ', en.numero, ' - ', en.bairro, ' - ', en.cidade, ' (',en.uf,') - ', en.cep) AS 'endereco_loja' FROM empresa emp
+		JOIN loja l ON l.id_empresa = emp.id_empresa
+		JOIN endereco en ON en.id_loja = l.id_loja;
+        
+SELECT * FROM informacoes_empresa_loja;
