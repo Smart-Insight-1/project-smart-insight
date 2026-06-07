@@ -255,3 +255,70 @@ CREATE VIEW informacoes_empresa_loja AS
 	SELECT l.id_loja AS id_loja, emp.razao_social, emp.cnpj AS cnpj_empresa, l.nome_loja, l.cnpj AS cnpj_loja, CONCAT(en.rua, ', ', en.numero, ' - ', en.bairro, ' - ', en.cidade, ' (',en.uf,') - ', en.cep) AS 'endereco_loja' FROM empresa emp
 		JOIN loja l ON l.id_empresa = emp.id_empresa
 		JOIN endereco en ON en.id_loja = l.id_loja;
+        
+INSERT INTO empresa (razao_social, cnpj)
+VALUES
+('Natura Cosméticos S.A.', '11111111000111'),
+('O Boticário Franchising Ltda.', '22222222000122');
+
+INSERT INTO loja (id_empresa, nome_loja)
+VALUES
+(1, 'Natura BH Shopping'),
+(2, 'O Boticário BH Shopping');
+
+INSERT INTO setor_amostra (id_loja, nome_setor, descricao)
+VALUES
+(1, 'Perfumaria Natura', 'Área de perfumes testers Natura'),
+(2, 'Perfumaria Boticário', 'Área de perfumes testers Boticário');
+
+INSERT INTO produto (id_loja, nome, tipo_produto, cod_produto, marca)
+VALUES
+(1, 'Kaiak Clássico', 'Perfume', '7891000000001', 'Natura'),
+(1, 'Essencial Masculino', 'Perfume', '7891000000002', 'Natura'),
+
+(2, 'Malbec Tradicional', 'Perfume', '7892000000001', 'O Boticário'),
+(2, 'Coffee Man Sense', 'Perfume', '7892000000002', 'O Boticário');
+
+INSERT INTO sensor (id_setor, id_produto, situacao, data_instalacao)
+VALUES
+(1, 1, 'Ativo', '2026-01-15'), -- Kaiak
+(1, 2, 'Ativo', '2026-01-15'), -- Essencial
+
+(2, 3, 'Ativo', '2026-01-15'), -- Malbec
+(2, 4, 'Ativo', '2026-01-15'); -- Coffee Man
+
+-- Período atual (01/06 a 07/06/2026)
+INSERT INTO interacao (id_sensor, horario, duracao) VALUES
+
+-- Kaiak
+(1, '2026-06-01 10:00:00', 180),
+(1, '2026-06-02 11:15:00', 170),
+
+-- Essencial
+(2, '2026-06-03 14:20:00', 160),
+(2, '2026-06-04 10:45:00', 150),
+
+-- Malbec
+(3, '2026-06-05 13:10:00', 220),
+(3, '2026-06-06 15:00:00', 210),
+
+-- Coffee
+(4, '2026-06-07 16:00:00', 140),
+
+-- Período anterior (24/05 a 31/05/2026)
+
+-- Kaiak
+(1, '2026-05-24 10:00:00', 150),
+(1, '2026-05-25 11:00:00', 140),
+
+-- Essencial
+(2, '2026-05-26 14:00:00', 130),
+(2, '2026-05-27 10:30:00', 120),
+
+-- Malbec
+(3, '2026-05-28 12:00:00', 180),
+(3, '2026-05-29 13:00:00', 170),
+
+-- Coffee
+(4, '2026-05-30 15:00:00', 100),
+(4, '2026-05-31 16:30:00', 90);
