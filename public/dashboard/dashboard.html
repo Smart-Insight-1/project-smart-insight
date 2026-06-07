@@ -311,7 +311,7 @@
         function obterTempoRetencao() {
             let id_loja = sessionStorage.getItem('ID_LOJA') || 1;
 
-            fetch(`/dashboard/grafico/retencao/${id_loja}`, { cache: 'no-store' })
+            fetch(`/dashboard/tempoRetencao/${id_loja}`, { cache: 'no-store' })
                 .then(function (response) {
                     if (response.ok) {
                         response.json().then(function (resposta) {
