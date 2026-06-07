@@ -74,11 +74,11 @@
             return resposta.json();
         }).then((dados) => {
             console.log('Dados: ', dados);
-            razao_social_empresa.value = dados[0].razao_social;
-            cnpj_empresa.value = dados[0].cnpj_empresa;
-            nome_loja.value = dados[0].nome_loja;
-            cnpj_loja.value = dados[0].cnpj_loja;
-            endereco_loja.value = dados[0].endereco_loja;
+            razao_social_empresa.innerHTML = dados.razao_social;
+            cnpj_empresa.innerHTML = dados.cnpj_empresa;
+            nome_loja.innerHTML = dados.nome_loja;
+            cnpj_loja.innerHTML = dados.cnpj_loja;
+            endereco_loja.innerHTML = dados.endereco_loja;
         }).catch((err) => {
             console.log(err);
             console.log("\nHouve um erro ao buscar as informações! Erro: ", err);
