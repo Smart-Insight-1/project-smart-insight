@@ -88,6 +88,8 @@
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
 
+    const idUsuario = sessionStorage.getItem('ID_USUARIO');
+
     if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
     } else {
