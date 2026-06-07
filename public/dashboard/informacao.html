@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 </head>
 
-<body>
+<body onload="buscarInformacoesEmpresaLoja()">
 
     <div class="menu">
         <h2>Painel, Olá <span id="nome_usuario">*</span></h2>
@@ -35,11 +35,13 @@
             <p>CNPJ: <span id="cnpj_empresa">-</span></p>
             <h2>Infomações da Loja:</h2>
             <p>Nome Loja: <span id="nome_loja"></span></p>
+            <p>CNPJ: <span id="cnpj_loja">-</span></p>
             <p>Endereço: <span id="endereco_loja">-</span></p>
         </div>
     </div>
 </body>
 <script>
+
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
     
     if(nomeUsuario == undefined || nomeUsuario == null) {
@@ -55,6 +57,32 @@
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
         document.getElementById("menuCadastro").style.display = "none";
+    }
+
+    const idLoja = sessionStorage.getItem('ID_LOJA');
+
+    function buscarInformacoesEmpresaLoja() {
+
+        let razao_social_empresa = document.getElementById("razao_social_empresa");
+        let cnpj_empresa = document.getElementById("cnpj_empresa");
+        let nome_loja = document.getElementById("nome_loja");
+        let cnpj_loja = document.getElementById("cnpj_loja");
+        let endereco_loja = document.getElementById("endereco_loja");
+
+        fetch(`/informacao/buscarInformacoesEmpresaLoja/${idLoja}`)
+        .then((resposta) => {
+            return resposta.json();
+        }).then((dados) => {
+            console.log('Dados: ', dados);
+            razao_social_empresa.value = dados[0].razao_social;
+            cnpj_empresa.value = dados[0].cnpj_empresa;
+            nome_loja.value = dados[0].nome_loja;
+            cnpj_loja.value = dados[0].cnpj_loja;
+            endereco_loja.value = dados[0].endereco_loja;
+        }).catch((err) => {
+            console.log(err);
+            console.log("\nHouve um erro ao buscar as informações! Erro: ", err);
+        })
     }
     
 </script>
