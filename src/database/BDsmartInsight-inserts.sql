@@ -34,6 +34,7 @@ CREATE TABLE loja (
     id_loja INT AUTO_INCREMENT PRIMARY KEY,
     id_empresa INT NOT NULL,
     nome_loja VARCHAR(100) NOT NULL,
+    cnpj CHAR(14) UNIQUE NOT NULL,
     FOREIGN KEY (id_empresa)
         REFERENCES empresa(id_empresa)
 );
@@ -99,7 +100,6 @@ CREATE TABLE interacao (
 
 
 
-
 -- EMPRESA
 INSERT INTO empresa (razao_social, cnpj)
 VALUES ('Smart Insight Tecnologia Ltda', '12345678000199');
@@ -116,7 +116,7 @@ VALUES (
     1,
     'Marcel Suriani',
     'usuariousuariomarcel@smartinsight.com',
-    '123456',
+    '12345678',
     'gestor'
 );
 
@@ -125,8 +125,8 @@ INSERT INTO contato (id_usuario, telefone)
 VALUES (1, '11999999999');
 
 -- LOJA
-INSERT INTO loja (id_empresa, nome_loja)
-VALUES (1, 'Loja Shopping Paulista');
+INSERT INTO loja (id_empresa, nome_loja, cnpj)
+VALUES (1, 'Loja Shopping Paulista', '12345678901234');
 
 -- ENDEREÇO
 INSERT INTO endereco (
