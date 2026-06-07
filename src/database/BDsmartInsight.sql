@@ -97,3 +97,43 @@ CREATE TABLE interacao (
     duracao FLOAT,
     FOREIGN KEY (id_sensor) REFERENCES sensor(id_sensor)
 );
+
+CREATE VIEW vw_kpi AS
+SELECT
+    interacao.id_interacao,
+    interacao.horario,
+    interacao.duracao,
+
+    sensor.id_sensor,
+
+    produto.id_produto,
+    produto.nome AS produto,
+    produto.id_loja,
+
+    setor_amostra.id_setor,
+    setor_amostra.nome_setor AS setor
+FROM interacao 
+JOIN sensor ON interacao.id_sensor = sensor.id_sensor
+JOIN produto ON sensor.id_produto = produto.id_produto
+JOIN setor_amostra ON sensor.id_setor = setor_amostra.id_setor;
+
+
+
+CREATE VIEW vw_graficos AS
+SELECT
+    interacao.id_interacao,
+    interacao.horario,
+    interacao.duracao,
+
+    produto.id_loja,
+    produto.nome AS produto,
+
+    setor_amostra.nome_setor AS setor
+
+FROM interacao 
+JOIN sensor 
+    ON interacao.id_sensor = sensor.id_sensor
+JOIN produto 
+    ON sensor.id_produto = produto.id_produto
+JOIN setor_amostra 
+    ON sensor.id_setor = setor_amostra.id_setor;
