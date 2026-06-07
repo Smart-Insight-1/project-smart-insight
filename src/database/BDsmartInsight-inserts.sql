@@ -128,6 +128,10 @@ VALUES (1, '11999999999');
 INSERT INTO loja (id_empresa, nome_loja, cnpj)
 VALUES (1, 'Loja Shopping Paulista', '12345678901234');
 
+-- ACESSO LOJA
+INSERT INTO acesso_loja (id_loja, id_usuario)
+VALUES (1, 1);
+
 -- ENDEREÇO
 INSERT INTO endereco (
     id_loja,
