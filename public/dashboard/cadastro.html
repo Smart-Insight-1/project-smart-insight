@@ -53,7 +53,7 @@
                 <label>Confirmar Senha:</label>
                 <input type="text" placeholder="Digite a senha novamente" id="ipt_confirmarSenha">
             </div>
-            
+
             <div class="campo">
                 <label>Tipo de Usuario:</label>
                 <select name="" id="ipt_tipoUsuario">
@@ -61,7 +61,7 @@
                     <option value="gestor">Gestor</option>
                 </select>
             </div>
-            <button onclick="criarConta()">Cadastrar Usuário</button>   
+            <button onclick="criarConta()">Cadastrar Usuário</button>
 
         </div>
 
@@ -74,23 +74,23 @@
 <script>
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
-    
-    if(nomeUsuario == undefined || nomeUsuario == null) {
+
+    if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
     } else {
         document.getElementById("nome_usuario").innerHTML = nomeUsuario;
     }
-    
+
     const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
 
-    if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
+    if (tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
         document.getElementById("menuCadastro").style.display = "none";
     }
 
-    let listaCaracter = ["@","#","$","%","&","*","!","."]
+    let listaCaracter = ["@", "#", "$", "%", "&", "*", "!", "."]
 
     function criarConta() {
         let nome = ipt_nome.value;
@@ -106,6 +106,9 @@
 
         let temEspecial = false;
 
+        let temMaiuscula = senha != senha.toLowerCase();
+        let temMinuscula = senha != senha.toUpperCase();
+
         for (let i = 0; i < listaCaracter.length; i++) {
             if (senha.includes(listaCaracter[i])) {
                 temEspecial = true;
@@ -114,7 +117,7 @@
         }
 
         if (
-            nome == "" ||  email == "" || senha == "" || confirmarSenha == ""
+            nome == "" || email == "" || senha == "" || confirmarSenha == ""
         ) {
             alert("❌ Preencha todos os campos!");
             return;
@@ -126,7 +129,15 @@
         else if (!temEspecial) {
             alert("❌ A senha precisa ter caractere especial");
             return;
-        } 
+        }
+        else if (!temMaiuscula) {
+            alert("❌ A senha precisa ter pelo menos uma letra maiúscula!");
+            return;
+        }
+        else if (!temMinuscula) {
+            alert("❌ A senha precisa ter pelo menos uma letra minúscula!");
+            return;
+        }
         else if (indice_arroba == -1 || !termina_com) {
             alert("❌ Email inválido!");
             return;
@@ -150,18 +161,18 @@
                     idLojaServer: idLoja
                 })
             })
-            .then(function (resposta) {
-                console.log("Resposta:", resposta);
-                if(resposta.ok) {
-                    alert("Cadastro realizado com sucesso!");
-                } else {
-                    alert("Erro ao realizar cadastro! Verifique as informações inseridas");
-                }
-            })
-            .catch(function (erro) {
-                console.log("Erro: ", erro);
-                alert("Erro na comumincação com o servidor.")
-            });
-    }
+                .then(function (resposta) {
+                    console.log("Resposta:", resposta);
+                    if (resposta.ok) {
+                        alert("Cadastro realizado com sucesso!");
+                    } else {
+                        alert("Erro ao realizar cadastro! Verifique as informações inseridas");
+                    }
+                })
+                .catch(function (erro) {
+                    console.log("Erro: ", erro);
+                    alert("Erro na comumincação com o servidor.")
+                });
+        }
     }
 </script>
