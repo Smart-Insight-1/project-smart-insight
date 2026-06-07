@@ -431,13 +431,14 @@
             carregarGraficoProduto();
             carregarGraficoSetor();
             carregarKpis(dataInicio, dataFim);
-        }
-            let dataHoje = new Date().toISOString().split('T')[0];
 
-            carregarGraficoProduto();
-            carregarGraficoSetor();
-            carregarKpis(dataHoje, dataHoje);
-            obterTempoRetencao();
+        }
+        let dataHoje = new Date().toISOString().split('T')[0];
+
+        carregarGraficoProduto();
+        carregarGraficoSetor();
+        carregarKpis(dataHoje, dataHoje);
+        obterTempoRetencao();
 
 
     </script>

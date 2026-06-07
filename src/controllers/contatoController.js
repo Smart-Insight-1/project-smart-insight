@@ -1,4 +1,4 @@
-var setoresModel = require("../models/contatoModel");
+var contatoModel = require("../models/contato");
 
 function listarContato(req, res) {
     var id_usuario = req.params.idUsuario;
