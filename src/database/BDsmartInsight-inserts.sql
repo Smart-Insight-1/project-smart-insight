@@ -4,13 +4,7 @@ INSERT INTO empresa (razao_social, cnpj)
 VALUES ('Smart Insight Tecnologia Ltda', '12345678000199');
 
 -- USUÁRIO
-INSERT INTO usuario (
-    id_empresa,
-    nome,
-    email,
-    senha,
-    tipo_usuario
-)
+INSERT INTO usuario (id_empresa,nome,email,senha,tipo_usuario)
 VALUES (
     1,
     'Marcel Suriani',
@@ -204,7 +198,6 @@ INSERT INTO loja (id_empresa, nome_loja, cnpj) VALUES
 INSERT INTO endereco
 (id_loja, rua, numero, bairro, cidade, uf, cep)
 VALUES
-(1,'Av. Roque Petroni Jr','1089','Morumbi','São Paulo','SP','04707000'),
 (2,'Av. Ibirapuera','3103','Moema','São Paulo','SP','04029020'),
 
 (3,'Av. Paulista','1578','Bela Vista','São Paulo','SP','01310100'),
@@ -480,3 +473,7 @@ INSERT INTO interacao (id_sensor, horario, duracao) VALUES
 (7,'2026-06-07 14:15:00',53),
 (10,'2026-06-07 16:30:00',57),
 (12,'2026-06-07 18:20:00',60);
+
+select * from usuario;
+
+SELECT * FROM informacoes_empresa_loja WHERE id_loja = 1;
