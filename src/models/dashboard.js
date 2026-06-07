@@ -48,62 +48,56 @@ function obterKpis(id_loja, dataInicio, dataFim) {
     var instrucao = `
 
 -- Total atual
-SELECT COUNT(i.id_interacao) AS total_atual
-FROM interacao i
-JOIN sensor s ON i.id_sensor = s.id_sensor
-JOIN produto p ON s.id_produto = p.id_produto
-WHERE p.id_loja = ${id_loja}
-AND DATE(i.horario) BETWEEN '${dataInicio}' AND '${dataFim}';
+SELECT COUNT(id_interacao) AS total_atual
+FROM vw_kpi
+WHERE id_loja = ${id_loja}
+AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}';
 
 -- Total anterior
-    SELECT COUNT(i.id_interacao) AS total_anterior
-    FROM interacao i
-    JOIN sensor s ON i.id_sensor = s.id_sensor
-    JOIN produto p ON s.id_produto = p.id_produto
-    WHERE p.id_loja = ${id_loja}
-    AND DATE(i.horario) BETWEEN
+SELECT COUNT(id_interacao) AS total_anterior
+FROM vw_kpi
+WHERE id_loja = ${id_loja}
+AND DATE(horario) BETWEEN
     DATE_SUB('${dataInicio}', INTERVAL DATEDIFF('${dataFim}', '${dataInicio}') + 1 DAY)
     AND DATE_SUB('${dataInicio}', INTERVAL 1 DAY);
 
         -- Top 2 produtos no período atual
-        SELECT p.nome AS produto, COUNT(i.id_interacao) AS total
-        FROM interacao i
-        JOIN sensor s ON i.id_sensor = s.id_sensor
-        JOIN produto p ON s.id_produto = p.id_produto
-        WHERE p.id_loja = ${id_loja}
-        AND DATE(i.horario) BETWEEN '${dataInicio}' AND '${dataFim}'
-        GROUP BY p.nome
-        ORDER BY total DESC
-        LIMIT 2;
+        SELECT
+			produto,
+			COUNT(id_interacao) AS total
+		FROM vw_kpi
+		WHERE id_loja = ${id_loja}
+		AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}'
+		GROUP BY produto
+		ORDER BY total DESC
+		LIMIT 2;
 
         -- Top 2 setores no período atual
-        SELECT sa.nome_setor AS setor, COUNT(i.id_interacao) AS total
-        FROM interacao i
-        JOIN sensor s ON i.id_sensor = s.id_sensor
-        JOIN setor_amostra sa ON s.id_setor = sa.id_setor
-        WHERE sa.id_loja = ${id_loja}
-        AND DATE(i.horario) BETWEEN '${dataInicio}' AND '${dataFim}'
-        GROUP BY sa.nome_setor
-        ORDER BY total DESC
-        LIMIT 2;
+        SELECT
+			setor,
+			COUNT(id_interacao) AS total
+		FROM vw_kpi
+		WHERE id_loja = ${id_loja}
+		AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}'
+		GROUP BY setor
+		ORDER BY total DESC
+		LIMIT 2;
 
         -- Tempo médio de retenção no período atual
-        SELECT ROUND(AVG(i.duracao), 0) AS tempo_medio
-        FROM interacao i
-        JOIN sensor s ON i.id_sensor = s.id_sensor
-        JOIN produto p ON s.id_produto = p.id_produto
-        WHERE p.id_loja = ${id_loja}
-        AND DATE(i.horario) BETWEEN '${dataInicio}' AND '${dataFim}';
+        SELECT
+			ROUND(AVG(duracao),0) AS tempo_medio
+		FROM vw_kpi
+		WHERE id_loja = ${id_loja}
+		AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}';
 
         -- Tempo médio no período anterior
-    SELECT ROUND(AVG(i.duracao), 0) AS tempo_medio_anterior
-    FROM interacao i
-    JOIN sensor s ON i.id_sensor = s.id_sensor
-    JOIN produto p ON s.id_produto = p.id_produto
-    WHERE p.id_loja = ${id_loja}
-    AND DATE(i.horario) BETWEEN 
-    DATE_SUB('${dataInicio}', INTERVAL DATEDIFF('${dataFim}', '${dataInicio}') + 1 DAY)
-    AND DATE_SUB('${dataInicio}', INTERVAL 1 DAY);
+    SELECT
+		ROUND(AVG(duracao),0) AS tempo_medio_anterior
+	FROM vw_kpi
+	WHERE id_loja = ${id_loja}
+	AND DATE(horario) BETWEEN
+	DATE_SUB('${dataInicio}', INTERVAL DATEDIFF('${dataFim}', '${dataInicio}') + 1 DAY)
+	AND DATE_SUB('${dataInicio}', INTERVAL 1 DAY);
     `;
     return database.executar(instrucao);
 }
@@ -125,5 +119,6 @@ module.exports = {
     obterInteracoesPorProduto,
     obterInteracoesPorSetor,
     obterTempoRetencao,
+    obterInteracoesPorHora,
     obterKpis
 }
