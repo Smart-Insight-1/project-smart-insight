@@ -133,185 +133,88 @@
             document.getElementById("menuCadastro").style.display = "none";
         }
 
-        function filtrarDashboard() {
-            let dataInicio = dataInicial.value;
-            let dataFim = dataFinal.value;
-
-            if (dataInicio == "" || dataFim == "") {
-                alert("Selecione as datas!");
-                return;
-            }
-        }
-
         const graficoInteracaoProduto = document.getElementById('graficoInteracaoProduto');
+        const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
         Chart.register(ChartDataLabels);
         const idLoja = sessionStorage.getItem('ID_LOJA');
 
+        let chartProduto = null;
+        let chartSetor = null;
 
-        fetch(`/dashboard/interacoesPorProduto/${idLoja}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (dados) {
-                let xLabels = [];
-                let yValores = [];
-
-                for (let i = 0; i < dados.length; i++) {
-                    xLabels.push(dados[i].produto);
-                    yValores.push(dados[i].total_interacoes);
-                }
-
-                new Chart(graficoInteracaoProduto, {
-                    type: 'bar',
-                    data: {
-                        labels: xLabels,
-                        datasets: [{
-                            label: 'Interações',
-                            data: yValores,
-                            borderWidth: 2,
-                            backgroundColor: '#ae80ed',
-                            borderColor: '#2F0569'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                ticks: {
-                                    font: { size: 13 },
-                                    color: "#ffffff"
-                                },
-                                title: {
-                                    font: { size: 18 },
-                                    display: true,
-                                    text: 'Produtos',
-                                    color: '#ffffff'
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Quantidade (interações)',
-                                    color: '#ffffff',
-                                    font: { size: 18 }
-                                },
-                                beginAtZero: true,
-                                ticks: {
-                                    font: { size: 16 },
-                                    color: "#ffffff"
-                                }
-                            }
+        function carregarGraficoProduto() {
+            if (chartProduto) {
+                chartProduto.destroy();
+            }
+            fetch(`/dashboard/interacoesPorProduto/${idLoja}`)
+                .then(function (response) { return response.json(); })
+                .then(function (dados) {
+                    let xLabels = [];
+                    let yValores = [];
+                    for (let i = 0; i < dados.length; i++) {
+                        xLabels.push(dados[i].produto);
+                        yValores.push(dados[i].total_interacoes);
+                    }
+                    chartProduto = new Chart(graficoInteracaoProduto, {
+                        type: 'bar',
+                        data: {
+                            labels: xLabels,
+                            datasets: [{ label: 'Interações', data: yValores, borderWidth: 2, backgroundColor: '#ae80ed', borderColor: '#2F0569' }]
                         },
-                        plugins: {
-                            datalabels: {
-                                anchor: 'end',
-                                align: 'end',
-                                color: '#ffffff',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            scales: {
+                                x: { ticks: { font: { size: 13 }, color: "#ffffff" }, title: { font: { size: 18 }, display: true, text: 'Produtos', color: '#ffffff' } },
+                                y: { title: { display: true, text: 'Quantidade (interações)', color: '#ffffff', font: { size: 18 } }, beginAtZero: true, ticks: { font: { size: 16 }, color: "#ffffff" } }
                             },
-                            title: {
-                                display: true,
-                                text: 'Top 06 - Total de interações por produto',
-                                color: '#ffffff',
-                                font: { size: 16 }
-                            },
-                            legend: {
-                                labels: { color: "#ffffff" }
+                            plugins: {
+                                datalabels: { anchor: 'end', align: 'end', color: '#ffffff', font: { size: 14, weight: 'bold' } },
+                                title: { display: true, text: 'Top 06 - Total de interações por produto', color: '#ffffff', font: { size: 16 } },
+                                legend: { labels: { color: "#ffffff" } }
                             }
                         }
-                    }
+                    });
                 });
-            });
+        }
 
-        const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
-
-        fetch(`/dashboard/interacoesPorSetor/${idLoja}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (dados) {
-                let xLabels = [];
-                let yValores = [];
-
-                for (let i = 0; i < dados.length; i++) {
-                    xLabels.push(dados[i].setor);
-                    yValores.push(dados[i].total_interacoes);
-                }
-
-                new Chart(graficoInteracaoSetor, {
-                    type: 'bar',
-                    data: {
-                        labels: xLabels,
-                        datasets: [{
-                            label: 'Interações por setor',
-                            data: yValores,
-                            borderWidth: 2,
-                            backgroundColor: '#ae80ed',
-                            borderColor: '#2F0569'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                ticks: {
-                                    font: { size: 13 },
-                                    color: "#ffffff"
-                                },
-                                title: {
-                                    font: { size: 18 },
-                                    display: true,
-                                    text: 'Setor',
-                                    color: '#ffffff'
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Quantidade (interações)',
-                                    color: '#ffffff',
-                                    font: { size: 16 }
-                                },
-                                beginAtZero: true,
-                                ticks: {
-                                    font: { size: 16 },
-                                    color: "#ffffff"
-                                }
-                            }
+        function carregarGraficoSetor() {
+            if (chartSetor) {
+                chartSetor.destroy();
+            }
+            fetch(`/dashboard/interacoesPorSetor/${idLoja}`)
+                .then(function (response) { return response.json(); })
+                .then(function (dados) {
+                    let xLabels = [];
+                    let yValores = [];
+                    for (let i = 0; i < dados.length; i++) {
+                        xLabels.push(dados[i].setor);
+                        yValores.push(dados[i].total_interacoes);
+                    }
+                    chartSetor = new Chart(graficoInteracaoSetor, {
+                        type: 'bar',
+                        data: {
+                            labels: xLabels,
+                            datasets: [{ label: 'Interações por setor', data: yValores, borderWidth: 2, backgroundColor: '#ae80ed', borderColor: '#2F0569' }]
                         },
-                        plugins: {
-                            datalabels: {
-                                anchor: 'end',
-                                align: 'end',
-                                color: '#ffffff',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            scales: {
+                                x: { ticks: { font: { size: 13 }, color: "#ffffff" }, title: { font: { size: 18 }, display: true, text: 'Setor', color: '#ffffff' } },
+                                y: { title: { display: true, text: 'Quantidade (interações)', color: '#ffffff', font: { size: 16 } }, beginAtZero: true, ticks: { font: { size: 16 }, color: "#ffffff" } }
                             },
-                            title: {
-                                display: true,
-                                text: 'Total de interações por setor',
-                                color: '#ffffff',
-                                font: { size: 16 }
-                            },
-                            legend: {
-                                labels: { color: "#ffffff" }
+                            plugins: {
+                                datalabels: { anchor: 'end', align: 'end', color: '#ffffff', font: { size: 14, weight: 'bold' } },
+                                title: { display: true, text: 'Total de interações por setor', color: '#ffffff', font: { size: 16 } },
+                                legend: { labels: { color: "#ffffff" } }
                             }
                         }
-                    }
+                    });
                 });
-            });
+        }
 
         function obterTempoRetencao() {
             let id_loja = sessionStorage.getItem('ID_LOJA') || 1;
 
-            fetch(`/dashboard/tempoRetencao/${id_loja}`, { cache: 'no-store' })
+            fetch(`/dashboard/grafico/retencao/${id_loja}`, { cache: 'no-store' })
                 .then(function (response) {
                     if (response.ok) {
                         response.json().then(function (resposta) {
@@ -495,38 +398,47 @@
                 console.error(erro)
             })
 
+        function carregarKpis(dataInicio, dataFim) {
+            fetch(`/dashboard/kpis/${idLoja}?dataInicio=${dataInicio}&dataFim=${dataFim}`)
+                .then(function (resposta) { return resposta.json(); })
+                .then(function (dados) {
+                    let sinal = "";
+                    if (dados.variacaoPercentual >= 0) { sinal = "+"; }
 
-        obterTempoRetencao()
+                    let sinalTempo = "";
+                    if (dados.variacaoTempo >= 0) { sinalTempo = "+"; }
 
-        fetch(`/dashboard/kpis/${idLoja}?dataInicio=2026-06-01&dataFim=2026-06-07`)
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .then(function (dados) {
-                var sinal = "";
-                if (dados.variacaoPercentual >= 0) {
-                    sinal = "+";
-                }
+                    document.getElementById("kpi-total-interacoes").innerHTML = dados.totalAtual;
+                    document.getElementById("kpi-total-ancoragem").innerHTML = sinal + dados.variacaoPercentual + "% em relação ao período anterior";
+                    document.getElementById("kpi-top-produto").innerHTML = dados.topProdutoAtual;
+                    document.getElementById("kpi-top-produto-anterior").innerHTML = "Anterior: " + dados.topProdutoAnterior;
+                    document.getElementById("kpi-top-setor").innerHTML = dados.topSetorAtual;
+                    document.getElementById("kpi-top-setor-anterior").innerHTML = "Anterior: " + dados.topSetorAnterior;
+                    document.getElementById("kpi-tempo-medio").innerHTML = dados.tempoMedio + "s";
+                    document.getElementById("kpi-tempo-ancoragem").innerHTML = sinalTempo + dados.variacaoTempo + "% em relação ao período anterior";
+                });
+        }
 
-                var sinalTempo = "";
-                if (dados.variacaoTempo >= 0) {
-                    sinalTempo = "+";
-                }
+        function filtrarDashboard() {
+            let dataInicio = dataInicial.value;
+            let dataFim = dataFinal.value;
 
-                document.getElementById("kpi-total-interacoes").innerHTML = dados.totalAtual;
-                document.getElementById("kpi-total-ancoragem").innerHTML = sinal + dados.variacaoPercentual + "% em relação ao período anterior";
+            if (dataInicio == "" || dataFim == "") {
+                alert("Selecione as datas!");
+                return;
+            }
 
-                document.getElementById("kpi-top-produto").innerHTML = dados.topProdutoAtual;
-                document.getElementById("kpi-top-produto-anterior").innerHTML = "Anterior: " + dados.topProdutoAnterior;
+            carregarGraficoProduto();
+            carregarGraficoSetor();
+            carregarKpis(dataInicio, dataFim);
+        }
+            let dataHoje = new Date().toISOString().split('T')[0];
 
-                document.getElementById("kpi-top-setor").innerHTML = dados.topSetorAtual;
-                document.getElementById("kpi-top-setor-anterior").innerHTML = "Anterior: " + dados.topSetorAnterior;
+            carregarGraficoProduto();
+            carregarGraficoSetor();
+            carregarKpis(dataHoje, dataHoje);
+            obterTempoRetencao();
 
-                document.getElementById("kpi-tempo-medio").innerHTML = dados.tempoMedio + "s";
-
-
-                document.getElementById("kpi-tempo-ancoragem").innerHTML = sinalTempo + dados.variacaoTempo + "% em relação ao período anterior";
-            });
 
     </script>
 
