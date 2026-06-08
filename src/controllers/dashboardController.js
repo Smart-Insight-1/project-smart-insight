@@ -32,7 +32,7 @@ function obterInteracoesPorSetor(req, res) {
         });
 }
 
-function obterPioresInteracoesPorP(req, res) {
+function obterPioresInteracoesPorProduto(req, res) {
     let id_loja = req.params.idLoja;
     let dataInicio = req.query.dataInicio;
     let dataFim = req.query.dataFim;
