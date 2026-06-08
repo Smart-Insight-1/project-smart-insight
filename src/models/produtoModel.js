@@ -13,7 +13,7 @@ function listarProduto(id_loja) {
     FROM produto p
     LEFT JOIN sensor s ON p.id_produto = s.id_produto
     LEFT JOIN setor_amostra sa ON s.id_setor = sa.id_setor
-    WHERE p.id_loja = ${id_loja}
+    WHERE p.id_loja = ${id_loja} AND s.situacao = 'Ativo'
     GROUP BY p.id_produto, sa.nome_setor;
 `
 
@@ -29,7 +29,7 @@ function inserirProduto(id_loja, nome, tipo_produto, cod_produto, marca, setor) 
     ('${id_loja}', '${nome}', '${tipo_produto}', '${cod_produto}', '${marca}');
     
     INSERT INTO sensor (id_setor, id_produto, situacao, data_instalacao) VALUES
-    (${setor}, (SELECT id_produto FROM produto WHERE cod_produto = '${cod_produto}';), DEFAULT, DEFAULT);
+    (${setor}, (SELECT id_produto FROM produto WHERE cod_produto = '${cod_produto}'), DEFAULT, NOW());
     `
 
     console.log("Executando a instrução: ", instrucaoSql);
@@ -39,7 +39,11 @@ function inserirProduto(id_loja, nome, tipo_produto, cod_produto, marca, setor) 
 function deletarProduto(id_loja, cod_produto) {
     console.log('Acessando o model para deletar o produto');
 
-    var instrucaoSql = `DELETE FROM produto WHERE cod_produto = '${cod_produto}' AND id_loja = ${id_loja};`
+    var instrucaoSql = `
+
+    UPDATE sensor SET situacao = 'Inativo' WHERE id_produto = (SELECT id_produto FROM produto WHERE cod_produto = '${cod_produto}');
+
+    `
 
     console.log("Executando a instrução: ", instrucaoSql);
     return database.executar(instrucaoSql);
