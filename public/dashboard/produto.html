@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 </head>
 
-<body>
+<body onload="listarProduto()">
 
     <div class="menu">
         <h2>Painel, Olá <span id="nome_usuario">*</span></h2>
@@ -112,9 +112,7 @@
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
 
-    window.onload = function() {
-        listarProduto()
-    }
+    const idLoja = sessionStorage.getItem('ID_LOJA') || 1
 
     if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
@@ -132,7 +130,7 @@
     }
 
    function listarProduto() {
-    fetch(`/produtos/buscarProdutosPorLoja/${sessionStorage.getItem('ID_LOJA')}`)
+    fetch(`/produtos/buscarProdutosPorLoja/${idLoja}`)
     .then(function(response) {
         if (response.ok) {
             response.json().then(function(dados) {
