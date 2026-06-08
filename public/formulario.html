@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário | Smart Insight</title>
     <link rel="stylesheet" href="css/headerFooter.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/formulario.css">
     <script src="https://kit.fontawesome.com/d840916580.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 </head>
@@ -34,41 +34,58 @@
             <div class="card-login">
                 <h2>Formulário Empresa</h2>
                 <div class="formulario">
-                    <div class="campo">
-                        <span>Razão social:</span>
-                        <input id="ipt_razao_social" type="text" placeholder="Nome Oficial da Loja Ltda">
+
+                    <div class="parte1" style="display: block;">
+                        <div class="campo">
+                            <span>Razão social:</span>
+                            <input id="ipt_razao_social" type="text" placeholder="Nome Oficial da Loja Ltda">
+                        </div>
+                        <div class="campo">
+                            <span>CNPJ:</span>
+                            <input id="ipt_cnpj_empresa" type="text" placeholder="Insira o CNPJ da empresa">
+                        </div>
+                        <button class="botao" onclick="mudarEtapa(1, 2)">Próxima</button>
+
                     </div>
-                    <div class="campo">
-                        <span>CNPJ:</span>
-                        <input id="ipt_cnpj_empresa" type="text" placeholder="Insira o CNPJ da empresa">
+
+
+                    <div class="parte2" style="display: none;">
+                        <h3>Insira os dados para a primeira Loja:</h3>
+                        <div class="campo">
+                            <span>Nome:</span>
+                            <input id="ipt_nome_loja" type="text" placeholder="Insira o nome da loja">
+                        </div>
+                        <div class="campo">
+                            <span>CNPJ:</span>
+                            <input id="ipt_cnpj_loja" type="text" placeholder="Insira o CNPJ da loja">
+                        </div>
+                        <button class="botao" onclick="mudarEtapa(2, 3)">Próxima</button>
+                        <button class="botao" onclick="mudarEtapa(2, 1)" style="margin-top: 20px;">Voltar</button>
                     </div>
-                    <h3>Insira os dados para a primeira Loja:</h3>
-                    <div class="campo">
-                        <span>Nome:</span>
-                        <input id="ipt_nome_loja" type="text" placeholder="Insira o nome da loja">
+
+
+                    <div class="parte3" style="display: none;">
+                        <h3>Insira os dados do primeiro Gestor:</h3>
+                        <div class="campo">
+                            <span>Nome:</span>
+                            <input id="ipt_nome_gestor" type="text" placeholder="Insira o nome do gestor">
+                        </div>
+                        <div class="campo">
+                            <span>Email:</span>
+                            <input id="ipt_email_gestor" type="text" placeholder="Insira o email do gestor">
+                        </div>
+                        <div class="campo">
+                            <span>Senha:</span>
+                            <input id="ipt_senha_gestor" type="text" placeholder="Insira a senha do gestor">
+                        </div>
+                        <div class="campo">
+                            <span>Confirmar Senha:</span>
+                            <input id="ipt_confirmar_senha" type="text" placeholder="Confirme a senha do gestor">
+                        </div>
+                        <button class="botao" onclick="solicitarCadastro()">Solicitar Ativação</button>
+                        <button class="botao" onclick="mudarEtapa(3, 2)" style="margin-top: 20px;">Voltar</button>
                     </div>
-                    <div class="campo">
-                        <span>CNPJ:</span>
-                        <input id="ipt_cnpj_loja" type="text" placeholder="Insira o CNPJ da loja">
-                    </div>
-                    <h3>Insira os dados do primeiro Gestor:</h3>
-                    <div class="campo">
-                        <span>Nome:</span>
-                        <input id="ipt_nome_gestor" type="text" placeholder="Insira o nome do gestor">
-                    </div>
-                    <div class="campo">
-                        <span>Email:</span>
-                        <input id="ipt_email_gestor" type="text" placeholder="Insira o email do gestor">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="ipt_senha_gestor" type="text" placeholder="Insira a senha do gestor">
-                    </div>
-                    <div class="campo">
-                        <span>Confirmar Senha:</span>
-                        <input id="ipt_confirmar_senha" type="text" placeholder="Confirme a senha do gestor">
-                    </div>
-                    <button class="botao" onclick="solicitarCadastro()">Solicitar Ativação</button>
+
                 </div>
 
             </div>
@@ -97,11 +114,17 @@
 </html>
 
 <script>
+
+    function mudarEtapa(parteAtual, proximaParte) {
+        document.querySelector('.parte' + parteAtual).style.display = 'none';
+        document.querySelector('.parte' + proximaParte).style.display = 'block';
+    }
+
     function solicitarCadastro() {
-        
+
         let razao_social = ipt_razao_social.value;
         let cnpj_empresa = ipt_cnpj_empresa.value;
-        
+
         let nome_loja = ipt_nome_loja.value;
         let cnpj_loja = ipt_cnpj_loja.value;
 
@@ -122,14 +145,14 @@
         let listaCaracter = ["@", "#", "$", "%", "&", "*", "!", "."]
 
         for (let i = 0; i < listaCaracter.length; i++) {
-            if (ssenha_gestor.includes(listaCaracter[i])) {
+            if (senha_gestor.includes(listaCaracter[i])) {
                 temEspecial = true;
                 break;
             }
         }
 
         if (
-            razao_social == "" ||  cnpj_empresa == "" || nome_loja == "" || cnpj_loja == "" ||
+            razao_social == "" || cnpj_empresa == "" || nome_loja == "" || cnpj_loja == "" ||
             nome_gestor == "" || email_gestor == "" || senha_gestor == ""
         ) {
             alert("❌ Preencha todos os campos!");
@@ -137,7 +160,7 @@
         } else if (!indice_arroba || !termina_com) {
             alert("❌ Email inválido!");
             return;
-        } else if (senha.length < 8) {
+        } else if (senha_gestor.length < 8) {
             alert("❌ A senha deve ter pelo menos 8 caracteres!");
             return;
         } else if (!temEspecial) {
@@ -152,12 +175,47 @@
         } else if (cnpj_empresa.length != 14 || cnpj_loja.length != 14) {
             alert("❌ CNPJ inválido!");
             return;
-        } else if (senha != confirmarSenha) {
+        } else if (senha_gestor != confirmarSenha) {
             alert("❌ As senhas não coincidem!");
             return;
         } else {
             alert("✅ Solicitação de ativição encaminhada com sucesso!");
         }
 
+        fetch("/empresa/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                razaoSocialServer: razao_social,
+                cnpjEmpresaServer: cnpj_empresa,
+                nomeLojaServer: nome_loja,
+                cnpjLojaServer: cnpj_loja,
+                nomeGestorServer: nome_gestor,
+                emailGestorServer: email_gestor,
+                senhaGestorServer: senha_gestor
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO cadastrar empresa()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                })
+            } else {
+                console.log("Houve um erro ao tentar cadastrar empresa!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        }).catch(function(erro){
+            console.log(erro);
+            console.log("Mensagem erro: ", erro)
+        })
     }
 </script>

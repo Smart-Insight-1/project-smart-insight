@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 </head>
 
-<body onload="listarProduto()">
+<body onload="listarProduto(); listarSetores()">
 
     <div class="menu">
         <h2>Painel, Olá <span id="nome_usuario">*</span></h2>
@@ -73,9 +73,7 @@
             <div class="campo">
                 <label>Setor</label>
                 <select id="ipt_setor">
-                    <option>Masculino</option>
-                    <option>Feminino</option>
-                    <option>Lançamentos</option>
+                    
                 </select>
             </div>
 
@@ -102,8 +100,6 @@
         <div id="div_msg" class="alertas"></div>
     </div>
 
-
-
 </body>
 
 </html>
@@ -127,6 +123,38 @@
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
         document.getElementById("menuCadastro").style.display = "none";
+    }
+
+    function listarSetores() {
+         fetch(`/setores/buscarSetorPorLoja/${idLoja}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(function(resposta){
+
+            if(resposta.ok){
+                resposta.json().then(function(setores){
+
+                    console.log(setores);
+                    document.getElementById('ipt_setor').innerHTML = "";
+
+                    for(let i = 0; i < setores.length; i++){
+                        let setor = setores[i];
+
+                        document.getElementById('ipt_setor').innerHTML += `
+                            <option value="${setor.ID}">${setor.nome_setor}</option>
+                        `;
+                    }
+                });
+            } else {
+                console.log("erro ao listar setores")
+            }
+        })
+        .catch(function(erro){
+            console.log(erro)
+        });
     }
 
    function listarProduto() {
@@ -221,7 +249,7 @@
                 div.innerHTML = "✅ produto removido!";
                 listarProduto()
             } else {
-                console.error('Erro na API')
+                console.error('Erro na API:', response)
             }
         })
         .catch(function(erro) {
