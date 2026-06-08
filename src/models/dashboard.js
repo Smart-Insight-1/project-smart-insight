@@ -9,7 +9,7 @@ function obterInteracoesPorProduto(id_loja) {
             WHERE id_loja = '${id_loja}'
             GROUP BY produto
             ORDER BY total_interacoes DESC
-            LIMIT 6;
+            LIMIT 5;
     `;
     return database.executar(instrucao);
 }
@@ -22,7 +22,8 @@ function obterInteracoesPorSetor(id_loja) {
         FROM vw_graficos
             WHERE id_loja = '${id_loja}'
             GROUP BY setor
-            ORDER BY total_interacoes DESC;
+            ORDER BY total_interacoes DESC
+            LIMIT 5;
     `;
     return database.executar(instrucao);
 }
@@ -38,7 +39,7 @@ function obterTempoRetencao(id_loja) {
             WHERE id_loja = '${id_loja}'
             GROUP BY produto
             ORDER BY tempo_medio DESC
-            LIMIT 6;
+            LIMIT 5;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
