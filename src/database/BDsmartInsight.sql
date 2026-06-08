@@ -1,5 +1,7 @@
-CREATE DATABASE prateleiraInteligente;
-USE prateleiraInteligente;
+
+CREATE DATABASE smart_insight;
+
+USE smart_insight;
 
 CREATE TABLE empresa (
     id_empresa INT AUTO_INCREMENT PRIMARY KEY,
@@ -78,6 +80,7 @@ CREATE TABLE produto (
     marca VARCHAR(100),
     FOREIGN KEY (id_loja) REFERENCES loja(id_loja)
 );
+
 CREATE TABLE sensor (
     id_sensor INT AUTO_INCREMENT PRIMARY KEY,
     id_setor INT NOT NULL,
@@ -89,7 +92,7 @@ CREATE TABLE sensor (
     FOREIGN KEY (id_setor) REFERENCES setor_amostra(id_setor),
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
 );
-
+    
 CREATE TABLE interacao (
     id_interacao INT AUTO_INCREMENT PRIMARY KEY,
     id_sensor INT NOT NULL,
@@ -145,4 +148,6 @@ CREATE VIEW informacoes_empresa_loja AS
 		JOIN loja l ON l.id_empresa = emp.id_empresa
 		JOIN endereco en ON en.id_loja = l.id_loja;
         
+
+
 

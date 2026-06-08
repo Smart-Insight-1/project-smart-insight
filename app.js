@@ -24,6 +24,7 @@ var bobRouter = require("./src/routes/bob");
 var setorRouter = require("./src/routes/setores");
 var dashboardRouter = require("./src/routes/dashboard");
 var informacaoRouter = require("./src/routes/informacao");
+var contatoRouter = require("./src/routes/contato")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,6 +40,7 @@ app.use("/bob", bobRouter);
 app.use("/setores", setorRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/informacao", informacaoRouter);
+app.use("/contatos", contatoRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
