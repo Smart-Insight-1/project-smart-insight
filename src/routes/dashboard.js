@@ -12,7 +12,7 @@ router.get("/interacoesPorSetor/:idLoja", function(req, res) {
 });
 
 router.get("/pioresInteracoesPorProduto/:idLoja", function(req, res) {
-    dashboardController.obterPioresInteracoesPorP(req, res);
+    dashboardController.obterPioresInteracoesPorProduto(req, res);
 });
 
 router.get("/interacoesPorHora/:idLoja", function(req, res) {
