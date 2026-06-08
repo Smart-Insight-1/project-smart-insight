@@ -473,7 +473,3 @@ INSERT INTO interacao (id_sensor, horario, duracao) VALUES
 (7,'2026-06-07 14:15:00',53),
 (10,'2026-06-07 16:30:00',57),
 (12,'2026-06-07 18:20:00',60);
-
-select * from usuario;
-
-SELECT * FROM informacoes_empresa_loja WHERE id_loja = 1;

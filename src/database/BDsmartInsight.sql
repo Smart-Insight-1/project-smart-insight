@@ -145,5 +145,4 @@ CREATE VIEW informacoes_empresa_loja AS
 		JOIN loja l ON l.id_empresa = emp.id_empresa
 		JOIN endereco en ON en.id_loja = l.id_loja;
         
-SELECT * FROM informacoes_empresa_loja;
 

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../css/informacao.css">
     <link rel="stylesheet" href="../css/sair.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 </head>
 
@@ -43,16 +42,16 @@
 <script>
 
     const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
-    
-    if(nomeUsuario == undefined || nomeUsuario == null) {
+
+    if (nomeUsuario == undefined || nomeUsuario == null) {
         document.getElementById("nome_usuario").innerHTML = "Usuário";
     } else {
         document.getElementById("nome_usuario").innerHTML = nomeUsuario;
     }
-    
+
     const tipoUsuario = sessionStorage.getItem('TIPO_USUARIO');
 
-    if(tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
+    if (tipoUsuario == "analista" || tipoUsuario == undefined || tipoUsuario == null) {
         document.getElementById("menuProdutos").style.display = "none";
         document.getElementById("menuSetores").style.display = "none";
         document.getElementById("menuContatos").style.display = "none";
@@ -69,20 +68,24 @@
         let cnpj_loja = document.getElementById("cnpj_loja");
         let endereco_loja = document.getElementById("endereco_loja");
 
-        fetch(`/informacao/buscarInformacoesEmpresaLoja/${idLoja}`)
-        .then((resposta) => {
-            return resposta.json();
-        }).then((dados) => {
-            console.log('Dados: ', dados);
-            razao_social_empresa.innerHTML = dados.razao_social;
-            cnpj_empresa.innerHTML = dados.cnpj_empresa;
-            nome_loja.innerHTML = dados.nome_loja;
-            cnpj_loja.innerHTML = dados.cnpj_loja;
-            endereco_loja.innerHTML = dados.endereco_loja;
-        }).catch((err) => {
-            console.log(err);
-            console.log("\nHouve um erro ao buscar as informações! Erro: ", err);
-        })
+        fetch(`/informacao/buscarInformacoesEmpresaLoja/${idLoja}`, { cache: "no-store" })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    return resposta.json().then((dados) => {
+                        console.log('Dados: ', dados);
+                        razao_social_empresa.innerHTML = dados.razao_social;
+                        cnpj_empresa.innerHTML = dados.cnpj_empresa;
+                        nome_loja.innerHTML = dados.nome_loja;
+                        cnpj_loja.innerHTML = dados.cnpj_loja;
+                        endereco_loja.innerHTML = dados.endereco_loja;
+                    })
+                } else{
+                    console.log(resposta);
+                }
+            }).catch((err) => {
+                console.log(err);
+                console.log("\nHouve um erro ao buscar as informações! Erro: ", err);
+            })
     }
-    
+
 </script>
