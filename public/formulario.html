@@ -160,7 +160,7 @@
         } else if (!indice_arroba || !termina_com) {
             alert("❌ Email inválido!");
             return;
-        } else if (senha.length < 8) {
+        } else if (senha_gestor.length < 8) {
             alert("❌ A senha deve ter pelo menos 8 caracteres!");
             return;
         } else if (!temEspecial) {
@@ -175,7 +175,7 @@
         } else if (cnpj_empresa.length != 14 || cnpj_loja.length != 14) {
             alert("❌ CNPJ inválido!");
             return;
-        } else if (senha != confirmarSenha) {
+        } else if (senha_gestor != confirmarSenha) {
             alert("❌ As senhas não coincidem!");
             return;
         } else {
