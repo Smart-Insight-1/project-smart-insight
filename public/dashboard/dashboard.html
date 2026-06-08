@@ -142,10 +142,11 @@
         const graficoInteracaoSetor = document.getElementById('graficoInteracaoSetor');
         Chart.register(ChartDataLabels);
         const idLoja = sessionStorage.getItem('ID_LOJA');
+        const graficoPioresInteracoes = document.getElementById('graficoTempoRetencao');
 
         let chartProduto = null;
         let chartSetor = null;
-        let chartTempoRetencao = null;
+        let chartPioresInteracoes = null;
         let chartHora = null;
 
         function carregarGraficoProduto(dataInicio, dataFim) {
@@ -218,100 +219,40 @@
                 });
         }
 
-        function obterTempoRetencao(dataInicio, dataFim) {
-            let id_loja = sessionStorage.getItem('ID_LOJA') || 1;
-            if (chartTempoRetencao) {
-                chartTempoRetencao.destroy();
+        function carregarGraficoPioresInteracoes(dataInicio, dataFim) {
+    if (chartPioresInteracoes) {
+        chartPioresInteracoes.destroy();
+    }
+    fetch(`/dashboard/pioresInteracoesPorProduto/${idLoja}?dataInicio=${dataInicio}&dataFim=${dataFim}`)
+        .then(function (response) { return response.json(); })
+        .then(function (dados) {
+            let xLabels = [];
+            let yValores = [];
+            for (let i = 0; i < dados.length; i++) {
+                xLabels.push(dados[i].produto);
+                yValores.push(dados[i].total_interacoes);
             }
-            fetch(`/dashboard/tempoRetencao/${id_loja}?dataInicio=${dataInicio}&dataFim=${dataFim}`, { cache: 'no-store' })
-                .then(function (response) {
-                    if (response.ok) {
-                        response.json().then(function (resposta) {
-                            let labelsProduto = []
-                            let dadosTempo = []
-
-                            for (let i = 0; i < resposta.length; i++) {
-                                labelsProduto.push(resposta[i].produto)
-                                dadosTempo.push(resposta[i].tempo_medio)
-                            }
-
-                            const graficoTempoRetencao = document.getElementById('graficoTempoRetencao');
-
-                            chartTempoRetencao = new Chart(graficoTempoRetencao, {
-                                type: 'bar',
-                                data: {
-                                    labels: labelsProduto,
-                                    datasets: [{
-                                        label: 'Tempo (segundos)',
-                                        data: dadosTempo,
-                                        backgroundColor: '#ae80ed',
-                                        borderColor: '#2F0569',
-                                        borderWidth: 2
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    plugins: {
-                                        datalabels: {
-                                            anchor: 'center',
-                                            align: 'center',
-                                            color: '#ffffff',
-                                            font: {
-                                                size: 14,
-                                                weight: 'bold'
-                                            },
-                                        },
-                                        title: {
-                                            display: true,
-                                            text: 'Top 05 - Tempo Médio de Retenção por Produto',
-                                            color: '#ffffff',
-                                            font: { size: 16 }
-                                        },
-                                        legend: {
-                                            labels: { color: "#ffffff" }
-                                        }
-                                    },
-                                    scales: {
-                                        x: {
-                                            title: {
-                                                font: { size: 18 },
-                                                display: true,
-                                                text: 'Produtos',
-                                                color: '#ffffff'
-                                            },
-                                            ticks: {
-                                                font: { size: 13 },
-                                                color: "#ffffff"
-                                            }
-                                        },
-                                        y: {
-                                            title: {
-                                                display: true,
-                                                text: 'Tempo (segundos)',
-                                                color: '#ffffff',
-                                                font: { size: 16 }
-                                            },
-                                            beginAtZero: true,
-                                            ticks: {
-                                                font: { size: 16 },
-                                                color: "#ffffff"
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                        })
-                    } else {
-                        console.error('Erro na API')
+            chartPioresInteracoes = new Chart(graficoPioresInteracoes, {
+                type: 'bar',
+                data: {
+                    labels: xLabels,
+                    datasets: [{ label: 'Interações', data: yValores, borderWidth: 2, backgroundColor: '#ae80ed', borderColor: '#2F0569' }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        x: { ticks: { font: { size: 13 }, color: "#ffffff" }, title: { font: { size: 18 }, display: true, text: 'Produtos', color: '#ffffff' } },
+                        y: { title: { display: true, text: 'Quantidade (interações)', color: '#ffffff', font: { size: 18 } }, beginAtZero: true, ticks: { font: { size: 16 }, color: "#ffffff" } }
+                    },
+                    plugins: {
+                        datalabels: { anchor: 'end', align: 'end', color: '#ffffff', font: { size: 14, weight: 'bold' } },
+                        title: { display: true, text: 'Top 05 - Produtos com Menos Interações', color: '#ffffff', font: { size: 16 } },
+                        legend: { labels: { color: "#ffffff" } }
                     }
-
-                })
-                .catch(function (erro) {
-                    console.error(erro)
-                })
-
-        }
+                }
+            });
+        });
+}
 
 
         function carregarGraficoHora(dataInicio, dataFim) {
@@ -447,7 +388,7 @@
             carregarGraficoProduto(dataInicio, dataFim);
             carregarGraficoSetor(dataInicio, dataFim);
             carregarKpis(dataInicio, dataFim);
-            obterTempoRetencao(dataInicio, dataFim);
+            carregarGraficoPioresInteracoes(dataInicio, dataFim);
             carregarGraficoHora(dataInicio, dataFim);
 
         }
@@ -459,7 +400,7 @@
         carregarGraficoProduto(dataHoje, dataHoje);
         carregarGraficoSetor(dataHoje, dataHoje);
         carregarKpis(dataHoje, dataHoje);
-        obterTempoRetencao(dataHoje, dataHoje);
+        carregarGraficoPioresInteracoes(dataHoje, dataHoje);
         carregarGraficoHora(dataHoje, dataHoje);
 
 
