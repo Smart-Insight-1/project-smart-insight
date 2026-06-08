@@ -21,12 +21,16 @@ function listarProduto(id_loja) {
     return database.executar(instrucaoSql);
 }
 
-function inserirProduto(id_loja, nome, tipo_produto, cod_produto, marca) {
+function inserirProduto(id_loja, nome, tipo_produto, cod_produto, marca, setor) {
     console.log('Acessando o model para inserir o produto');
 
     var instrucaoSql = `INSERT INTO produto 
     (id_loja, nome, tipo_produto, cod_produto, marca) VALUES
-    ('${id_loja}', '${nome}', '${tipo_produto}', '${cod_produto}', '${marca}');`
+    ('${id_loja}', '${nome}', '${tipo_produto}', '${cod_produto}', '${marca}');
+    
+    INSERT INTO sensor (id_setor, id_produto, situacao, data_instalacao) VALUES
+    (${setor}, (SELECT id_produto FROM produto WHERE cod_produto = '${cod_produto}';), DEFAULT, DEFAULT);
+    `
 
     console.log("Executando a instrução: ", instrucaoSql);
     return database.executar(instrucaoSql);

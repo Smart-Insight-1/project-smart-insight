@@ -29,8 +29,9 @@ function inserirProduto(req, res) {
     var tipo_produto = req.body.tipoProduto;
     var cod_produto = req.body.codProduto;
     var marca = req.body.marca;
+    var setor = req.body.setor;
 
-    produtoModel.inserirProduto(id_loja, nome, tipo_produto, cod_produto, marca)
+    produtoModel.inserirProduto(id_loja, nome, tipo_produto, cod_produto, marca, setor)
         .then(function (resultadoProduto) {
             console.log(
                 `\nResultados encontrados: ${resultadoProduto.length}`
