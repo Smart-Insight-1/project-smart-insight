@@ -53,9 +53,9 @@ body {
 
 .btnManual {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
+    bottom: 70px;
+    right: 18px;
+    width: 95px;
     height: 40px;
     padding: 6px;    
     background-color: #300968;
@@ -75,5 +75,32 @@ body {
 }
 
 .btnManual:hover {
+    background-color: #9258e6;
+}
+
+.btnJira {
+    position: absolute;
+    bottom: 70px;
+    right: 124px;
+    width: 95px;
+    height: 40px;
+    padding: 6px;    
+    background-color: #300968;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnJira img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.btnJira:hover {
     background-color: #9258e6;
 }
