@@ -27,7 +27,7 @@ function obterInteracoesPorSetor(id_loja, dataInicio, dataFim) {
 
 
 
-function obterPioresInteracoesPorP(id_loja, dataInicio, dataFim) {
+function obterPioresInteracoesPorProduto(id_loja, dataInicio, dataFim) {
     var instrucao = `
         SELECT
             produto,
