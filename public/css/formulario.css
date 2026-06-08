@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&display=swap');
+
+
+body {
+    margin: 0;
+    background-color: #0C021A;
+    font-family: "Hanken Grotesk", sans-serif;
+}
+
+
+.container {
+
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-login {
+    padding: 40px;
+    width: 600px;
+    max-width: 600px;
+
+    background-color: aliceblue;
+    border-radius: 30px;
+    text-align: center;
+
+    box-shadow: 0 0 20px rgb(41, 41, 41);
+}
+
+.card-login h2 {
+    padding: 5px;
+    font-size: 40px;
+}
+
+.formulario {
+    padding: 10px;
+    display: flex;
+
+    flex-direction: column;
+}
+
+.tituloCadastro {
+    font-size: 40px;
+    margin: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px;
+    text-align: left;
+    font-weight: bold;
+
+
+}
+
+.campo span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.campo input {
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid #2F0569;
+    text-align: center;
+    outline: none;
+
+
+}
+
+input::placeholder {
+    font-family: "Hanken Grotesk", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.botao {
+    width: 100%;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #2F0569;
+    color: antiquewhite;
+    border: none;
+    cursor: pointer;
+
+    box-shadow: 0 0 5px black;
+}
+
+.botao:hover {
+    background-color: #572e91;
+}
+
+.botao:active {
+    transform: scale(0.95);
+
+}
+
+.msg {
+    padding: 20px;
+    height: 0;
+
+}
+
+.msg a {
+    color: #000;
+    text-decoration: none;
+}
+
+.msg span {
+    color: #2F0569;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.cadastro {
+    padding: 100px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.container-cadastro {
+    padding: 40px;
+    border-radius: 30px;
+    background-color: aliceblue;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+.nomes {
+    display: flex;
+    gap: 20px;
+
+
+}
+
+.nomes>.campo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.nomes>.campo input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.email {
+    display: flex;
+    gap: 20px;
+}
+
+.email>.campo {
+    flex: 1;
+}
+
+.cep-numero {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+}
+
+.cep-numero .campo {
+    flex: 1;
+}
+
+
+
+
+
+
+
+.senha {
+    display: flex;
+    gap: 20px;
+}
+
+.senha>.campo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.senha>.campo input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+
+
+.confirmarsenha {
+    display: flex;
+    gap: 20px;
+}
+
+.confirmarsenha>.campo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmarsenha>.campo input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.botaoCadastro button {
+    width: 100%;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #2F0569;
+    color: antiquewhite;
+    border: none;
+    cursor: pointer;
+
+    box-shadow: 0 0 5px black;
+}
+
+.botaoCadastro button:hover {
+    background-color: #572e91;
+}
+
+.botaoCadastro button:active {
+    transform: scale(0.95);
+
+}
+
+.alerta {
+    height: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+    /* começa escondido */
+    animation: aparecer 0.4s ease;
+    background-color: #e6ffed;
+}

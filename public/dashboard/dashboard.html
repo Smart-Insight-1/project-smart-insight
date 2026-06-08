@@ -116,7 +116,7 @@
 
     <script>
 
-        const nomeUsuario = sessionStorage.getItem('NOME_USUARIO');
+        const nomeUsuario = sessionStorage.getItem('NOME_USUARIO') || 10;
 
         if (nomeUsuario == undefined || nomeUsuario == null) {
             document.getElementById("nome_usuario").innerHTML = "Usuário";
