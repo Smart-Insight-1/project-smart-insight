@@ -1,7 +1,6 @@
+CREATE DATABASE prateleiraInteligente;
 
-CREATE DATABASE smart_insight;
-
-USE smart_insight;
+USE prateleiraInteligente;
 
 CREATE TABLE empresa (
     id_empresa INT AUTO_INCREMENT PRIMARY KEY,
