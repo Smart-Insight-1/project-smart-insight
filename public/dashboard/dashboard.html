@@ -34,7 +34,7 @@
                 <img src="/assets/icons/google-docs.png" alt="Manual PDF">
             </button>
         </a>
-                <a href="https://smart-insight.atlassian.net/jira/core/projects/SI/form/34" title="Central de serviços Jira">
+        <a href="https://smart-insight.atlassian.net/jira/core/projects/SI/form/34" title="Central de serviços Jira">
             <button class="btnJira">
                 <img src="/assets/icons/suport.png" alt="Manual PDF">
             </button>
@@ -146,11 +146,11 @@
         let chartProduto = null;
         let chartSetor = null;
 
-        function carregarGraficoProduto() {
+        function carregarGraficoProduto(dataInicio, dataFim) {
             if (chartProduto) {
                 chartProduto.destroy();
             }
-            fetch(`/dashboard/interacoesPorProduto/${idLoja}`)
+            fetch(`/dashboard/interacoesPorProduto/${idLoja}?dataInicio=${dataInicio}&dataFim=${dataFim}`)
                 .then(function (response) { return response.json(); })
                 .then(function (dados) {
                     let xLabels = [];
@@ -181,11 +181,11 @@
                 });
         }
 
-        function carregarGraficoSetor() {
+        function carregarGraficoSetor(dataInicio, dataFim) {
             if (chartSetor) {
                 chartSetor.destroy();
             }
-            fetch(`/dashboard/interacoesPorSetor/${idLoja}`)
+            fetch(`/dashboard/interacoesPorSetor/${idLoja}?dataInicio=${dataInicio}&dataFim=${dataFim}`)
                 .then(function (response) { return response.json(); })
                 .then(function (dados) {
                     let xLabels = [];
@@ -216,10 +216,10 @@
                 });
         }
 
-        function obterTempoRetencao() {
+        function obterTempoRetencao(dataInicio, dataFim) {
             let id_loja = sessionStorage.getItem('ID_LOJA') || 1;
 
-            fetch(`/dashboard/tempoRetencao/${id_loja}`, { cache: 'no-store' })
+            fetch(`/dashboard/tempoRetencao/${id_loja}?dataInicio=${dataInicio}&dataFim=${dataFim}`, { cache: 'no-store' })
                 .then(function (response) {
                     if (response.ok) {
                         response.json().then(function (resposta) {
@@ -310,98 +310,102 @@
         }
 
 
-        const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
+        function carregarGraficoHora(dataInicio, dataFim) {
+            const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
 
-        fetch(`/dashboard/interacoesPorHora/${idLoja}`)
-            .then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (dados) {
-                        let xLabels = [];
-                        let yValores = [];
+            fetch(`/dashboard/interacoesPorHora/${idLoja}?dataInicio=${dataInicio}&dataFim=${dataFim}`)
+                .then(function (response) {
+                    if (response.ok) {
+                        response.json().then(function (dados) {
+                            let xLabels = [];
+                            let yValores = [];
 
-                        for (let i = 0; i < dados.length; i++) {
-                            let hora = String(dados[i].hora).padStart(2, '0') + ':00';
-                            xLabels.push(hora);
-                            yValores.push(dados[i].total_interacoes);
-                        }
+                            for (let i = 0; i < dados.length; i++) {
+                                let hora = String(dados[i].hora).padStart(2, '0') + ':00';
+                                xLabels.push(hora);
+                                yValores.push(dados[i].total_interacoes);
+                            }
 
-                        new Chart(graficoInteracoesHora, {
-                            type: 'line',
-                            data: {
-                                labels: xLabels,
-                                datasets: [{
-                                    label: 'Interações',
-                                    data: yValores,
-                                    borderColor: '#ae80ed',
-                                    borderDash: [5, 5],
-                                    borderWidth: 3
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                scales: {
-                                    x: {
-                                        ticks:
-                                        {
-                                            font: { size: 13 },
-                                            color: "#ffffff"
+                            new Chart(graficoInteracoesHora, {
+                                type: 'line',
+                                data: {
+                                    labels: xLabels,
+                                    datasets: [{
+                                        label: 'Interações',
+                                        data: yValores,
+                                        borderColor: '#ae80ed',
+                                        borderDash: [5, 5],
+                                        borderWidth: 3
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        x: {
+                                            ticks:
+                                            {
+                                                font: { size: 13 },
+                                                color: "#ffffff"
+                                            },
+                                            title:
+                                            {
+                                                font: { size: 18 },
+                                                text: "Hora",
+                                                display: true,
+                                                color: "#fff"
+                                            }
                                         },
-                                        title:
-                                        {
-                                            font: { size: 18 },
-                                            text: "Hora",
-                                            display: true,
-                                            color: "#fff"
+                                        y: {
+                                            title: {
+                                                display: true,
+                                                text: 'Quantidade',
+                                                color: '#ffffff',
+                                                font: { size: 16 }
+                                            },
+                                            beginAtZero: true,
+                                            ticks:
+                                            {
+                                                font: { size: 16 },
+                                                color: "#ffffff"
+                                            }
                                         }
                                     },
-                                    y: {
+                                    plugins: {
+                                        datalabels: {
+                                            anchor: 'end', align: 'end', color: '#ffffff',
+                                            font:
+                                            {
+                                                size: 14,
+                                                weight: 'bold'
+                                            }
+                                        },
                                         title: {
                                             display: true,
-                                            text: 'Quantidade',
+                                            text: 'Quantidade total de interações por Hora',
                                             color: '#ffffff',
                                             font: { size: 16 }
                                         },
-                                        beginAtZero: true,
-                                        ticks:
-                                        {
-                                            font: { size: 16 },
-                                            color: "#ffffff"
-                                        }
-                                    }
-                                },
-                                plugins: {
-                                    datalabels: {
-                                        anchor: 'end', align: 'end', color: '#ffffff',
-                                        font:
-                                        {
-                                            size: 14,
-                                            weight: 'bold'
-                                        }
-                                    },
-                                    title: {
-                                        display: true,
-                                        text: 'Quantidade total de interações por Hora',
-                                        color: '#ffffff',
-                                        font: { size: 16 }
-                                    },
-                                    legend: {
-                                        labels:
-                                        {
-                                            color: "#ffffff"
+                                        legend: {
+                                            labels:
+                                            {
+                                                color: "#ffffff"
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        });
-                    })
-                } else {
-                    console.error('Erro na API')
-                }
-            })
-            .catch(function (erro) {
-                console.error(erro)
-            })
+                            });
+                        })
+                    } else {
+                        console.error('Erro na API')
+                    }
+                })
+                .catch(function (erro) {
+                    console.error(erro)
+                })
+
+        }
+
 
         function carregarKpis(dataInicio, dataFim) {
             fetch(`/dashboard/kpis/${idLoja}?dataInicio=${dataInicio}&dataFim=${dataFim}`)
@@ -433,17 +437,23 @@
                 return;
             }
 
-            carregarGraficoProduto();
-            carregarGraficoSetor();
+            carregarGraficoProduto(dataInicio, dataFim);
+            carregarGraficoSetor(dataInicio, dataFim);
             carregarKpis(dataInicio, dataFim);
+            obterTempoRetencao(dataInicio, dataFim);
+            carregarGraficoHora(dataInicio, dataFim);
 
         }
         let dataHoje = new Date().toISOString().split('T')[0];
 
-        carregarGraficoProduto();
-        carregarGraficoSetor();
+        document.getElementById('dataInicial').value = dataHoje;
+        document.getElementById('dataFinal').value = dataHoje;
+
+        carregarGraficoProduto(dataHoje, dataHoje);
+        carregarGraficoSetor(dataHoje, dataHoje);
         carregarKpis(dataHoje, dataHoje);
-        obterTempoRetencao();
+        obterTempoRetencao(dataHoje, dataHoje);
+        carregarGraficoHora(dataHoje, dataHoje);
 
 
     </script>

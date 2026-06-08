@@ -1,44 +1,41 @@
 var database = require("../database/config")
 
-function obterInteracoesPorProduto(id_loja) {
+function obterInteracoesPorProduto(id_loja, dataInicio, dataFim) {
     var instrucao = `
-        SELECT
-            produto,
-            COUNT(*) AS total_interacoes
+    SELECT produto, COUNT(*) AS total_interacoes
         FROM vw_graficos
-            WHERE id_loja = '${id_loja}'
-            GROUP BY produto
-            ORDER BY total_interacoes DESC
-            LIMIT 6;
+        WHERE id_loja = '${id_loja}'
+        AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}'
+        GROUP BY produto
+        ORDER BY total_interacoes DESC
+        LIMIT 6;
     `;
     return database.executar(instrucao);
 }
 
-function obterInteracoesPorSetor(id_loja) {
+function obterInteracoesPorSetor(id_loja, dataInicio, dataFim) {
     var instrucao = `
-        SELECT
-            setor,
-            COUNT(*) AS total_interacoes
+        SELECT setor, COUNT(*) AS total_interacoes
         FROM vw_graficos
-            WHERE id_loja = '${id_loja}'
-            GROUP BY setor
-            ORDER BY total_interacoes DESC;
+        WHERE id_loja = '${id_loja}'
+        AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}'
+        GROUP BY setor
+        ORDER BY total_interacoes DESC;
     `;
     return database.executar(instrucao);
 }
 
 
 
-function obterTempoRetencao(id_loja) {
+function obterTempoRetencao(id_loja, dataInicio, dataFim) {
     var instrucao = `
-        SELECT
-            produto,
-            ROUND(AVG(duracao),0) AS tempo_medio
+       SELECT produto, ROUND(AVG(duracao),0) AS tempo_medio
         FROM vw_graficos
-            WHERE id_loja = '${id_loja}'
-            GROUP BY produto
-            ORDER BY tempo_medio DESC
-            LIMIT 6;
+        WHERE id_loja = '${id_loja}'
+        AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}'
+        GROUP BY produto
+        ORDER BY tempo_medio DESC
+        LIMIT 6;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -102,15 +99,14 @@ AND DATE(horario) BETWEEN
     return database.executar(instrucao);
 }
 
-function obterInteracoesPorHora(id_loja) {
+function obterInteracoesPorHora(id_loja, dataInicio, dataFim) {
     var instrucao = `
-        SELECT
-            HOUR(horario) AS hora,
-            COUNT(*) AS total_interacoes
+        SELECT HOUR(horario) AS hora, COUNT(*) AS total_interacoes
         FROM vw_graficos
-            WHERE id_loja = '${id_loja}'
-            GROUP BY HOUR(horario)
-            ORDER BY hora;
+        WHERE id_loja = '${id_loja}'
+        AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}'
+        GROUP BY HOUR(horario)
+        ORDER BY hora;
     `;
     return database.executar(instrucao);
 }

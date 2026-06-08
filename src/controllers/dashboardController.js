@@ -2,8 +2,10 @@ var dashboardModel = require("../models/dashboard");
 
 function obterInteracoesPorProduto(req, res) {
     let id_loja = req.params.idLoja;
+    let dataInicio = req.query.dataInicio;
+    let dataFim = req.query.dataFim;
 
-    dashboardModel.obterInteracoesPorProduto(id_loja)
+    dashboardModel.obterInteracoesPorProduto(id_loja, dataInicio, dataFim)
         .then(function (resultado) {
             console.log(`\nResultados encontrados: ${resultado.length}`);
             console.log(`Resultados: ${JSON.stringify(resultado)}`);
@@ -16,8 +18,10 @@ function obterInteracoesPorProduto(req, res) {
 
 function obterInteracoesPorSetor(req, res) {
     let id_loja = req.params.idLoja;
+    let dataInicio = req.query.dataInicio;
+    let dataFim = req.query.dataFim;
 
-    dashboardModel.obterInteracoesPorSetor(id_loja)
+    dashboardModel.obterInteracoesPorSetor(id_loja, dataInicio, dataFim)
         .then(function (resultado) {
             console.log(`\nResultados encontrados: ${resultado.length}`);
             console.log(`Resultados: ${JSON.stringify(resultado)}`);
@@ -30,11 +34,13 @@ function obterInteracoesPorSetor(req, res) {
 
 function obterTempoRetencao(req, res) {
     var id_loja = req.params.idLoja;
+    let dataInicio = req.query.dataInicio;
+    let dataFim = req.query.dataFim;
 
     if (id_loja == undefined) {
         res.status(400).send("O ID da loja está undefined!");
     } else {
-        dashboardModel.obterTempoRetencao(id_loja)
+        dashboardModel.obterTempoRetencao(id_loja, dataInicio, dataFim)
             .then(function (resultado) {
                 res.json(resultado);
             })
@@ -47,11 +53,13 @@ function obterTempoRetencao(req, res) {
 
 function obterInteracoesPorHora(req, res) {
     let id_loja = req.params.idLoja;
+    let dataInicio = req.query.dataInicio;
+    let dataFim = req.query.dataFim;
 
     if (id_loja == undefined) {
         res.status(400).send("O ID da loja está undefined!");
     } else {
-        dashboardModel.obterInteracoesPorHora(id_loja)
+        dashboardModel.obterInteracoesPorHora(id_loja, dataInicio, dataFim)
             .then(function (resultado) {
                 res.json(resultado);
             })
