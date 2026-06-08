@@ -64,6 +64,10 @@
                         <span>Senha:</span>
                         <input id="ipt_senha_gestor" type="text" placeholder="Insira a senha do gestor">
                     </div>
+                    <div class="campo">
+                        <span>Confirmar Senha:</span>
+                        <input id="ipt_confirmar_senha" type="text" placeholder="Confirme a senha do gestor">
+                    </div>
                     <button class="botao" onclick="solicitarCadastro()">Solicitar Ativação</button>
                 </div>
 
@@ -93,28 +97,67 @@
 </html>
 
 <script>
-    function solicitarAtivacao() {
-        let nome = ipt_nome.value;
-        let email = ipt_email.value;
-        let razaoSocial = ipt_razao_social.value
-        let cnpj = ipt_cnpj.value;
+    function solicitarCadastro() {
+        
+        let razao_social = ipt_razao_social.value;
+        let cnpj_empresa = ipt_cnpj_empresa.value;
+        
+        let nome_loja = ipt_nome_loja.value;
+        let cnpj_loja = ipt_cnpj_loja.value;
 
-        let termina_com = email.endsWith('.com');
-        let indice_arroba = email.indexOf('@');
+        let nome_gestor = ipt_nome_gestor.value;
+        let email_gestor = ipt_email_gestor.value;
+        let senha_gestor = ipt_senha_gestor.value;
 
+        let confirmarSenha = ipt_confirmar_senha.value;
+
+        let indice_arroba = email_gestor.includes("@");
+        let termina_com = email_gestor.endsWith(".com");
+
+        let temEspecial = false;
+
+        let temMaiuscula = senha_gestor != senha_gestor.toLowerCase();
+        let temMinuscula = senha_gestor != senha_gestor.toUpperCase();
+
+        let listaCaracter = ["@", "#", "$", "%", "&", "*", "!", "."]
+
+        for (let i = 0; i < listaCaracter.length; i++) {
+            if (ssenha_gestor.includes(listaCaracter[i])) {
+                temEspecial = true;
+                break;
+            }
+        }
 
         if (
-            nome == "" ||  email == "" || cnpj == "" || razaoSocial == ""
+            razao_social == "" ||  cnpj_empresa == "" || nome_loja == "" || cnpj_loja == "" ||
+            nome_gestor == "" || email_gestor == "" || senha_gestor == ""
         ) {
             alert("❌ Preencha todos os campos!");
-        } else if (indice_arroba == -1 || !termina_com) {
+            return;
+        } else if (!indice_arroba || !termina_com) {
             alert("❌ Email inválido!");
-        }
-        else if (cnpj.length != 14) {
+            return;
+        } else if (senha.length < 8) {
+            alert("❌ A senha deve ter pelo menos 8 caracteres!");
+            return;
+        } else if (!temEspecial) {
+            alert("❌ A senha precisa ter caractere especial");
+            return;
+        } else if (!temMaiuscula) {
+            alert("❌ A senha precisa ter pelo menos uma letra maiúscula!");
+            return;
+        } else if (!temMinuscula) {
+            alert("❌ A senha precisa ter pelo menos uma letra minúscula!");
+            return;
+        } else if (cnpj_empresa.length != 14 || cnpj_loja.length != 14) {
             alert("❌ CNPJ inválido!");
+            return;
+        } else if (senha != confirmarSenha) {
+            alert("❌ As senhas não coincidem!");
+            return;
+        } else {
+            alert("✅ Solicitação de ativição encaminhada com sucesso!");
         }
-        else {
-            alert("✅ Validação encaminhada com sucesso!");
-        }
+
     }
 </script>
