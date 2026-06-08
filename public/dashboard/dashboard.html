@@ -315,6 +315,9 @@
 
 
         function carregarGraficoHora(dataInicio, dataFim) {
+            if (chartHora ) {
+                chartHora.destroy();
+            }
             const graficoInteracoesHora = document.getElementById('graficoInteracoesHora');
 
             fetch(`/dashboard/interacoesPorHora/${idLoja}?dataInicio=${dataInicio}&dataFim=${dataFim}`)
@@ -330,7 +333,7 @@
                                 yValores.push(dados[i].total_interacoes);
                             }
 
-                            new Chart(graficoInteracoesHora, {
+                            chartHora = new Chart(graficoInteracoesHora, {
                                 type: 'line',
                                 data: {
                                     labels: xLabels,
