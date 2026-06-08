@@ -83,7 +83,7 @@
                             <input id="ipt_confirmar_senha" type="text" placeholder="Confirme a senha do gestor">
                         </div>
                         <button class="botao" onclick="solicitarCadastro()">Solicitar Ativação</button>
-                        <button class="botao" onclick="mudarEtapa(3, 2)" style="margin-top: 20px;" >Voltar</button>
+                        <button class="botao" onclick="mudarEtapa(3, 2)" style="margin-top: 20px;">Voltar</button>
                     </div>
 
                 </div>
@@ -182,5 +182,40 @@
             alert("✅ Solicitação de ativição encaminhada com sucesso!");
         }
 
+        fetch("/empresa/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                razaoSocialServer: razao_social,
+                cnpjEmpresaServer: cnpj_empresa,
+                nomeLojaServer: nome_loja,
+                cnpjLojaServer: cnpj_loja,
+                nomeGestorServer: nome_gestor,
+                emailGestorServer: email_gestor,
+                senhaGestorServer: senha_gestor
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO cadastrar empresa()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                })
+            } else {
+                console.log("Houve um erro ao tentar cadastrar empresa!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        }).catch(function(erro){
+            console.log(erro);
+            console.log("Mensagem erro: ", erro)
+        })
     }
 </script>
