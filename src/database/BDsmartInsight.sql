@@ -117,7 +117,8 @@ SELECT
 FROM interacao 
 JOIN sensor ON interacao.id_sensor = sensor.id_sensor
 JOIN produto ON sensor.id_produto = produto.id_produto
-JOIN setor_amostra ON sensor.id_setor = setor_amostra.id_setor;
+JOIN setor_amostra ON sensor.id_setor = setor_amostra.id_setor
+WHERE sensor.situacao='Ativo';
 
 
 
@@ -131,6 +132,7 @@ SELECT
     produto.nome AS produto,
 
     setor_amostra.nome_setor AS setor
+    
 
 FROM interacao 
 JOIN sensor 
@@ -138,7 +140,8 @@ JOIN sensor
 JOIN produto 
     ON sensor.id_produto = produto.id_produto
 JOIN setor_amostra 
-    ON sensor.id_setor = setor_amostra.id_setor;
+    ON sensor.id_setor = setor_amostra.id_setor
+    WHERE sensor.situacao='Ativo';
 
     
 
