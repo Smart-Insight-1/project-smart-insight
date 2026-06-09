@@ -27,17 +27,18 @@ function obterInteracoesPorSetor(id_loja, dataInicio, dataFim) {
 
 
 
-function obterTempoRetencao(id_loja, dataInicio, dataFim) {
+function obterPioresInteracoesPorProduto(id_loja, dataInicio, dataFim) {
     var instrucao = `
-       SELECT produto, ROUND(AVG(duracao),0) AS tempo_medio
+        SELECT
+            produto,
+            COUNT(*) AS total_interacoes
         FROM vw_graficos
-        WHERE id_loja = '${id_loja}' and situacao = 'Ativo'
-        AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}'
-        GROUP BY produto
-        ORDER BY tempo_medio DESC
-        LIMIT 5;
+            WHERE id_loja = '${id_loja}' and situacao = 'Ativo'
+            AND DATE(horario) BETWEEN '${dataInicio}' AND '${dataFim}'
+            GROUP BY produto
+            ORDER BY total_interacoes ASC
+            LIMIT 5;
     `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
@@ -114,7 +115,7 @@ function obterInteracoesPorHora(id_loja, dataInicio, dataFim) {
 module.exports = {
     obterInteracoesPorProduto,
     obterInteracoesPorSetor,
-    obterTempoRetencao,
+    obterPioresInteracoesPorProduto,
     obterInteracoesPorHora,
     obterKpis
 }

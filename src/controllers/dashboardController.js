@@ -32,23 +32,17 @@ function obterInteracoesPorSetor(req, res) {
         });
 }
 
-function obterTempoRetencao(req, res) {
-    var id_loja = req.params.idLoja;
+function obterPioresInteracoesPorProduto(req, res) {
+    let id_loja = req.params.idLoja;
     let dataInicio = req.query.dataInicio;
     let dataFim = req.query.dataFim;
-
-    if (id_loja == undefined) {
-        res.status(400).send("O ID da loja está undefined!");
-    } else {
-        dashboardModel.obterTempoRetencao(id_loja, dataInicio, dataFim)
-            .then(function (resultado) {
-                res.json(resultado);
-            })
-            .catch(function (erro) {
-                console.log(erro);
-                res.status(500).json(erro.sqlMessage);
-            });
-    }
+    dashboardModel.obterPioresInteracoesPorProduto(id_loja, dataInicio, dataFim)
+        .then(function (resultado) {
+            res.json(resultado);
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function obterInteracoesPorHora(req, res) {
@@ -109,7 +103,7 @@ function obterKpis(req, res) {
 module.exports = {
     obterInteracoesPorProduto,
     obterInteracoesPorSetor,
-    obterTempoRetencao,
+    obterPioresInteracoesPorProduto,
     obterInteracoesPorHora,
     obterKpis
 }

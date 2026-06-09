@@ -11,8 +11,8 @@ router.get("/interacoesPorSetor/:idLoja", function(req, res) {
     dashboardController.obterInteracoesPorSetor(req, res);
 });
 
-router.get("/tempoRetencao/:idLoja", function(req, res) {
-    dashboardController.obterTempoRetencao(req, res);
+router.get("/pioresInteracoesPorProduto/:idLoja", function(req, res) {
+    dashboardController.obterPioresInteracoesPorProduto(req, res);
 });
 
 router.get("/interacoesPorHora/:idLoja", function(req, res) {
